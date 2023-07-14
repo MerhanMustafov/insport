@@ -1,0 +1,10 @@
+@import url(./reset.css);
+@import url(./typography.css);
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}

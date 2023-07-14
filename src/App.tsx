@@ -1,10 +1,16 @@
-import Button from "@/components/Button";
+import { useTheme } from "@/context/theme/hooks/useThemeContext";
+import AppLayout from "@/layouts/app/AppLayout";
+import AppRoutes from "@/routes/AppRoutes";
+
 function App() {
+    const { theme } = useTheme();
+
     return (
-        <>
-            <div>App Component</div>
-            <Button></Button>
-        </>
+        <div style={{ ...(theme as React.CSSProperties) }}>
+            <AppLayout>
+                <AppRoutes />
+            </AppLayout>
+        </div>
     );
 }
 
