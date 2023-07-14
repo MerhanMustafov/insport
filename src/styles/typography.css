@@ -1,0 +1,6 @@
+:root {
+    --font-size-mini: clamp(7px, 5vw, 13px);
+    --font-size-small: clamp(10px, 5vw, 15px);
+    --font-size-medium: clamp(15px, 5vw, 20px);
+    --font-size-big: clamp(20px, 10vw, 30px);
+}
