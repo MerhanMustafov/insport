@@ -1,15 +1,10 @@
 import styled from "styled-components";
 
-export const StyledContainerHoverEffect = styled("div")`
-    :hover {
-        cursor: pointer;
-        border: 1px solid var(--tx-primary);
-    }
-`;
 export const StyledContainer = styled("div")`
     border: 1px solid transparent;
-    :hover {
-        border: none;
+    &:hover {
+        cursor: pointer;
+        border: 1px solid var(--tx-primary);
     }
     border-radius: 5px;
     display: grid;

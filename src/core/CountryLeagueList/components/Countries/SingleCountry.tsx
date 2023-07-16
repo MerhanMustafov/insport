@@ -1,7 +1,6 @@
 import { useCountryLeagueListContext } from "../../hooks/useCountryLeagueListContext";
 import {
     StyledContainer,
-    StyledContainerHoverEffect,
     StyledImage,
     StyledImageContainer,
     StyledName
@@ -17,16 +16,14 @@ export default function SingleCountry(props: IProps) {
     const { flag, name } = props;
     const { handleCountrySelection } = useCountryLeagueListContext();
     return (
-        <StyledContainerHoverEffect>
-            <StyledContainer onClick={() => handleCountrySelection(name)}>
-                <StyledImageContainer>
-                    <StyledImage
-                        src={flag}
-                        alt={`${name}: flag`}
-                    />
-                </StyledImageContainer>
-                <StyledName>{name}</StyledName>
-            </StyledContainer>
-        </StyledContainerHoverEffect>
+        <StyledContainer onClick={() => handleCountrySelection(name)}>
+            <StyledImageContainer>
+                <StyledImage
+                    src={flag}
+                    alt={`${name}: flag`}
+                />
+            </StyledImageContainer>
+            <StyledName>{name}</StyledName>
+        </StyledContainer>
     );
 }
