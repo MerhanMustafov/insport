@@ -1,0 +1,1 @@
+export const SEARCH_INPUT_DEBOUNCE_TIMER = 1000;

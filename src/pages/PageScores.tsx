@@ -1,7 +1,21 @@
+import styled from "styled-components";
+
+import CountryLeagueList from "@/core/CountryLeagueList";
+
+const StyledPageScoreContainer = styled("div")`
+    margin: 0 auto;
+    width: 100%;
+    max-width: var(--max-width-app-content);
+    flex-grow: 1;
+`;
+
 export default function PageScores() {
     return (
         <>
-            <div style={{ color: "var(--tx-primary)" }}>Page SCORES</div>
+            <StyledPageScoreContainer>
+                Page SCORES
+                <CountryLeagueList />
+            </StyledPageScoreContainer>
         </>
     );
 }

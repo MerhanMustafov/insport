@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import AppNavigation from "@/components/navigation/AppNavigation";
+import AppNavigation from "@/core/navigation/AppNavigation";
 
 interface IProps {
     children: React.ReactNode;

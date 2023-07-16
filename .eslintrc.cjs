@@ -17,9 +17,11 @@ module.exports = {
         tsconfigRootDir: __dirname
     },
     plugins: ["react-refresh"],
+
     rules: {
         "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "react-hooks/exhaustive-deps": "off"
     },
     ignorePatterns: [".eslintrc.cjs", "vite.config.ts"]
 };
