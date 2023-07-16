@@ -1,4 +1,4 @@
-import { useCountriesLeaguesContext } from "../../hooks/useCountriesLeaguesContext";
+import { useCountryLeagueListContext } from "../../hooks/useCountryLeagueListContext";
 import {
     StyledContainer,
     StyledContainerHoverEffect,
@@ -15,7 +15,7 @@ interface IProps {
 
 export default function SingleCountry(props: IProps) {
     const { flag, name } = props;
-    const { handleCountrySelection } = useCountriesLeaguesContext();
+    const { handleCountrySelection } = useCountryLeagueListContext();
     return (
         <StyledContainerHoverEffect>
             <StyledContainer onClick={() => handleCountrySelection(name)}>

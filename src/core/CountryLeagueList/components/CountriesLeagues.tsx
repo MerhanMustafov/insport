@@ -1,4 +1,4 @@
-import { useCountriesLeaguesContext } from "../hooks/useCountriesLeaguesContext";
+import { useCountryLeagueListContext } from "../hooks/useCountryLeagueListContext";
 import { StyledContainer } from "../styles/CountriesLeagues.style";
 import Countries from "./Countries";
 import Leagues from "./Leagues";
@@ -10,7 +10,7 @@ export default function CountriesLeagues() {
         selectedCountry,
         handleClearSelectedCountry,
         handleSerachInputFieldChange
-    } = useCountriesLeaguesContext();
+    } = useCountryLeagueListContext();
 
     return (
         <StyledContainer>

@@ -1,8 +1,8 @@
-import { useCountriesLeaguesContext } from "../../hooks/useCountriesLeaguesContext";
+import { useCountryLeagueListContext } from "../../hooks/useCountryLeagueListContext";
 import SingleCountry from "./SingleCountry";
 
 export default function Countries() {
-    const { countries, fileterdCountries } = useCountriesLeaguesContext();
+    const { countries, fileterdCountries } = useCountryLeagueListContext();
 
     return (
         <>
