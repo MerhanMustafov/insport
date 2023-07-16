@@ -26,5 +26,4 @@ dist-ssr
 # custom directories
 src/testy/**
 
-
 .env
