@@ -15,7 +15,8 @@ export default function Leagues() {
         queryKey: ["leagues", selectedCountry],
         queryFn: () => getLeagues(selectedCountry),
         enabled: !!selectedCountry,
-        refetchOnMount: false
+        refetchOnMount: false,
+        refetchOnWindowFocus: false
     });
 
     if (isLoading || isFetching) {

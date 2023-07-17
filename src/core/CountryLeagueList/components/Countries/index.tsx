@@ -19,7 +19,8 @@ export default function Countries() {
     } = useQuery({
         queryKey: ["countries"],
         queryFn: getCountries,
-        refetchOnMount: false
+        refetchOnMount: false,
+        refetchOnWindowFocus: false
     });
 
     useEffect(() => {
