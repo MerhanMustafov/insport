@@ -19,9 +19,6 @@ export default function SingleLeague(props: IProps) {
 
     function handleSingleLeagueClick() {
         navigate(`/football/${countryName}/${name}`, { state: { leagueId: id } });
-        console.log("handleSingleLeagueClick: ID: ", id);
-        console.log("handleSingleLeagueClick: Country Name: ", countryName);
-        console.log("handleSingleLeagueClick: League Name: ", name);
     }
 
     return (

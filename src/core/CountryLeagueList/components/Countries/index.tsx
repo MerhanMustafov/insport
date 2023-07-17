@@ -34,8 +34,6 @@ export default function Countries() {
         }
         setFiltered([]);
     }, [searchWord]);
-    console.log(isLoading);
-    console.log(isFetching);
 
     if (isLoading || isFetching) {
         return <div>LOADING ...</div>;

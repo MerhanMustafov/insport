@@ -8,7 +8,6 @@ interface ILeagueData {
 }
 
 export default async function getLeagues(selectedCountry: string) {
-    console.log("IN: getLeagues");
     return axiosInstance
         .get(`/leagues?country=${selectedCountry}`)
         .then((res) => (res.data as IAxiosData<ILeagueData[]>).response);

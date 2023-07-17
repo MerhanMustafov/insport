@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -12,10 +12,7 @@ const StyledContainer = styled("div")`
 
 export default function LeagueInfo() {
     const location = useLocation();
-    const params = useParams();
-    console.log("LOCATION", location);
-    console.log("Params", params.countryName);
-    console.log("Params", params.leagueName);
+    // const params = useParams();
 
     useEffect(() => {
         if ((location.state as { leagueId: string }).leagueId) {
