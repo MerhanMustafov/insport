@@ -5,14 +5,14 @@ import {
 } from "../../styles/CountriesLeagues.style";
 
 export default function SearchInputField() {
-    const { searchWord, handleSerachInputFieldChange } = useCountryLeagueListContext();
+    const { searchWord, setSearchWord } = useCountryLeagueListContext();
     return (
         <StyledHeaderContainer>
             <StyledInputField
                 type="text"
                 placeholder="search"
                 value={searchWord}
-                onChange={(e) => handleSerachInputFieldChange(e.target.value)}
+                onChange={(e) => setSearchWord(e.target.value)}
             />
         </StyledHeaderContainer>
     );

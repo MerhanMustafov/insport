@@ -6,13 +6,12 @@ import Leagues from "./Leagues";
 import SearchInputField from "./SearchInputField";
 
 export default function CountriesLeagues() {
-    const { isLoading, selectedCountry } = useCountryLeagueListContext();
+    const { selectedCountry } = useCountryLeagueListContext();
 
     return (
         <StyledContainer>
             {selectedCountry ? <GoBackButton /> : <SearchInputField />}
-            {isLoading && <div>LOADING ...</div>}
-            {!selectedCountry ? <Countries /> : <Leagues />}
+            {selectedCountry ? <Leagues /> : <Countries />}
         </StyledContainer>
     );
 }

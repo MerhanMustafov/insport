@@ -6,12 +6,18 @@ import {
 } from "../../styles/CountriesLeagues.style";
 
 export default function GoBackButton() {
-    const { handleClearSelectedCountry, selectedCountry } = useCountryLeagueListContext();
+    const { setSelectedCountry, selectedCountry, setSearchWord } =
+        useCountryLeagueListContext();
+
+    function handleClick() {
+        setSelectedCountry("");
+        setSearchWord("");
+    }
     return (
         <StyledHeaderContainer>
             <StyledGoBackButton
                 type="button"
-                onClick={handleClearSelectedCountry}>
+                onClick={handleClick}>
                 &lt;
             </StyledGoBackButton>
             <StyledLeagueTitle>{selectedCountry}</StyledLeagueTitle>

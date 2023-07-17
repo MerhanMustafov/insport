@@ -14,9 +14,9 @@ interface IProps {
 
 export default function SingleCountry(props: IProps) {
     const { flag, name } = props;
-    const { handleCountrySelection } = useCountryLeagueListContext();
+    const { setSelectedCountry } = useCountryLeagueListContext();
     return (
-        <StyledContainer onClick={() => handleCountrySelection(name)}>
+        <StyledContainer onClick={() => setSelectedCountry(name)}>
             <StyledImageContainer>
                 <StyledImage
                     src={flag}
