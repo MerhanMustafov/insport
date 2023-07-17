@@ -19,7 +19,7 @@ interface ICountriesLeaguesProps {
 
 interface ILeagueData {
     league: ILeague;
-    cointry: ICountry;
+    country: ICountry;
     seasons: ISeason;
 }
 type TLeagues = IAxiosData<ILeagueData[]>;

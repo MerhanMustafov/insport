@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { ILeague } from "@/models/api";
 
 import {
@@ -7,13 +9,23 @@ import {
     StyledName
 } from "../../styles/SingleItem.style";
 
-type IProps = ILeague;
+interface IProps extends ILeague {
+    countryName: string;
+}
 
 export default function SingleLeague(props: IProps) {
-    const { id, logo, name } = props;
+    const { id, logo, name, countryName } = props;
+    const navigate = useNavigate();
+
+    function handleSingleLeagueClick() {
+        navigate(`/football/${countryName}/${name}`, { state: { leagueId: id } });
+        console.log("handleSingleLeagueClick: ID: ", id);
+        console.log("handleSingleLeagueClick: Country Name: ", countryName);
+        console.log("handleSingleLeagueClick: League Name: ", name);
+    }
 
     return (
-        <StyledContainer id={JSON.stringify(id)}>
+        <StyledContainer onClick={handleSingleLeagueClick}>
             <StyledImageContainer>
                 <StyledImage
                     src={logo}

@@ -11,6 +11,7 @@ export default function Leagues() {
             logo={c.league.logo}
             name={c.league.name}
             type={c.league.type}
+            countryName={c.country.name as string}
         />
     ));
 }
