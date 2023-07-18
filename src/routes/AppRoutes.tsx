@@ -7,7 +7,7 @@ export default function AppRoutes() {
     return (
         <Routes>
             <Route
-                path="/"
+                path="/*"
                 element={<PageScores />}
             />
             <Route

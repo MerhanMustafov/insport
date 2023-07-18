@@ -2,20 +2,21 @@ import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
 
-import AppLogo from "@/components/navigation/AppLogo";
+import AppLogo from "@/core/navigation/AppLogo";
 import { routePaths } from "@/routes/routePaths";
 
 const StyledNavigationContainer = styled("div")`
     background: var(--nav-bg);
 `;
-const StyledNavigationInnerContainer = styled("nav")`
+const StyledNavigationMainContentContainer = styled("nav")`
+    border: 2px solid red;
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: max-content auto;
     grid-template-areas: "logo mainNavLinks";
     align-items: center;
     gap: 20px;
-    max-width: 1200px;
+    max-width: var(--max-width-app-content);
     margin: 10px auto;
     background: transparent;
 `;
@@ -34,17 +35,15 @@ const StyledNavLink = styled(NavLink)`
 
 export default function AppNavigation() {
     return (
-        <>
-            <StyledNavigationContainer>
-                <StyledNavigationInnerContainer>
-                    <AppLogo />
-                    <StyledUnorderedList>
-                        <StyledLinkContainer>
-                            <StyledNavLink to={routePaths.SCORES}>Scores</StyledNavLink>
-                        </StyledLinkContainer>
-                    </StyledUnorderedList>
-                </StyledNavigationInnerContainer>
-            </StyledNavigationContainer>
-        </>
+        <StyledNavigationContainer>
+            <StyledNavigationMainContentContainer>
+                <AppLogo />
+                <StyledUnorderedList>
+                    <StyledLinkContainer>
+                        <StyledNavLink to={routePaths.SCORES}>Scores</StyledNavLink>
+                    </StyledLinkContainer>
+                </StyledUnorderedList>
+            </StyledNavigationMainContentContainer>
+        </StyledNavigationContainer>
     );
 }
