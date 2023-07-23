@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
 import CountryLeagueList from "@/core/CountryLeagueList";
+import Dates from "@/core/Dates";
 import LeagueInfo from "@/core/LeagueInfo";
 
 const StyledPageScoreContainer = styled("div")`
@@ -14,7 +15,10 @@ const StyledPageScoreContainer = styled("div")`
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: max-content 20px auto;
-    grid-template-areas: "CountryLeagueList . LeagueInfo";
+    grid-template-areas:
+        "CountryLeagueList . Dates"
+        "CountryLeagueList . LeagueInfo"
+        "CountryLeagueList . .";
 `;
 
 export default function PageScores() {
@@ -22,12 +26,14 @@ export default function PageScores() {
         <>
             <StyledPageScoreContainer>
                 <CountryLeagueList />
-                <Routes>
+                <Dates />
+                <LeagueInfo />
+                {/* <Routes>
                     <Route
-                        path="/football/:countryName/:leagueName"
+                        path="/football/:countryName/:leagueName/:leagueId"
                         element={<LeagueInfo />}
                     />
-                </Routes>
+                </Routes> */}
             </StyledPageScoreContainer>
         </>
     );

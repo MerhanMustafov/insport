@@ -11,6 +11,7 @@ const StyledAppLayoutContainer = styled("div")`
     background: var(--bg-primary);
     min-height: 100vh;
 `;
+//TODO: put wrapper around {children} and set a flex-grow: 1
 export default function AppLayout({ children }: IProps) {
     return (
         <StyledAppLayoutContainer>

@@ -1,38 +1,25 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-
 import styled from "styled-components";
 
-import axiosInstance, { resolvePath } from "@/lib/axios/axiosConfig";
+// import LeagueInfoHeader from "./components/LeagueInfoHeader";
 
 const StyledContainer = styled("div")`
     grid-area: LeagueInfo;
-    border: 2px solid red;
+    border: 2px solid blue;
+    max-height: max-content;
 `;
 
+// interface IData {
+//     league: {
+//         country: string;
+//         flag: string;
+//         id: number;
+//         logo: string;
+//         name: string;
+//         season: number;
+//         standing: { points: number; team: { id: number; logo: string; name: string } };
+//     };
+// }
+
 export default function LeagueInfo() {
-    const location = useLocation();
-    // const params = useParams();
-
-    useEffect(() => {
-        if ((location.state as { leagueId: string }).leagueId) {
-            axiosInstance
-                .get(
-                    resolvePath(
-                        `/standings?league=${
-                            (location.state as { leagueId: string }).leagueId
-                        }&season=${2022}`
-                    )
-                )
-                .then((res) => console.log("STANDING 2023: ", res))
-                .catch((err) => console.log("ERR: ", err));
-        }
-    }, [location]);
-
-    return (
-        <StyledContainer>
-            <div>League INFO FOOTBALL</div>
-            <div>STANDING</div>
-        </StyledContainer>
-    );
+    return <StyledContainer>LeagueInfo Component</StyledContainer>;
 }
