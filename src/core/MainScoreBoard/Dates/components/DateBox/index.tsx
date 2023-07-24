@@ -10,11 +10,16 @@ const StyledToday = styled("h3")`
 
 interface IProps {
     today: boolean;
-    date: Date;
+    activeDate: Date;
+    index: number;
 }
 
 export default function DateBox(props: IProps) {
-    const { today, date } = props;
+    const { today, activeDate, index } = props;
+    console.log(index);
+
+    const date = new Date(activeDate);
+    date.setDate(activeDate.getDate() + index);
 
     return (
         <StyledContainer>

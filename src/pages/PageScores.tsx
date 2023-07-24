@@ -3,8 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
 import CountryLeagueList from "@/core/CountryLeagueList";
-import Dates from "@/core/Dates";
-import LeagueInfo from "@/core/LeagueInfo";
+import MainScoreBoard from "@/core/MainScoreBoard";
 
 const StyledPageScoreContainer = styled("div")`
     margin: 0 auto;
@@ -23,18 +22,15 @@ const StyledPageScoreContainer = styled("div")`
 
 export default function PageScores() {
     return (
-        <>
-            <StyledPageScoreContainer>
-                <CountryLeagueList />
-                <Dates />
-                <LeagueInfo />
-                {/* <Routes>
+        <StyledPageScoreContainer>
+            <CountryLeagueList />
+            <MainScoreBoard />
+            {/* <Routes>
                     <Route
                         path="/football/:countryName/:leagueName/:leagueId"
                         element={<LeagueInfo />}
                     />
                 </Routes> */}
-            </StyledPageScoreContainer>
-        </>
+        </StyledPageScoreContainer>
     );
 }

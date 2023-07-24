@@ -14,7 +14,8 @@ const StyledContainer = styled("div")`
     max-height: max-content;
 `;
 
-const endpoint = "/fixtures?timezone=Europe/Sofia&date=2023-07-24&status=NS";
+const baseEndpoint =
+    "/fixtures?timezone=Europe/Sofia&date=2023-07-24&status=NS&status=FT";
 export default function LeagueInfo() {
     const { data, isLoading, isFetching, isError } = useQuery({
         queryKey: ["fixtures"],
@@ -24,8 +25,9 @@ export default function LeagueInfo() {
     });
 
     async function getFixtures(): Promise<{ [K: string]: IFixture[] }> {
-        const res = ((await axiosInstance.get(endpoint)).data as IAxiosData<IFixture[]>)
-            .response;
+        const res = (
+            (await axiosInstance.get(baseEndpoint)).data as IAxiosData<IFixture[]>
+        ).response;
         return res
             .sort(sortAscByCountryName)
             .reduce((acc: { [K: string]: IFixture[] }, curr) => {
@@ -54,7 +56,8 @@ export default function LeagueInfo() {
 
     return (
         <StyledContainer>
-            <div>LeagueInfo Component</div>
+            <div>Upcomming</div>
+            <div>FT</div>
             {(isLoading || isFetching) && <h1>Loading ... </h1>}
             {isError && <div>Erro has occured LeagueInfo</div>}
             {data &&
