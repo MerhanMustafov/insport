@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
+import DateBox from "./components/DateBox";
+
 const StyledContainer = styled("div")`
     grid-area: Dates;
     border: 2px solid red;
@@ -11,6 +13,7 @@ const StyledContainer = styled("div")`
 `;
 
 export default function Dates() {
+    const [today, setToday] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [dates, setDates] = useState<{
         TwoDaysBefore: string;
@@ -45,11 +48,11 @@ export default function Dates() {
             OneDayAfter: tomorrowDateString,
             TwoDayssAfter: twoDaysAheadDateString
         });
-        console.log(thedaybeforeyeaterdayDateString);
-        console.log(yesterdayDateString);
-        console.log(selectedDateString);
-        console.log(tomorrowDateString);
-        console.log(twoDaysAheadDateString);
+        // console.log(thedaybeforeyeaterdayDateString);
+        // console.log(yesterdayDateString);
+        // console.log(selectedDateString);
+        // console.log(tomorrowDateString);
+        // console.log(twoDaysAheadDateString);
     }, [selectedDate]);
 
     const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,6 +90,11 @@ export default function Dates() {
                     justifyContent: "space-between"
                     // height: "max-content"
                 }}>
+                <DateBox
+                    today={true}
+                    date={today}
+                />
+
                 {dates &&
                     Object.entries(dates)?.map(([key, value]) => (
                         <div
@@ -99,10 +107,7 @@ export default function Dates() {
                             }}
                             key={value.split(" ")[2]}>
                             {" "}
-                            <span>
-                                {" "}
-                                {key === "today" ? "Today" : value.split(" ")[0]}
-                            </span>{" "}
+                            <span> {value.split(" ")[0]}</span>{" "}
                             <span> {value.split(" ")[1]}</span>{" "}
                             <span> {value.split(" ")[2]}</span>
                         </div>
