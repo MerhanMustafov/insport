@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
 
-import AppLogo from "@/core/navigation/AppLogo";
+import AppLogo from "@/components/AppLogo";
 import { routePaths } from "@/routes/routePaths";
 
 const StyledNavigationContainer = styled("div")`
