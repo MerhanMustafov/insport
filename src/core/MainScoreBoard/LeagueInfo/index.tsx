@@ -5,31 +5,40 @@ import { IAxiosData } from "@/models/api";
 
 import { useQuery } from "@tanstack/react-query";
 
-import CountryFixtureWrapper from "./components/CountryFixtureWrapper";
+import { useMainScoreBoardContext } from "../hooks/useMainScoreBoardContext";
+import CountryFixtures from "./components/CountryFixtures";
 import { IFixture } from "./models/index";
 
 const StyledContainer = styled("div")`
     grid-area: LeagueInfo;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     max-height: max-content;
 `;
 
-const baseEndpoint =
-    "/fixtures?timezone=Europe/Sofia&date=2023-07-24&status=NS&status=FT";
+const baseEndpoint = "/fixtures";
 export default function LeagueInfo() {
+    const { activeDate, getFormatedActiveDateYYYY_MM_DD } = useMainScoreBoardContext();
+
     const { data, isLoading, isFetching, isError } = useQuery({
-        queryKey: ["fixtures"],
+        queryKey: ["fixtures", activeDate],
         queryFn: getFixtures,
         refetchOnMount: false,
         refetchOnWindowFocus: false
     });
 
     async function getFixtures(): Promise<{ [K: string]: IFixture[] }> {
+        const timeZone = "Europe/Sofia";
+        const date = getFormatedActiveDateYYYY_MM_DD();
+        const URL_ENDPOINT = `${baseEndpoint}?timezone=${timeZone}&date=${date}`;
+
         const res = (
-            (await axiosInstance.get(baseEndpoint)).data as IAxiosData<IFixture[]>
+            (await axiosInstance.get(URL_ENDPOINT)).data as IAxiosData<IFixture[]>
         ).response;
+        console.log("IN");
         return res
-            .sort(sortAscByCountryName)
+            .sort((curr: IFixture, next: IFixture) =>
+                customSort(curr, next, "asc", "name")
+            )
             .reduce((acc: { [K: string]: IFixture[] }, curr) => {
                 if (acc[curr.league.country]) {
                     return {
@@ -41,17 +50,31 @@ export default function LeagueInfo() {
             }, {});
     }
 
-    function sortAscByCountryName(_curr: IFixture, _next: IFixture) {
-        const curr = _curr.league.country.toLowerCase().trim();
-        const next = _next.league.country.toLowerCase().trim();
-
-        if (curr < next) {
-            return -1; // CURR should come before NEXT in the sorted order
+    function customSort(
+        _curr: IFixture,
+        _next: IFixture,
+        _sortDirection: "asc" | "desc",
+        _sortBy: "country" | "name"
+    ): number {
+        const curr = _curr.league[_sortBy].toLowerCase().trim();
+        const next = _next.league[_sortBy].toLowerCase().trim();
+        if (_sortDirection === "asc") {
+            if (curr < next) {
+                return -1; // CURR should come before NEXT in the sorted order
+            }
+            if (curr > next) {
+                return 1; // CURR should come after NEXT in the sorted order
+            }
+            return 0; // names are equal, no change in order
+        } else {
+            if (curr > next) {
+                return -1; // CURR should come before NEXT in the sorted order
+            }
+            if (curr < next) {
+                return 1; // CURR should come after NEXT in the sorted order
+            }
+            return 0; // names are equal, no change in order
         }
-        if (curr > next) {
-            return 1; // CURR should come after NEXT in the sorted order
-        }
-        return 0; // names are equal, no change in order
     }
 
     return (
@@ -60,9 +83,11 @@ export default function LeagueInfo() {
             <div>FT</div>
             {(isLoading || isFetching) && <h1>Loading ... </h1>}
             {isError && <div>Erro has occured LeagueInfo</div>}
-            {data &&
+            {!isLoading &&
+                !isFetching &&
+                data &&
                 Object.entries(data).map(([countryName, fixtures], index: number) => (
-                    <CountryFixtureWrapper
+                    <CountryFixtures
                         key={`${countryName}-${index}`}
                         countryName={countryName}
                         fixtures={fixtures}

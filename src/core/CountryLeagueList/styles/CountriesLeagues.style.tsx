@@ -6,6 +6,7 @@ export const StyledContainer = styled("div")`
     width: max-content;
     max-width: 150px;
     min-width: 150px;
+    height: max-content;
     padding: 10px 5px;
     border-radius: 10px;
 `;

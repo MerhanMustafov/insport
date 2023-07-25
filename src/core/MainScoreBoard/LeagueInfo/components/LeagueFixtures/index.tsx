@@ -1,22 +1,15 @@
-import styled from "styled-components";
-
-import { IFixture } from "../../models/index";
+import { IFixture } from "../../models";
 import SingleFixture from "../SingleFixture";
 
-const StyledCountryFixtureContainer = styled("div")`
-    border: 7px solid red;
-`;
 interface IProps {
-    countryName: string;
+    leagueTitle: string;
     fixtures: IFixture[];
 }
-
-export default function CountryFixtureWrapper(props: IProps) {
-    const { countryName, fixtures } = props;
-
+export default function LeagueFixtures(props: IProps) {
+    const { leagueTitle, fixtures } = props;
     return (
-        <StyledCountryFixtureContainer>
-            <h1>{countryName}</h1>
+        <div>
+            <div>{leagueTitle}</div>
             {fixtures &&
                 fixtures?.map((fixture) => (
                     <SingleFixture
@@ -28,6 +21,6 @@ export default function CountryFixtureWrapper(props: IProps) {
                         teams={fixture.teams}
                     />
                 ))}
-        </StyledCountryFixtureContainer>
+        </div>
     );
 }
