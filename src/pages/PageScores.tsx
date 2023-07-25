@@ -24,7 +24,6 @@ export default function PageScores() {
     return (
         <StyledPageScoreContainer>
             <CountryLeagueList />
-            {/* <MainScoreBoard /> */}
             <Routes>
                 <Route
                     path="/*"

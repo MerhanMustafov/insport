@@ -16,7 +16,7 @@ const StyledContainer = styled("div")`
 `;
 
 const baseEndpoint = "/fixtures";
-export default function LeagueInfo() {
+export default function CountryLeagueFixtures() {
     const { activeDate, getFormatedActiveDateYYYY_MM_DD } = useMainScoreBoardContext();
 
     const { data, isLoading, isFetching, isError } = useQuery({
