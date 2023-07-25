@@ -5,7 +5,7 @@ import { IAxiosData } from "@/models/api";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { useMainScoreBoardContext } from "../hooks/useMainScoreBoardContext";
+import { useMainScoreBoardContext } from "../../hooks/useMainScoreBoardContext";
 import CountryFixtures from "./components/CountryFixtures";
 import { IFixture } from "./models/index";
 

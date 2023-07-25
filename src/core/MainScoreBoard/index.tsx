@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
-import Dates from "@/core/MainScoreBoard/Dates";
-import LeagueInfo from "@/core/MainScoreBoard/LeagueInfo";
+import Dates from "@/core/MainScoreBoard/components/Dates";
+import LeagueInfo from "@/core/MainScoreBoard/components/LeagueInfo";
 
 import { MainScoreBoardProvider } from "./context/MainScoreBoard.context";
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useMainScoreBoardContext } from "../hooks/useMainScoreBoardContext";
+import { useMainScoreBoardContext } from "../../hooks/useMainScoreBoardContext";
 import DateBox from "./components/DateBox";
 
 const StyledContainer = styled("div")`
