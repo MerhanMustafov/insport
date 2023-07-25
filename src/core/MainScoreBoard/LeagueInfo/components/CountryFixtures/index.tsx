@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { IFixture } from "../../models/index";
 import LeagueFixtures from "../LeagueFixtures";
+import CountryName from "./CountryName";
 
 const StyledCountryFixtureContainer = styled("div")`
     /* border: 7px solid red; */
@@ -26,12 +27,14 @@ export default function CountryFixtures(props: IProps) {
         },
         {}
     );
-    console.log("transformedFixtures: ", transformedFixtures);
-    // console.log("fixtures: ", fixtures);
 
     return (
         <StyledCountryFixtureContainer>
-            <h1>{countryName}</h1>
+            <CountryName
+                sizeType="big"
+                name={countryName}
+                image={fixtures[0].league.flag}
+            />
 
             {fixtures &&
                 transformedFixtures &&

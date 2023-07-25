@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
 import PageScores from "@/pages/PageScores";
-import { routePaths } from "@/routes/routePaths";
 
 export default function AppRoutes() {
     return (
@@ -11,7 +10,7 @@ export default function AppRoutes() {
                 element={<PageScores />}
             />
             <Route
-                path={routePaths.SCORES}
+                path={"/scores/*"}
                 element={<PageScores />}
             />
         </Routes>

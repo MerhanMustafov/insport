@@ -10,9 +10,9 @@ import CountryFixtures from "./components/CountryFixtures";
 import { IFixture } from "./models/index";
 
 const StyledContainer = styled("div")`
-    grid-area: LeagueInfo;
-    /* border: 2px solid blue; */
+    grid-area: PageScores_LeagueInfo;
     max-height: max-content;
+    /* border: 2px solid green; */
 `;
 
 const baseEndpoint = "/fixtures";
@@ -34,10 +34,9 @@ export default function LeagueInfo() {
         const res = (
             (await axiosInstance.get(URL_ENDPOINT)).data as IAxiosData<IFixture[]>
         ).response;
-        console.log("IN");
         return res
             .sort((curr: IFixture, next: IFixture) =>
-                customSort(curr, next, "asc", "name")
+                customSort(curr, next, "asc", "country")
             )
             .reduce((acc: { [K: string]: IFixture[] }, curr) => {
                 if (acc[curr.league.country]) {
@@ -60,27 +59,25 @@ export default function LeagueInfo() {
         const next = _next.league[_sortBy].toLowerCase().trim();
         if (_sortDirection === "asc") {
             if (curr < next) {
-                return -1; // CURR should come before NEXT in the sorted order
+                return -1;
             }
             if (curr > next) {
-                return 1; // CURR should come after NEXT in the sorted order
+                return 1;
             }
-            return 0; // names are equal, no change in order
+            return 0;
         } else {
             if (curr > next) {
-                return -1; // CURR should come before NEXT in the sorted order
+                return -1;
             }
             if (curr < next) {
-                return 1; // CURR should come after NEXT in the sorted order
+                return 1;
             }
-            return 0; // names are equal, no change in order
+            return 0;
         }
     }
 
     return (
         <StyledContainer>
-            <div>Upcomming</div>
-            <div>FT</div>
             {(isLoading || isFetching) && <h1>Loading ... </h1>}
             {isError && <div>Erro has occured LeagueInfo</div>}
             {!isLoading &&

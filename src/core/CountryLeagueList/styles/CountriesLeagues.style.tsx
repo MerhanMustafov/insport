@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled("div")`
-    grid-area: CountryLeagueList;
+    grid-area: PageScores_CountryLeagueList;
     border: 1px solid var(--tx-primary);
     width: max-content;
     max-width: 150px;

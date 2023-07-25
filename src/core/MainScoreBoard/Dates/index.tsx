@@ -4,9 +4,10 @@ import { useMainScoreBoardContext } from "../hooks/useMainScoreBoardContext";
 import DateBox from "./components/DateBox";
 
 const StyledContainer = styled("div")`
-    grid-area: Dates;
+    grid-area: PageScores_Dates;
     /* border: 2px solid red; */
-    height: max-content;
+    /* height: max-content; */
+    /* border: 2px solid blue; */
 `;
 
 const StyledToday = styled("div")<{ $isToday: boolean }>`

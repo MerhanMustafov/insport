@@ -7,22 +7,25 @@ const StyledFixtureContainer = styled("div")`
     grid-template-rows: auto;
     grid-template-columns: 10px max-content 10px auto;
     grid-template-areas: ". fixtureTime . teams";
-    border: 2px solid black;
-    margin: 10px 5px;
+    /* border: 2px solid black; */
+    margin: 5px auto;
     align-items: center;
+    border: 1px solid black;
 `;
 
 const StyledFixtureTime = styled("div")`
     display: flex;
     align-self: center;
     grid-area: fixtureTime;
-    border: 2px solid green;
+    /* border: 2px solid green; */
+    font-size: 12px;
 `;
 const StyledTeamsContainer = styled("div")`
     display: flex;
     flex-direction: column;
     grid-area: teams;
-    border: 2px solid black;
+    border-left: 1px solid black;
+    padding-left: 20px;
 `;
 const StyledTeamContainer = styled("div")`
     display: flex;
@@ -32,7 +35,7 @@ const StyledTeamContainer = styled("div")`
 `;
 const StyledTeamLogoContainer = styled("div")`
     /* border: 2px solid green; */
-    width: 30px;
+    width: 20px;
 `;
 const StyledTeamLogo = styled("img")`
     /* border: 2px solid green; */
@@ -40,6 +43,8 @@ const StyledTeamLogo = styled("img")`
 `;
 const StyledTeamName = styled("div")`
     /* border: 2px solid green; */
+    font-size: 12px;
+    font-weight: 600;
 `;
 
 export default function SingleFixture(props: IFixture) {
