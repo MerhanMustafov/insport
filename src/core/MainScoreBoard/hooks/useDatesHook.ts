@@ -3,16 +3,15 @@ import { useState } from "react";
 export interface IUseDatesHook {
     dateToday: Date;
     activeDate: Date;
-    handleActiveDateChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleActiveDateChange: (date: Date) => void;
 }
 
 export function useDatesHook(): IUseDatesHook {
     const [dateToday, setDateToday] = useState(new Date());
     const [activeDate, setActivedate] = useState(new Date());
 
-    const handleActiveDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedDateValue = new Date(event.target.value);
-        setActivedate(selectedDateValue);
+    const handleActiveDateChange = (date: Date) => {
+        setActivedate(date);
     };
 
     return { dateToday, activeDate, handleActiveDateChange };
