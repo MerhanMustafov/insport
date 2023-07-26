@@ -7,7 +7,7 @@ interface ICountriesLeaguesProps {
     setSelectedCountry: React.Dispatch<React.SetStateAction<string>>;
 }
 
-interface IThemeProvider {
+interface ICountryLeagueListContext {
     children: React.ReactNode;
 }
 
@@ -16,7 +16,8 @@ export const CountryLeagueListContext = createContext<ICountriesLeaguesProps>({
     selectedCountry: ""
 } as ICountriesLeaguesProps);
 
-export function CountryLeagueListProvider({ children }: IThemeProvider) {
+export function CountryLeagueListProvider(props: ICountryLeagueListContext) {
+    const { children } = props;
     const [searchWord, setSearchWord] = useState<string>("");
     const [selectedCountry, setSelectedCountry] = useState<string>("");
 

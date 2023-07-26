@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import AppNavigation from "@/core/navigation/AppNavigation";
+import AppNavigation from "@/core/AppNavigation";
 
 interface IProps {
     children: React.ReactNode;
@@ -11,6 +11,7 @@ const StyledAppLayoutContainer = styled("div")`
     background: var(--bg-primary);
     min-height: 100vh;
 `;
+//TODO: put wrapper around {children} and set a flex-grow: 1
 export default function AppLayout({ children }: IProps) {
     return (
         <StyledAppLayoutContainer>

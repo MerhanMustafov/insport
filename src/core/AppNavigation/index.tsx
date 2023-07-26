@@ -2,14 +2,13 @@ import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
 
-import AppLogo from "@/core/navigation/AppLogo";
-import { routePaths } from "@/routes/routePaths";
+import AppLogo from "@/components/AppLogo";
 
 const StyledNavigationContainer = styled("div")`
     background: var(--nav-bg);
 `;
 const StyledNavigationMainContentContainer = styled("nav")`
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: max-content auto;
@@ -40,7 +39,7 @@ export default function AppNavigation() {
                 <AppLogo />
                 <StyledUnorderedList>
                     <StyledLinkContainer>
-                        <StyledNavLink to={routePaths.SCORES}>Scores</StyledNavLink>
+                        <StyledNavLink to={"/scores"}>Scores</StyledNavLink>
                     </StyledLinkContainer>
                 </StyledUnorderedList>
             </StyledNavigationMainContentContainer>

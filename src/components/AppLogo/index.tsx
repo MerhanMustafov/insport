@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import styled from "styled-components";
 
 const StyledLogoContainer = styled("div")`
@@ -6,6 +8,7 @@ const StyledLogoContainer = styled("div")`
     grid-area: logo;
     padding: 10px;
     margin-left: 20px;
+    cursor: pointer;
 `;
 const StyledLogo = styled("span")`
     font-size: var(--font-size-big);
@@ -19,9 +22,14 @@ const StyledLogoSPORT = styled(StyledLogo)`
     color: var(--logo-sport);
 `;
 export default function AppLogo() {
+    const navigate = useNavigate();
+
+    function handleNavigateHome() {
+        navigate("/");
+    }
     return (
-        <StyledLogoContainer>
-            <StyledLogoIN>In</StyledLogoIN>
+        <StyledLogoContainer onClick={handleNavigateHome}>
+            <StyledLogoIN>I</StyledLogoIN>
             <StyledLogoSPORT>Sport</StyledLogoSPORT>
         </StyledLogoContainer>
     );
