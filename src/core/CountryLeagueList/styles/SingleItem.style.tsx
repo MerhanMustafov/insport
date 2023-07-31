@@ -9,8 +9,8 @@ export const StyledContainer = styled("div")`
     border-radius: 5px;
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 20px 10px auto;
-    grid-template-areas: "country-img . country-name";
+    grid-template-columns: auto 10px 20px;
+    grid-template-areas: "country-name . country-img";
     align-items: center;
     padding: 2px;
     margin: 5px 0;

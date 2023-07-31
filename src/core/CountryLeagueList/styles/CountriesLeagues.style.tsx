@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled("div")`
-    grid-area: PageScores_CountryLeagueList;
-    border: 1px solid var(--tx-primary);
+    /* border: 1px solid var(--tx-primary); */
     width: max-content;
     max-width: 150px;
     min-width: 150px;
     height: max-content;
     padding: 10px 5px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    margin: 20px 0 0 10px;
+    box-shadow: 0px 0px 10px 1px gray;
 `;
 
 export const StyledHeaderContainer = styled("div")`

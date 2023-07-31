@@ -11,16 +11,20 @@ const StyledNavigationMainContentContainer = styled("nav")`
     /* border: 2px solid red; */
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: max-content auto;
-    grid-template-areas: "logo mainNavLinks";
+    grid-template-columns: max-content 30px auto;
+    grid-template-areas: "App_Navigation_Logo . App_Navigation_LeftNavContent";
     align-items: center;
-    gap: 20px;
     max-width: var(--max-width-app-content);
-    margin: 10px auto;
+    margin: 0 auto;
     background: transparent;
 `;
-const StyledUnorderedList = styled("ul")`
-    grid-area: mainNavLinks;
+
+const StyledAppNavigationLogo = styled("ul")`
+    grid-area: App_Navigation_Logo;
+`;
+
+const StyledAppNavigationLeftNavLinks = styled("ul")`
+    grid-area: App_Navigation_LeftNavContent;
 `;
 
 const StyledLinkContainer = styled("li")`
@@ -36,12 +40,14 @@ export default function AppNavigation() {
     return (
         <StyledNavigationContainer>
             <StyledNavigationMainContentContainer>
-                <AppLogo />
-                <StyledUnorderedList>
+                <StyledAppNavigationLogo>
+                    <AppLogo />
+                </StyledAppNavigationLogo>
+                <StyledAppNavigationLeftNavLinks>
                     <StyledLinkContainer>
                         <StyledNavLink to={"/scores"}>Scores</StyledNavLink>
                     </StyledLinkContainer>
-                </StyledUnorderedList>
+                </StyledAppNavigationLeftNavLinks>
             </StyledNavigationMainContentContainer>
         </StyledNavigationContainer>
     );

@@ -6,17 +6,31 @@ interface IProps {
     children: React.ReactNode;
 }
 const StyledAppLayoutContainer = styled("div")`
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-primary);
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: max-content 10px auto 10px;
+    grid-template-areas:
+        "App_Navigation"
+        "."
+        "App_MainContent"
+        ".";
     min-height: 100vh;
 `;
-//TODO: put wrapper around {children} and set a flex-grow: 1
+const StyledAppNavigation = styled("div")`
+    grid-area: App_Navigation;
+`;
+const StyledAppMainContent = styled("div")`
+    grid-area: App_MainContent;
+`;
+
 export default function AppLayout({ children }: IProps) {
     return (
         <StyledAppLayoutContainer>
-            <AppNavigation />
-            {children}
+            <StyledAppNavigation>
+                <AppNavigation />
+            </StyledAppNavigation>
+
+            <StyledAppMainContent>{children}</StyledAppMainContent>
         </StyledAppLayoutContainer>
     );
 }

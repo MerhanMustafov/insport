@@ -5,7 +5,6 @@ import styled from "styled-components";
 const StyledLogoContainer = styled("div")`
     border-left: 2px solid white;
     border-bottom: 2px solid white;
-    grid-area: logo;
     padding: 10px;
     margin-left: 20px;
     cursor: pointer;
