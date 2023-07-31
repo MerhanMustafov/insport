@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import Dates from "@/core/MainScoreBoard/components/Dates";
 import axiosInstance from "@/lib/axios/axiosConfig";
 import { IAxiosData } from "@/models/api";
 
@@ -78,6 +79,7 @@ export default function CountryLeagueFixtures() {
 
     return (
         <StyledContainer>
+            <Dates />
             {(isLoading || isFetching) && <h1>Loading ... </h1>}
             {isError && <div>Erro has occured LeagueInfo</div>}
             {!isLoading &&
