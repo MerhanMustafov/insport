@@ -1,1 +1,1 @@
-export type TypeLinks = "Scores" | "News" | null;
+export type TAppNavLinks = "Scores" | "News" | null;

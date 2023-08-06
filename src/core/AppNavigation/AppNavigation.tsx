@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 
 import AppLogo from "@/components/AppLogo";
-import { TypeLinks } from "@/models/links/IAppNavLinks";
+import { TAppNavLinks } from "@/models/links/IAppNavLinks";
 import { activeLinkObserver } from "@/observers/ActiveLinkObserver";
 import { urlPaths } from "@/routes/urlPaths";
 
@@ -35,7 +35,7 @@ const StyledAppNavigationLeftNavLinks = styled("ul")`
 `;
 
 export default function AppNavigation() {
-     const [activeLink, setActiveLink] = useState<TypeLinks | null>(null);
+     const [activeLink, setActiveLink] = useState<TAppNavLinks | null>(null);
 
      const initialMount = useRef(true);
 
@@ -44,7 +44,7 @@ export default function AppNavigation() {
           initialMount.current = false;
      }
 
-     function subscriber(activeLink: TypeLinks) {
+     function subscriber(activeLink: TAppNavLinks) {
           setActiveLink(activeLink);
      }
 
@@ -58,12 +58,12 @@ export default function AppNavigation() {
                          <AppSingleNavLink
                               navPath={urlPaths.SCORES}
                               labelTxt={"Scores"}
-                              isActive={("Scores" as TypeLinks) === activeLink}
+                              isActive={("Scores" as TAppNavLinks) === activeLink}
                          />
                          <AppSingleNavLink
                               navPath={urlPaths.NEWS}
                               labelTxt={"News"}
-                              isActive={("News" as TypeLinks) === activeLink}
+                              isActive={("News" as TAppNavLinks) === activeLink}
                          />
                     </StyledAppNavigationLeftNavLinks>
                </StyledNavigationMainContentContainer>

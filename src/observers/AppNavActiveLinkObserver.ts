@@ -1,6 +1,6 @@
-import { TypeLinks } from "@/models/links/IAppNavLinks";
+import { TAppNavLinks } from "@/models/links/IAppNavLinks";
 
-type TypeObserverFN = (newActiveLink: TypeLinks) => void;
+type TypeObserverFN = (newActiveLink: TAppNavLinks) => void;
 
 export class AppNavActiveLinkObserver {
      private observers: TypeObserverFN[];
@@ -20,7 +20,7 @@ export class AppNavActiveLinkObserver {
           this.observers = this.observers.filter((fn) => fn !== subscriberToBeRemoved);
      }
 
-     notify(newActiveLink: TypeLinks) {
+     notify(newActiveLink: TAppNavLinks) {
           this.observers.forEach((observer) => observer(newActiveLink));
      }
 }

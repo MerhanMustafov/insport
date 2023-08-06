@@ -27,6 +27,8 @@ const StyleSoccerSide = styled("div")`
 
 const StyleSoccerMain = styled("div")`
      grid-area: Soccer_Main;
+     /* width: 100%; */
+     /* overflow: hidden; */
 `;
 export default function PageScores() {
      useEffect(() => {

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
-import { TypeLinks } from "@/models/links/IAppNavLinks";
+import { TAppNavLinks } from "@/models/links/IAppNavLinks";
 
 interface IIsActive {
      $isActive: boolean;
@@ -22,7 +22,7 @@ const StyledLink = styled("div")`
 `;
 
 interface IProps {
-     labelTxt: TypeLinks;
+     labelTxt: TAppNavLinks;
      isActive: boolean;
      navPath: string;
 }

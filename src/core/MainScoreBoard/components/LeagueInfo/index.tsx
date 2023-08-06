@@ -1,96 +1,309 @@
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import styled from "styled-components";
 
-import LeagueInfoRoutes from "@/core/MainScoreBoard/components/LeagueInfo/routes/LeagueInfoRoutes";
 import axiosInstance from "@/lib/axios/axiosConfig";
 import { IAxiosData } from "@/models/api";
 
 import { useQuery } from "@tanstack/react-query";
 
-import LeaguInfoNav from "./components/LeaguInfoNav";
-import LeagueInfoHeader from "./components/LeagueInfoHeader";
-import { ILeague } from "./models/ILeague";
-import { TypeActiveNavLink } from "./models/TypeActiveNavLink";
+import { IFixtures } from "./models/IFixtures";
 
 const StyledContainer = styled("div")`
-    grid-area: PageScores_LeagueInfo;
-    /* border: 2px solid green; */
+     grid-area: PageScores_LeagueInfo;
+     margin: 20px 60px;
+     box-shadow: 0px 0px 10px 1px gray;
 `;
 
-const baseEndPoint = "/leagues?current=true";
+const StyledTable = styled("table")`
+     border-collapse: collapse;
+     background: rgba(0, 30, 30);
+     color: white;
+     width: 100%;
+`;
+const StyledTableRow = styled("tr")`
+     border-collapse: collapse;
+     border-bottom: 1px solid var(--logo-sport);
+`;
+const StyledTableCellHead = styled("th")`
+     border-collapse: collapse;
+     padding: 10px;
+     font-size: 15px;
+     position: sticky;
+     top: 0px;
+     background: var(--logo-sport);
+`;
+const StyledTableCellBody = styled("td")`
+     text-align: center;
+     font-size: 12px;
+`;
+
+interface IFormattedData {
+     teams: {
+          home: {
+               name: string;
+               logo: string;
+          };
+          away: {
+               name: string;
+               logo: string;
+          };
+     };
+     date: string;
+     time: string;
+     round: string;
+}
+// const baseEndPoint = "/leagues?current=true";
 export default function LeagueInfo() {
-    const [urlPath, setUrlPath] = useState("");
-    const [activeNavPath, setActiveNavPath] = useState<TypeActiveNavLink>("overview");
-    const params = useParams();
-    const location = useLocation();
+     const [columns, setColumns] = useState<(keyof IFormattedData)[]>([]);
+     const [originalData, setOriginalData] = useState<IFixtures[]>([]);
+     const [currentData, setCurrentlData] = useState<IFormattedData[]>([]);
+     const params = useParams();
+     const {
+          data: fixtures,
+          isLoading: isFixtureDataLoading,
+          isRefetching: isFixtureDataRefetching
+     } = useQuery({
+          queryKey: ["fixtues", params.leagueId],
+          queryFn: getFixturesData,
+          enabled: !!params.leagueId,
+          refetchOnWindowFocus: false
+     });
 
-    useEffect(() => {
-        handleSetUrlPathOnMount();
-        handleSetActiveOnMount();
-    }, [params]);
+     async function getFixturesData(): Promise<IFixtures[]> {
+          const year = new Date().getFullYear();
+          const res = await axiosInstance.get(
+               `/fixtures?league=${params.leagueId as string}&season=${year}`
+          );
+          const data = (res.data as IAxiosData<IFixtures[]>).response;
+          setOriginalData(data);
 
-    const { data, isLoading, isFetching } = useQuery({
-        queryKey: ["league", params.leagueName],
-        queryFn: getLeagues,
-        enabled: !!params.leagueName,
-        refetchOnMount: false,
-        refetchOnWindowFocus: false
-    });
+          if (data.length > 0) {
+               const formatted = data.reduce((acc, curr) => {
+                    const date = new Date(curr.fixture.date);
 
-    async function getLeagues(): Promise<ILeague[]> {
-        const country = params.countryName as string;
-        const league = params.leagueName as string;
+                    const day =
+                         date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+                    const month =
+                         date.getMonth() + 1 < 10
+                              ? `0${date.getMonth() + 1}`
+                              : date.getMonth() + 1;
+                    const hours =
+                         date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+                    const minutes =
+                         date.getMinutes() < 10
+                              ? `0${date.getMinutes()}`
+                              : date.getMinutes();
+                    const time = `${hours}:${minutes}`;
+                    return [
+                         ...acc,
+                         {
+                              teams: {
+                                   home: {
+                                        name: curr.teams.home.name,
+                                        logo: curr.teams.home.logo
+                                   },
+                                   away: {
+                                        name: curr.teams.away.name,
+                                        logo: curr.teams.away.logo
+                                   }
+                              },
+                              date: `${day}-${month}-${date.getFullYear()}` as string,
+                              time: time as string,
 
-        const url = `${baseEndPoint}&country=${country}&name=${league}`;
-        return ((await axiosInstance.get(url)).data as IAxiosData<ILeague[]>).response;
-    }
+                              round: curr?.league?.round
+                         }
+                    ] as IFormattedData[];
+               }, [] as IFormattedData[]);
+               setCurrentlData(formatted);
+               setColumns(Object.keys(formatted[0]) as (keyof IFormattedData)[]);
+          }
+          // setColumns( cols)
+          return data;
+     }
 
-    function handleSetUrlPathOnMount() {
-        const path = `/football/${params.countryName as string}/${
-            params.leagueName as string
-        }/${params.leagueId as string}`;
+     if (isFixtureDataLoading || isFixtureDataRefetching) {
+          return (
+               <StyledContainer>
+                    <div
+                         style={{
+                              display: "block",
+                              height: "100%",
+                              margin: "30px",
+                              padding: "100px 0px",
+                              background: "rgba(0, 30, 30)",
+                              color: "var(--logo-sport)"
+                         }}>
+                         <h1 style={{ textAlign: "center" }}>LOADING ...</h1>
+                    </div>
+               </StyledContainer>
+          );
+     }
 
-        setUrlPath(path);
-    }
+     if (originalData.length === 0) {
+          return (
+               <StyledContainer
+                    style={{
+                         overflowY: "unset"
+                    }}>
+                    <div
+                         style={{
+                              margin: "30px auto",
+                              padding: "100px 0px",
+                              background: "rgba(0, 30, 30)",
+                              color: "var(--logo-sport)",
+                              boxShadow: "0px 0px 10px 1px gray"
+                         }}>
+                         <h1
+                              style={{
+                                   textAlign: "center",
+                                   position: "sticky",
+                                   top: "10px"
+                              }}>
+                              NO DATA IS AVAILABLE ...
+                         </h1>
+                    </div>
+               </StyledContainer>
+          );
+     }
 
-    function handleSetActiveOnMount() {
-        const regExOverview = new RegExp("overview", "i");
-        const regExFixtures = new RegExp("matches", "i");
-        const regExMore = new RegExp("table", "i");
-        if (regExOverview.test(location.pathname)) {
-            setActiveNavPath("overview");
-        } else if (regExFixtures.test(location.pathname)) {
-            setActiveNavPath("matches");
-        } else if (regExMore.test(location.pathname)) {
-            setActiveNavPath("table");
-        } else {
-            setActiveNavPath("overview");
-        }
-    }
-    function handleNavClick(clickedNav: TypeActiveNavLink) {
-        setActiveNavPath(clickedNav);
-    }
-    return (
-        <StyledContainer>
-            {(isLoading || isFetching) && <div>Loading ...</div>}
-            {data && data?.length > 0 && (
-                <div>
-                    <LeagueInfoHeader
-                        countryName={data[0].country.name}
-                        flag={data[0].country.flag}
-                        leagueName={data[0].league.name}
-                        logo={data[0].league.logo}
-                    />
-                    <LeaguInfoNav
-                        active={activeNavPath}
-                        urlPath={urlPath}
-                        handleNavClick={handleNavClick}
-                    />
-                    <LeagueInfoRoutes />
-                </div>
-            )}
-        </StyledContainer>
-    );
+     return (
+          <StyledContainer style={{ position: "sticky", top: "-5px" }}>
+               <StyledTable>
+                    <thead>
+                         {originalData.length > 0 && (
+                              <caption
+                                   style={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        gap: "10px",
+                                        background: "rgba(0, 30, 30)",
+                                        color: "white",
+                                        padding: "10px 20px 5px 20px"
+                                   }}>
+                                   <div style={{ width: "30px" }}>
+                                        <img
+                                             style={{ width: "100%" }}
+                                             src={originalData[0].league.logo}
+                                             alt=""
+                                        />
+                                   </div>
+                                   <span style={{ fontSize: "12px", color: "gray" }}>
+                                        {originalData[0].league.country}
+                                   </span>
+                                   <span>/</span>
+                                   <span style={{ fontSize: "15px" }}>
+                                        {originalData[0].league.name}
+                                   </span>
+                              </caption>
+                         )}
+                         <StyledTableRow>
+                              {columns.length > 0 &&
+                                   columns.map((col, i) => (
+                                        <StyledTableCellHead
+                                             id={col}
+                                             key={`${col}-${i}`}>
+                                             {col[0].toUpperCase() + col.slice(1)}
+                                        </StyledTableCellHead>
+                                   ))}
+                         </StyledTableRow>
+                    </thead>
+                    <tbody>
+                         {currentData.length > 0
+                              ? currentData.map((data, i) => (
+                                     <StyledTableRow key={`${data.date}-${i}`}>
+                                          {columns.length > 0 &&
+                                               columns.map((col, i) => {
+                                                    if (col === "teams") {
+                                                         return (
+                                                              <TeamsCell
+                                                                   key={`${data[col]}-${i}`}
+                                                                   home={data[col].home}
+                                                                   away={data[col].away}
+                                                              />
+                                                         );
+                                                    } else {
+                                                         return (
+                                                              <StyledTableCellBody
+                                                                   key={`${data[col]}-${i}`}>
+                                                                   {data[col]}
+                                                              </StyledTableCellBody>
+                                                         );
+                                                    }
+                                               })}
+                                     </StyledTableRow>
+                                ))
+                              : null}
+                    </tbody>
+               </StyledTable>
+          </StyledContainer>
+     );
+}
+
+interface ITeamsCellProps {
+     home: {
+          name: string;
+          logo: string;
+     };
+     away: {
+          name: string;
+          logo: string;
+     };
+}
+function TeamsCell(props: ITeamsCellProps) {
+     const { away, home } = props;
+     return (
+          <td
+               style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    // border: "2px solid red",
+                    padding: "15px",
+                    gap: 10,
+                    fontSize: "12px"
+               }}>
+               <span
+                    style={{
+                         display: "flex",
+                         gap: 20
+                    }}>
+                    <span
+                         style={{
+                              width: "25px"
+                         }}>
+                         <img
+                              style={{
+                                   width: "100%"
+                              }}
+                              src={home.logo}
+                              alt=""
+                         />
+                    </span>
+                    <span>{home.name}</span>
+               </span>
+
+               <span
+                    style={{
+                         display: "flex",
+                         gap: 20
+                    }}>
+                    <span
+                         style={{
+                              width: "30px"
+                         }}>
+                         <img
+                              style={{
+                                   width: "100%"
+                              }}
+                              src={away.logo}
+                              alt=""
+                         />
+                    </span>
+
+                    <span>{away.name}</span>
+               </span>
+          </td>
+     );
 }
