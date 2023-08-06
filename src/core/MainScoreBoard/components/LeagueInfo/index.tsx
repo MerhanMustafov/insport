@@ -131,12 +131,11 @@ export default function LeagueInfo() {
                <StyledContainer>
                     <div
                          style={{
-                              display: "block",
-                              height: "100%",
-                              margin: "30px",
+                              margin: "30px auto",
                               padding: "100px 0px",
                               background: "rgba(0, 30, 30)",
-                              color: "var(--logo-sport)"
+                              color: "var(--logo-sport)",
+                              boxShadow: "0px 0px 10px 1px gray"
                          }}>
                          <h1 style={{ textAlign: "center" }}>LOADING ...</h1>
                     </div>
