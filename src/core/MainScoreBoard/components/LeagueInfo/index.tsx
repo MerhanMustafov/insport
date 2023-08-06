@@ -172,139 +172,111 @@ export default function LeagueInfo() {
      }
 
      return (
-          //style={{ position: "sticky", top: "-5px" }}
           <StyledContainer>
-               <div>
-                    {originalData.length > 0 && (
-                         <div
-                              style={{
-                                   display: "flex",
-                                   flexDirection: "row",
-                                   alignItems: "center",
-                                   gap: "10px",
-                                   background: "rgba(0, 30, 30)",
-                                   // background: "white",
-                                   color: "white",
-                                   padding: "5px 0px 5px 5px",
-                                   width: "auto",
-                                   position: "sticky",
-                                   top: -3
-                              }}>
-                              <div style={{ width: "25px" }}>
-                                   <img
-                                        style={{ width: "100%" }}
-                                        src={originalData[0].league.logo}
-                                        alt=""
-                                   />
-                              </div>
-                              <span style={{ fontSize: "8px", color: "#cccccc" }}>
-                                   {originalData[0].league.country}
-                              </span>
-                              <span>/</span>
-                              <span style={{ fontSize: "12px" }}>
-                                   {originalData[0].league.name}
-                              </span>
-
-                              {/* <nav>
-                                        <ul style={{ display: "flex", gap: 10 }}>
-                                             <input
-                                                  type="text"
-                                                  id="search-team-input"
-                                                  placeholder="type a team"
-                                             />
-                                             <li
+               <StyledTable>
+                    <thead
+                         style={{
+                              position: "sticky",
+                              top: -2
+                         }}>
+                         {originalData.length > 0 && (
+                              <tr>
+                                   <th
+                                        colSpan={5}
+                                        style={{
+                                             background: "red"
+                                        }}>
+                                        <div
+                                             style={{
+                                                  display: "flex",
+                                                  flexDirection: "row",
+                                                  alignItems: "center",
+                                                  gap: "10px",
+                                                  background: "#343636",
+                                                  color: "white",
+                                                  padding: "5px 0px 5px 5px",
+                                                  width: "auto",
+                                                  position: "sticky",
+                                                  top: -3
+                                             }}>
+                                             <div style={{ width: "25px" }}>
+                                                  <img
+                                                       style={{ width: "100%" }}
+                                                       src={originalData[0].league.logo}
+                                                       alt=""
+                                                  />
+                                             </div>
+                                             <span
                                                   style={{
-                                                       padding: "10px",
-                                                       border: "1px solid black"
-                                                       // margin: "5px"
+                                                       fontSize: "8px",
+                                                       color: "#cccccc"
                                                   }}>
-                                                  <a href="#">fixtures</a>
-                                             </li>
-                                             <li
-                                                  style={{
-                                                       padding: "10px",
-                                                       border: "1px solid black"
-                                                       // margin: "5px"
-                                                  }}>
-                                                  <a href="#">tables</a>
-                                             </li>
-                                        </ul>
-                                   </nav> */}
-                         </div>
-                    )}
-                    <StyledTable>
-                         <thead
-                              style={
-                                   {
-                                        // position: "sticky",
-                                        // top: "-10px",
-                                        // width: "100%",
-                                        // border: "2px solid red"
-                                   }
-                              }>
-                              <StyledTableRow>
-                                   {columns.length > 0 &&
-                                        columns.map((col, i) => {
-                                             if (col === "n") {
-                                                  return (
-                                                       <StyledTableCellHead
-                                                            style={{
-                                                                 fontStyle: "italic"
-                                                            }}
-                                                            id={col}
-                                                            key={`${col}-${i}`}>
-                                                            {col[0].toUpperCase() +
-                                                                 col.slice(1)}
-                                                       </StyledTableCellHead>
-                                                  );
-                                             } else {
-                                                  return (
-                                                       <StyledTableCellHead
-                                                            id={col}
-                                                            key={`${col}-${i}`}>
-                                                            {col[0].toUpperCase() +
-                                                                 col.slice(1)}
-                                                       </StyledTableCellHead>
-                                                  );
-                                             }
-                                        })}
-                              </StyledTableRow>
-                         </thead>
-                         <tbody>
-                              {currentData.length > 0
-                                   ? currentData.map((data, i) => (
-                                          <StyledTableRow key={`${data.date}-${i}`}>
-                                               {columns.length > 0 &&
-                                                    columns.map((col, i) => {
-                                                         if (col === "teams") {
-                                                              return (
-                                                                   <TeamsCell
-                                                                        key={`${data[col]}-${i}`}
-                                                                        home={
-                                                                             data[col]
-                                                                                  .home
-                                                                        }
-                                                                        away={
-                                                                             data[col]
-                                                                                  .away
-                                                                        }
-                                                                   />
-                                                              );
-                                                         } else {
-                                                              return (
-                                                                   <StyledTableCellBody
-                                                                        key={`${data[col]}-${i}`}>
-                                                                        {data[col]}
-                                                                   </StyledTableCellBody>
-                                                              );
-                                                         }
-                                                    })}
-                                          </StyledTableRow>
-                                     ))
-                                   : null}
-                         </tbody>
-                    </StyledTable>
-               </div>
+                                                  {originalData[0].league.country}
+                                             </span>
+                                             <span>/</span>
+                                             <span style={{ fontSize: "12px" }}>
+                                                  {originalData[0].league.name}
+                                             </span>
+                                        </div>
+                                   </th>
+                              </tr>
+                         )}
+                         <StyledTableRow>
+                              {columns.length > 0 &&
+                                   columns.map((col, i) => {
+                                        if (col === "n") {
+                                             return (
+                                                  <StyledTableCellHead
+                                                       style={{
+                                                            fontStyle: "italic"
+                                                       }}
+                                                       id={col}
+                                                       key={`${col}-${i}`}>
+                                                       {col[0].toUpperCase() +
+                                                            col.slice(1)}
+                                                  </StyledTableCellHead>
+                                             );
+                                        } else {
+                                             return (
+                                                  <StyledTableCellHead
+                                                       id={col}
+                                                       key={`${col}-${i}`}>
+                                                       {col[0].toUpperCase() +
+                                                            col.slice(1)}
+                                                  </StyledTableCellHead>
+                                             );
+                                        }
+                                   })}
+                         </StyledTableRow>
+                    </thead>
+                    <tbody>
+                         {currentData.length > 0
+                              ? currentData.map((data, i) => (
+                                     <StyledTableRow key={`${data.date}-${i}`}>
+                                          {columns.length > 0 &&
+                                               columns.map((col, i) => {
+                                                    if (col === "teams") {
+                                                         return (
+                                                              <TeamsCell
+                                                                   key={`${data[col]}-${i}`}
+                                                                   home={data[col].home}
+                                                                   away={data[col].away}
+                                                              />
+                                                         );
+                                                    } else {
+                                                         return (
+                                                              <StyledTableCellBody
+                                                                   key={`${data[col]}-${i}`}>
+                                                                   {data[col]}
+                                                              </StyledTableCellBody>
+                                                         );
+                                                    }
+                                               })}
+                                     </StyledTableRow>
+                                ))
+                              : null}
+                    </tbody>
+               </StyledTable>
           </StyledContainer>
      );
 }
