@@ -21,6 +21,7 @@ const StyledTable = styled("table")`
      background: rgba(0, 30, 30);
      color: white;
      width: 100%;
+     /* border: 8px solid blue; */
 `;
 const StyledTableRow = styled("tr")`
      border-collapse: collapse;
@@ -28,18 +29,19 @@ const StyledTableRow = styled("tr")`
 `;
 const StyledTableCellHead = styled("th")`
      border-collapse: collapse;
-     padding: 10px;
-     font-size: 15px;
+     padding: 5px;
+     font-size: 10px;
      position: sticky;
-     top: 0px;
+     top: 30px;
      background: var(--logo-sport);
 `;
 const StyledTableCellBody = styled("td")`
      text-align: center;
-     font-size: 12px;
+     font-size: 10px;
 `;
 
 interface IFormattedData {
+     n: number;
      teams: {
           home: {
                name: string;
@@ -80,7 +82,7 @@ export default function LeagueInfo() {
           setOriginalData(data);
 
           if (data.length > 0) {
-               const formatted = data.reduce((acc, curr) => {
+               const formatted = data.reduce((acc, curr, i) => {
                     const date = new Date(curr.fixture.date);
 
                     const day =
@@ -99,6 +101,7 @@ export default function LeagueInfo() {
                     return [
                          ...acc,
                          {
+                              n: i + 1,
                               teams: {
                                    home: {
                                         name: curr.teams.home.name,
@@ -169,75 +172,139 @@ export default function LeagueInfo() {
      }
 
      return (
-          <StyledContainer style={{ position: "sticky", top: "-5px" }}>
-               <StyledTable>
-                    <thead>
-                         {originalData.length > 0 && (
-                              <caption
-                                   style={{
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        gap: "10px",
-                                        background: "rgba(0, 30, 30)",
-                                        color: "white",
-                                        padding: "10px 20px 5px 20px"
-                                   }}>
-                                   <div style={{ width: "30px" }}>
-                                        <img
-                                             style={{ width: "100%" }}
-                                             src={originalData[0].league.logo}
-                                             alt=""
-                                        />
-                                   </div>
-                                   <span style={{ fontSize: "12px", color: "gray" }}>
-                                        {originalData[0].league.country}
-                                   </span>
-                                   <span>/</span>
-                                   <span style={{ fontSize: "15px" }}>
-                                        {originalData[0].league.name}
-                                   </span>
-                              </caption>
-                         )}
-                         <StyledTableRow>
-                              {columns.length > 0 &&
-                                   columns.map((col, i) => (
-                                        <StyledTableCellHead
-                                             id={col}
-                                             key={`${col}-${i}`}>
-                                             {col[0].toUpperCase() + col.slice(1)}
-                                        </StyledTableCellHead>
-                                   ))}
-                         </StyledTableRow>
-                    </thead>
-                    <tbody>
-                         {currentData.length > 0
-                              ? currentData.map((data, i) => (
-                                     <StyledTableRow key={`${data.date}-${i}`}>
-                                          {columns.length > 0 &&
-                                               columns.map((col, i) => {
-                                                    if (col === "teams") {
-                                                         return (
-                                                              <TeamsCell
-                                                                   key={`${data[col]}-${i}`}
-                                                                   home={data[col].home}
-                                                                   away={data[col].away}
-                                                              />
-                                                         );
-                                                    } else {
-                                                         return (
-                                                              <StyledTableCellBody
-                                                                   key={`${data[col]}-${i}`}>
-                                                                   {data[col]}
-                                                              </StyledTableCellBody>
-                                                         );
-                                                    }
-                                               })}
-                                     </StyledTableRow>
-                                ))
-                              : null}
-                    </tbody>
-               </StyledTable>
+          //style={{ position: "sticky", top: "-5px" }}
+          <StyledContainer>
+               <div>
+                    {originalData.length > 0 && (
+                         <div
+                              style={{
+                                   display: "flex",
+                                   flexDirection: "row",
+                                   alignItems: "center",
+                                   gap: "10px",
+                                   background: "rgba(0, 30, 30)",
+                                   // background: "white",
+                                   color: "white",
+                                   padding: "5px 0px 5px 5px",
+                                   width: "auto",
+                                   position: "sticky",
+                                   top: -3
+                              }}>
+                              <div style={{ width: "25px" }}>
+                                   <img
+                                        style={{ width: "100%" }}
+                                        src={originalData[0].league.logo}
+                                        alt=""
+                                   />
+                              </div>
+                              <span style={{ fontSize: "8px", color: "#cccccc" }}>
+                                   {originalData[0].league.country}
+                              </span>
+                              <span>/</span>
+                              <span style={{ fontSize: "12px" }}>
+                                   {originalData[0].league.name}
+                              </span>
+
+                              {/* <nav>
+                                        <ul style={{ display: "flex", gap: 10 }}>
+                                             <input
+                                                  type="text"
+                                                  id="search-team-input"
+                                                  placeholder="type a team"
+                                             />
+                                             <li
+                                                  style={{
+                                                       padding: "10px",
+                                                       border: "1px solid black"
+                                                       // margin: "5px"
+                                                  }}>
+                                                  <a href="#">fixtures</a>
+                                             </li>
+                                             <li
+                                                  style={{
+                                                       padding: "10px",
+                                                       border: "1px solid black"
+                                                       // margin: "5px"
+                                                  }}>
+                                                  <a href="#">tables</a>
+                                             </li>
+                                        </ul>
+                                   </nav> */}
+                         </div>
+                    )}
+                    <StyledTable>
+                         <thead
+                              style={
+                                   {
+                                        // position: "sticky",
+                                        // top: "-10px",
+                                        // width: "100%",
+                                        // border: "2px solid red"
+                                   }
+                              }>
+                              <StyledTableRow>
+                                   {columns.length > 0 &&
+                                        columns.map((col, i) => {
+                                             if (col === "n") {
+                                                  return (
+                                                       <StyledTableCellHead
+                                                            style={{
+                                                                 fontStyle: "italic"
+                                                            }}
+                                                            id={col}
+                                                            key={`${col}-${i}`}>
+                                                            {col[0].toUpperCase() +
+                                                                 col.slice(1)}
+                                                       </StyledTableCellHead>
+                                                  );
+                                             } else {
+                                                  return (
+                                                       <StyledTableCellHead
+                                                            id={col}
+                                                            key={`${col}-${i}`}>
+                                                            {col[0].toUpperCase() +
+                                                                 col.slice(1)}
+                                                       </StyledTableCellHead>
+                                                  );
+                                             }
+                                        })}
+                              </StyledTableRow>
+                         </thead>
+                         <tbody>
+                              {currentData.length > 0
+                                   ? currentData.map((data, i) => (
+                                          <StyledTableRow key={`${data.date}-${i}`}>
+                                               {columns.length > 0 &&
+                                                    columns.map((col, i) => {
+                                                         if (col === "teams") {
+                                                              return (
+                                                                   <TeamsCell
+                                                                        key={`${data[col]}-${i}`}
+                                                                        home={
+                                                                             data[col]
+                                                                                  .home
+                                                                        }
+                                                                        away={
+                                                                             data[col]
+                                                                                  .away
+                                                                        }
+                                                                   />
+                                                              );
+                                                         } else {
+                                                              return (
+                                                                   <StyledTableCellBody
+                                                                        key={`${data[col]}-${i}`}>
+                                                                        {data[col]}
+                                                                   </StyledTableCellBody>
+                                                              );
+                                                         }
+                                                    })}
+                                          </StyledTableRow>
+                                     ))
+                                   : null}
+                         </tbody>
+                    </StyledTable>
+               </div>
           </StyledContainer>
      );
 }
@@ -260,9 +327,9 @@ function TeamsCell(props: ITeamsCellProps) {
                     display: "flex",
                     flexDirection: "column",
                     // border: "2px solid red",
-                    padding: "15px",
-                    gap: 10,
-                    fontSize: "12px"
+                    padding: "5px",
+                    gap: 5,
+                    fontSize: "10px"
                }}>
                <span
                     style={{
@@ -271,7 +338,7 @@ function TeamsCell(props: ITeamsCellProps) {
                     }}>
                     <span
                          style={{
-                              width: "25px"
+                              width: "20px"
                          }}>
                          <img
                               style={{
@@ -291,7 +358,7 @@ function TeamsCell(props: ITeamsCellProps) {
                     }}>
                     <span
                          style={{
-                              width: "30px"
+                              width: "20px"
                          }}>
                          <img
                               style={{
