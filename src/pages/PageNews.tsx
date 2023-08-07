@@ -17,6 +17,7 @@ const StyledPageNewsContainer = styled("div")`
 
      box-shadow: 0px 5px 20px 1px gray;
      min-height: 100%;
+     font-size: clamp(1rem, 2.5vw, 1.5rem);
 `;
 
 export default function PageNews() {

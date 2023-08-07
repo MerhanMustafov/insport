@@ -13,7 +13,7 @@ const StyledPageScoreContainer = styled("div")`
      flex-grow: 1;
      width: 100%;
      display: grid;
-     grid-template-rows: auto;
+     grid-template-rows: max-content auto;
      grid-template-columns: max-content 20px auto;
      grid-template-areas: "Soccer_Side . Soccer_Main";
 

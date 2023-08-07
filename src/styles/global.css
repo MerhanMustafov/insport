@@ -1,6 +1,14 @@
 @import url(./reset.css);
 @import url(./typography.css);
 
+html {
+     font-size: 62.5%;
+}
+
+body {
+     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+}
+
 ul {
      list-style: none;
 }
@@ -9,6 +17,26 @@ a {
      text-decoration: none;
 }
 
-body {
-     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+/* const size = {
+	mobileS: '320px',
+	mobileM: '375px',
+	mobileL: '425px',
+	tablet: '768px',
+	laptop: '1024px',
+	laptopL: '1440px',
+	desktop: '2560px'
+   } */
+
+/* @media (max-width: 2560px) {
+	margin: 20px 40px;
 }
+
+@media (max-width: 1440px) {
+	margin: 20px 35px;
+}
+@media (max-width: 1024px) {
+	margin: 20px 25px;
+}
+@media (max-width: 768px) {
+	margin: 20px 10px;
+} */

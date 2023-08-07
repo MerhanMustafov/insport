@@ -30,7 +30,7 @@ export default function AppLogo() {
      }
      return (
           <StyledLogoContainer onClick={handleNavigateHome}>
-               <StyledLogoIN>I</StyledLogoIN>
+               <StyledLogoIN>In</StyledLogoIN>
                <StyledLogoSPORT>Sport</StyledLogoSPORT>
           </StyledLogoContainer>
      );

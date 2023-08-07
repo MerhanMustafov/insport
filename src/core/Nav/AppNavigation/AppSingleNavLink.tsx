@@ -38,7 +38,8 @@ export default function AppSingleNavLink(props: IProps) {
      return (
           <StyledLinkContainer
                onClick={linkClickHandler}
-               $isActive={isActive}>
+               $isActive={isActive}
+          >
                <StyledLink>{labelTxt}</StyledLink>
           </StyledLinkContainer>
      );
