@@ -3,10 +3,10 @@ import styled from "styled-components";
 const StyledTableRow = styled("tr")`
      border-collapse: collapse;
 `;
-const StyledLeagueName = styled("tr")`
+const StyledLeagueName = styled("div")`
      font-size: clamp(0.7rem, 1vw, 1rem);
 `;
-const StyledLeagueCountry = styled("tr")`
+const StyledLeagueCountry = styled("div")`
      font-size: clamp(0.9rem, 1.2vw, 1.2rem);
 `;
 
@@ -16,7 +16,7 @@ const StyledLogoImgContainer = styled("div")`
 const StyleLeageLogoImg = styled("img")`
      width: 100%;
 `;
-const StyledContainer = styled("div")`
+const StyledContainer = styled("span")`
      display: flex;
      flex-direction: row;
      align-items: center;
@@ -38,7 +38,7 @@ export default function LeagueInfoHeader(props: IProps) {
           <StyledTableRow>
                <th colSpan={colLength}>
                     <StyledContainer>
-                         <StyledLogoImgContainer style={{}}>
+                         <StyledLogoImgContainer>
                               <StyleLeageLogoImg
                                    src={leagueLogo}
                                    alt="logo"

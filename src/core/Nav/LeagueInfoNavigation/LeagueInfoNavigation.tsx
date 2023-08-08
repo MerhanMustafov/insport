@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
 import styled from "styled-components";
+
+import { TLeagueInfoNavLinks } from "@/models/links/ILeagueInfoNavLinks";
+import { activeLinkObserver } from "@/observers/ActiveLinkObserver";
 
 interface IIsActive {
      $isActive: boolean;
@@ -18,11 +24,12 @@ const StyledNavigationMainContentContainer = styled("ul")`
      width: 100%;
 `;
 
-const StyledLinkContainer = styled("li")`
+const StyledLinkContainer = styled("li")<IIsActive>`
      padding: 5px 10px;
      margin: 1px;
-     color: #ffd500;
-     border-bottom: 2px solid transparent;
+     color: #ffffff;
+     border-bottom: ${({ $isActive }) =>
+          $isActive ? "2px solid var(--logo-sport)" : "2px solid transparent"};
      &:hover {
           border-bottom: 2px solid var(--logo-sport);
      }
@@ -47,20 +54,49 @@ const StyledLink = styled("div")`
 `;
 
 export default function LeagueInfoNavigation() {
+     const [activeLink, setActiveLink] = useState<TLeagueInfoNavLinks>("Fixtures");
+     const navigate = useNavigate();
+     const params = useParams();
+     console.log(params);
+
+     activeLinkObserver.leagueInfoNav.subscribe(subscriber);
+     function subscriber(activeLink: TLeagueInfoNavLinks) {
+          setActiveLink(activeLink);
+     }
+     function linkClickHandler(e: React.MouseEvent) {
+          const navPath = (e.target as HTMLElement).innerText.toLowerCase();
+          navigate(
+               `/football/${params.countryName as string}/${
+                    params.leagueName as string
+               }/${params.leagueId as string}/` + navPath
+          );
+     }
      return (
           <StyledNavContainer>
                <StyledNavigationMainContentContainer>
-                    <StyledLinkContainerLive>
+                    <StyledLinkContainerLive
+                         onClick={linkClickHandler}
+                         $isActive={activeLink === "Live"}
+                    >
                          <StyledLink>Live</StyledLink>
                     </StyledLinkContainerLive>
-                    <StyledLinkContainerFixtures>
+                    <StyledLinkContainerFixtures
+                         onClick={linkClickHandler}
+                         $isActive={activeLink === "Fixtures"}
+                    >
                          <StyledLink>Fixtures</StyledLink>
                     </StyledLinkContainerFixtures>
 
-                    <StyledLinkContainerResults>
+                    <StyledLinkContainerResults
+                         onClick={linkClickHandler}
+                         $isActive={activeLink === "Result"}
+                    >
                          <StyledLink>Results</StyledLink>
                     </StyledLinkContainerResults>
-                    <StyledLinkContainerStandings>
+                    <StyledLinkContainerStandings
+                         onClick={linkClickHandler}
+                         $isActive={activeLink === "Standings"}
+                    >
                          <StyledLink>Standings</StyledLink>
                     </StyledLinkContainerStandings>
                </StyledNavigationMainContentContainer>
