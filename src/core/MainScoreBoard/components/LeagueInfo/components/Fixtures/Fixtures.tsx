@@ -13,10 +13,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import StickyTableHeadLayout from "../../Layouts/StickyTableHeadLayout";
 import LeagueInfoHeader from "../../components/Header/LeagueInfoHeader";
-import Cell from "../../components/Table/TableBodyCells/Cell/Cell";
-import ResultsCell from "../../components/Table/TableBodyCells/ResultsCell/ResultsCell";
-import TeamsCell from "../../components/Table/TableBodyCells/TeamsCell/TeamsCell";
-import TableHeader from "../../components/Table/TableHeader/TableHeader";
 import { IFixtures } from "../../models/IFixtures";
 import { IFormattedFixturesData } from "../../models/ITable";
 
@@ -46,16 +42,10 @@ const StyledContainer = styled("div")`
 `;
 
 const StyledTable = styled("table")`
-     /* border: 5px solid blue; */
      border-collapse: collapse;
      background: rgba(0, 30, 30);
      color: white;
      width: 100%;
-`;
-const StyledTableRow = styled("tr")`
-     /* border: 5px solid red; */
-     border-collapse: collapse;
-     border-bottom: 1px solid var(--logo-sport);
 `;
 
 // const baseEndPoint = "/leagues?current=true";
@@ -182,7 +172,6 @@ export default function LeagueInfo() {
 
      return (
           <StyledContainer>
-               {/* <LeagueInfoNavigation /> */}
                <StyledTable>
                     <StickyTableHeadLayout>
                          {originalData.length > 0 && (
@@ -204,58 +193,6 @@ export default function LeagueInfo() {
                                    type="fixtures"
                               />
                          )}
-                         {/* {currentData.length > 0
-                              ? currentData.map((data, i) => (
-                                     <StyledTableRow key={`${data.date}-${i}`}>
-                                          {columns.length > 0 &&
-                                               columns.map((col, i) => {
-                                                    if (col === "result") {
-                                                         return (
-                                                              <ResultsCell
-                                                                   key={`result-teams-${i}`}
-                                                                   homeTeamScore={
-                                                                        data[col].home
-                                                                   }
-                                                                   awayTeamScore={
-                                                                        data[col].away
-                                                                   }
-                                                              />
-                                                         );
-                                                    }
-                                                    if (col === "teams") {
-                                                         return (
-                                                              <TeamsCell
-                                                                   key={`$teams-${i}`}
-                                                                   home={data[col].home}
-                                                                   away={data[col].away}
-                                                              />
-                                                         );
-                                                    }
-
-                                                    if (col === "status") {
-                                                         return (
-                                                              <Cell
-                                                                   key={`status-${i}`}
-                                                                   cellData={
-                                                                        data[col].short
-                                                                   }
-                                                                   statusLong={
-                                                                        data[col].long
-                                                                   }
-                                                              />
-                                                         );
-                                                    } else {
-                                                         return (
-                                                              <Cell
-                                                                   cellData={data[col]}
-                                                                   key={`${data[col]}-${i}`}
-                                                              ></Cell>
-                                                         );
-                                                    }
-                                               })}
-                                     </StyledTableRow>
-                                ))
-                              : null} */}
                     </tbody>
                </StyledTable>
           </StyledContainer>
