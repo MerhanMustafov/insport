@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import styled from "styled-components";
 
+import TableBodyRow from "@/components/Table/Body/TableBodyRow";
+import TableHeadRow from "@/components/Table/Head/TableHeadRow";
 import axiosInstance from "@/lib/axios/axiosConfig";
 import { IAxiosData } from "@/models/api";
 import { activeLinkObserver } from "@/observers/ActiveLinkObserver";
@@ -118,8 +120,8 @@ export default function LeagueInfo() {
                                         logo: curr.teams.away.logo
                                    }
                               },
-                              date: `${day}-${month}-${date.getFullYear()}` as string,
-                              time: time as string,
+                              date: `${day}-${month}-${date.getFullYear()}`,
+                              time: time,
 
                               round: curr?.league?.round
                          }
@@ -191,7 +193,8 @@ export default function LeagueInfo() {
                                    leagueLogo={originalData[0].league.logo}
                               />
                          )}
-                         <TableHeader cols={columns} />
+                         {/* <TableHeader cols={columns} /> */}
+                         {columns.length > 0 && <TableHeadRow cols={columns} />}
                     </StickyTableHeadLayout>
                     <tbody>
                          {currentData.length > 0
@@ -202,7 +205,7 @@ export default function LeagueInfo() {
                                                     if (col === "result") {
                                                          return (
                                                               <ResultsCell
-                                                                   key={`$${data[col]} - ${i}`}
+                                                                   key={`result-teams-${i}`}
                                                                    homeTeamScore={
                                                                         data[col].home
                                                                    }
@@ -215,7 +218,7 @@ export default function LeagueInfo() {
                                                     if (col === "teams") {
                                                          return (
                                                               <TeamsCell
-                                                                   key={`${data[col]}-${i}`}
+                                                                   key={`$teams-${i}`}
                                                                    home={data[col].home}
                                                                    away={data[col].away}
                                                               />
@@ -225,7 +228,7 @@ export default function LeagueInfo() {
                                                     if (col === "status") {
                                                          return (
                                                               <Cell
-                                                                   key={`${data[col]}-${i}`}
+                                                                   key={`status-${i}`}
                                                                    cellData={
                                                                         data[col].short
                                                                    }

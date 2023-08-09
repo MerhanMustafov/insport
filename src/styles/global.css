@@ -1,5 +1,6 @@
 @import url(./reset.css);
 @import url(./typography.css);
+@import url(./root.css);
 
 html {
      font-size: 62.5%;
