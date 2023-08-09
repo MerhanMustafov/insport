@@ -12,5 +12,7 @@ interface IProps {
 export default function TableHeadCell(props: IProps) {
      const { colName } = props;
 
-     return <StyledHeadCell>{colName}</StyledHeadCell>;
+     return (
+          <StyledHeadCell>{colName[0].toUpperCase() + colName.slice(1)}</StyledHeadCell>
+     );
 }

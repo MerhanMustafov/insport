@@ -197,7 +197,14 @@ export default function LeagueInfo() {
                          {columns.length > 0 && <TableHeadRow cols={columns} />}
                     </StickyTableHeadLayout>
                     <tbody>
-                         {currentData.length > 0
+                         {currentData.length > 0 && (
+                              <TableBodyRow
+                                   data={currentData}
+                                   colNames={columns}
+                                   type="fixtures"
+                              />
+                         )}
+                         {/* {currentData.length > 0
                               ? currentData.map((data, i) => (
                                      <StyledTableRow key={`${data.date}-${i}`}>
                                           {columns.length > 0 &&
@@ -248,7 +255,7 @@ export default function LeagueInfo() {
                                                })}
                                      </StyledTableRow>
                                 ))
-                              : null}
+                              : null} */}
                     </tbody>
                </StyledTable>
           </StyledContainer>
