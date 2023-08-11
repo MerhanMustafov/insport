@@ -1,12 +1,7 @@
-import styled from "styled-components";
-
 import { IFormattedFixturesData } from "@/models/table/IFixturesTableData";
+import { StyledHeadRow } from "@/styles/Table/Table.styles";
 
 import TableHeadCell from "./TableHeadCell";
-
-const StyledHeadRow = styled("tr")`
-     background: var(--logo-sport);
-`;
 
 interface IProps {
      cols: (keyof IFormattedFixturesData)[];

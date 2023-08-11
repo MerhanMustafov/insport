@@ -1,9 +1,5 @@
-import styled from "styled-components";
+import { StyledBodyCell } from "@/styles/Table/Table.styles";
 
-const StyledBodyCell = styled("td")`
-     padding: var(--table-row-padding);
-     text-align: center;
-`;
 interface IProps {
      content: string | number;
 }

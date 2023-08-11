@@ -1,11 +1,6 @@
-import styled from "styled-components";
-
 import { IFormattedFixturesData } from "@/models/table/IFixturesTableData";
+import { StyledHeadCell } from "@/styles/Table/Table.styles";
 
-const StyledHeadCell = styled("th")`
-     padding: var(--table-row-padding);
-     text-align: center;
-`;
 interface IProps {
      colName: keyof IFormattedFixturesData;
 }
