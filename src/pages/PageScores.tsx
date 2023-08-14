@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
 import CountryLeagueList from "@/core/CountryLeagueList";
-import MainScoreBoard from "@/core/MainScoreBoard";
 import { activeLinkObserver } from "@/observers/ActiveLinkObserver";
+import PageScoresRoutes from "@/routes/PageScoresRoutes";
 
 const StyledPageScoreContainer = styled("div")`
      margin: 0 auto;
@@ -42,13 +42,7 @@ export default function PageScores() {
                </StyleSoccerSide>
 
                <StyleSoccerMain>
-                    <Routes>
-                         <Route
-                              path="/*"
-                              // path="/football/:countryName/:leagueName/:leagueId"
-                              element={<MainScoreBoard />}
-                         />
-                    </Routes>
+                    <PageScoresRoutes />
                </StyleSoccerMain>
           </StyledPageScoreContainer>
      );
