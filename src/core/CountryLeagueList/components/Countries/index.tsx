@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
+import { getCountries } from "@/api/getCountries";
 import { ICountry } from "@/models/api";
 
 import { useQuery } from "@tanstack/react-query";
 
 import { useCountryLeagueListContext } from "../../hooks/useCountryLeagueListContext";
-import { getCountries } from "../../services";
 import SingleCountry from "./SingleCountry";
 
 export default function Countries() {

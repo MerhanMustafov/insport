@@ -57,7 +57,6 @@ export default function LeagueInfoNavigation() {
      const [activeLink, setActiveLink] = useState<TLeagueInfoNavLinks>("Fixtures");
      const navigate = useNavigate();
      const params = useParams();
-     console.log(params);
 
      activeLinkObserver.leagueInfoNav.subscribe(subscriber);
      function subscriber(activeLink: TLeagueInfoNavLinks) {

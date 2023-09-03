@@ -1,4 +1,5 @@
 import axiosInstance from "@/lib/axios/axiosConfig";
+import { urlBuilder } from "@/lib/ts-url-builder/ts-url-builder";
 import { IAxiosData, ICountry, ILeague, ISeason } from "@/models/api";
 
 interface ILeagueData {
@@ -7,8 +8,14 @@ interface ILeagueData {
      seasons: ISeason;
 }
 
-export default async function getLeagues(selectedCountry: string) {
+export async function getLeagues(selectedCountry: string) {
+     const endpoint = urlBuilder
+          .new()
+          .setPath("leagues")
+          .setQuery("country", selectedCountry)
+          .build();
+
      return axiosInstance
-          .get(`/leagues?country=${selectedCountry}`)
+          .get(endpoint)
           .then((res) => (res.data as IAxiosData<ILeagueData[]>).response);
 }
