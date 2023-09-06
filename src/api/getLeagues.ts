@@ -2,7 +2,7 @@ import axiosInstance from "@/lib/axios/axiosConfig";
 import { urlBuilder } from "@/lib/ts-url-builder/ts-url-builder";
 import { IAxiosData, ICountry, ILeague, ISeason } from "@/models/api";
 
-interface ILeagueData {
+export interface ILeagueData {
     league: ILeague;
     country: ICountry;
     seasons: ISeason;

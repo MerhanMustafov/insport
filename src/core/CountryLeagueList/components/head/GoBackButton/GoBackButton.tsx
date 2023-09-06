@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 import { useCountryLeagueListContext } from "@/context/hooks/useContext";
 
-import { StyledHeaderContainer } from "../../styles/CountriesLeagues.styles";
+import { StyledHeaderContainer } from "../../../styles/CountriesLeagues.styles";
+
+const StyledContainer = styled(StyledHeaderContainer)``;
 
 const StyledGoBackButton = styled("button")`
     border: 1px solid transparent;
@@ -31,7 +33,7 @@ export default function GoBackButton() {
         setSearchWord("");
     }
     return (
-        <StyledHeaderContainer>
+        <StyledContainer>
             <StyledGoBackButton
                 type="button"
                 onClick={handleClick}
@@ -39,6 +41,6 @@ export default function GoBackButton() {
                 &lt;
             </StyledGoBackButton>
             <StyledLeagueTitle>{selectedCountry}</StyledLeagueTitle>
-        </StyledHeaderContainer>
+        </StyledContainer>
     );
 }

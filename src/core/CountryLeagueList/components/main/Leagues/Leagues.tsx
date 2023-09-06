@@ -1,26 +1,13 @@
 import { getLeagues } from "@/api/getLeagues";
 import { useCountryLeagueListContext } from "@/context/hooks/useContext";
 
-import { useQuery } from "@tanstack/react-query";
-
 import SingleLeague from "./SingleLeague";
 
 export default function Leagues() {
-    const { selectedCountry } = useCountryLeagueListContext();
+    const { leagues, isLoadingLeagues, isFetchingLeagues } =
+        useCountryLeagueListContext();
 
-    const {
-        data: leagues,
-        isLoading,
-        isFetching
-    } = useQuery({
-        queryKey: ["leagues", selectedCountry],
-        queryFn: () => getLeagues(selectedCountry),
-        enabled: !!selectedCountry,
-        refetchOnMount: false,
-        refetchOnWindowFocus: false
-    });
-
-    if (isLoading || isFetching) {
+    if (isLoadingLeagues || isFetchingLeagues) {
         return <div>LOADING ...</div>;
     }
     // TODO: Cover error case

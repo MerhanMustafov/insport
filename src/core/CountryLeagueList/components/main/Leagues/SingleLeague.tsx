@@ -7,7 +7,7 @@ import {
     StyledImageContainer,
     StyledLeagueOrCountryContainer,
     StyledName
-} from "../../styles/SingleItem.style";
+} from "../../../styles/SingleItem.style";
 
 interface IProps extends ILeague {
     countryName: string;

@@ -5,7 +5,7 @@ import {
     StyledImageContainer,
     StyledLeagueOrCountryContainer,
     StyledName
-} from "../../styles/SingleItem.style";
+} from "../../../styles/SingleItem.style";
 
 interface IProps {
     code: string;
@@ -16,6 +16,7 @@ interface IProps {
 export default function SingleCountry(props: IProps) {
     const { flag, name } = props;
     const { setSelectedCountry } = useCountryLeagueListContext();
+
     return (
         <StyledLeagueOrCountryContainer onClick={() => setSelectedCountry(name)}>
             <StyledImageContainer>

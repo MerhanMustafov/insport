@@ -2,8 +2,13 @@ import styled from "styled-components";
 
 import { useCountryLeagueListContext } from "@/context/hooks/useContext";
 
-import { StyledHeaderContainer } from "../../styles/CountriesLeagues.styles";
+import { StyledHeaderContainer } from "../../../styles/CountriesLeagues.styles";
 
+const StyledContainer = styled(StyledHeaderContainer)`
+    position: sticky;
+    top: -10px;
+    background: white;
+`;
 const StyledInputField = styled("input")`
     width: 100%;
     outline: none;
@@ -12,16 +17,15 @@ const StyledInputField = styled("input")`
 
 export default function SearchInputField() {
     const { searchWord, setSearchWord } = useCountryLeagueListContext();
+
     return (
-        <StyledHeaderContainer
-            style={{ position: "sticky", top: "-10px", background: "white" }}
-        >
+        <StyledContainer>
             <StyledInputField
                 type="text"
                 placeholder="search"
                 value={searchWord}
                 onChange={(e) => setSearchWord(e.target.value)}
             />
-        </StyledHeaderContainer>
+        </StyledContainer>
     );
 }
