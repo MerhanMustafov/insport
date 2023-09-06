@@ -1,8 +1,9 @@
-import { useCountryLeagueListContext } from "../../hooks/useCountryLeagueListContext";
+import { useCountryLeagueListContext } from "@/context/hooks/useContext";
+
 import {
-    StyledContainer,
     StyledImage,
     StyledImageContainer,
+    StyledLeagueOrCountryContainer,
     StyledName
 } from "../../styles/SingleItem.style";
 
@@ -16,7 +17,7 @@ export default function SingleCountry(props: IProps) {
     const { flag, name } = props;
     const { setSelectedCountry } = useCountryLeagueListContext();
     return (
-        <StyledContainer onClick={() => setSelectedCountry(name)}>
+        <StyledLeagueOrCountryContainer onClick={() => setSelectedCountry(name)}>
             <StyledImageContainer>
                 <StyledImage
                     src={flag}
@@ -24,6 +25,6 @@ export default function SingleCountry(props: IProps) {
                 />
             </StyledImageContainer>
             <StyledName>{name}</StyledName>
-        </StyledContainer>
+        </StyledLeagueOrCountryContainer>
     );
 }

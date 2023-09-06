@@ -1,9 +1,8 @@
 import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
 
 import styled from "styled-components";
 
-import CountryLeagueList from "@/core/CountryLeagueList";
+import CountryLeagueList from "@/core/CountryLeagueList/CountryLeagueList";
 import { activeLinkObserver } from "@/observers/ActiveLinkObserver";
 import PageScoresRoutes from "@/routes/PageScoresRoutes";
 

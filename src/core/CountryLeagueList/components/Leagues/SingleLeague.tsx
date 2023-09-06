@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { ILeague } from "@/models/api";
 
 import {
-    StyledContainer,
     StyledImage,
     StyledImageContainer,
+    StyledLeagueOrCountryContainer,
     StyledName
 } from "../../styles/SingleItem.style";
 
@@ -22,7 +22,7 @@ export default function SingleLeague(props: IProps) {
     }
 
     return (
-        <StyledContainer onClick={handleSingleLeagueClick}>
+        <StyledLeagueOrCountryContainer onClick={handleSingleLeagueClick}>
             <StyledImageContainer>
                 <StyledImage
                     src={logo}
@@ -30,6 +30,6 @@ export default function SingleLeague(props: IProps) {
                 />
             </StyledImageContainer>
             <StyledName>{name}</StyledName>
-        </StyledContainer>
+        </StyledLeagueOrCountryContainer>
     );
 }

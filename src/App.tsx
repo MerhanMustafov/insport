@@ -1,9 +1,9 @@
-import { useTheme } from "@/context/theme/hooks/useThemeContext";
+import { useThemeContext } from "@/context/hooks/useContext";
 import AppLayout from "@/layouts/app/AppLayout";
 import AppRoutes from "@/routes/AppRoutes";
 
 function App() {
-    const { theme } = useTheme();
+    const { theme } = useThemeContext();
 
     return (
         <div style={{ ...(theme as React.CSSProperties) }}>

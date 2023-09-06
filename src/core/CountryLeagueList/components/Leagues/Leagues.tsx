@@ -1,8 +1,8 @@
 import { getLeagues } from "@/api/getLeagues";
+import { useCountryLeagueListContext } from "@/context/hooks/useContext";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { useCountryLeagueListContext } from "../../hooks/useCountryLeagueListContext";
 import SingleLeague from "./SingleLeague";
 
 export default function Leagues() {

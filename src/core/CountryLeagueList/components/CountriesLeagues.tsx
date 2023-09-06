@@ -1,9 +1,27 @@
-import { useCountryLeagueListContext } from "../hooks/useCountryLeagueListContext";
-import { StyledContainer } from "../styles/CountriesLeagues.style";
-import Countries from "./Countries";
-import GoBackButton from "./GoBackButton";
-import Leagues from "./Leagues";
-import SearchInputField from "./SearchInputField";
+import styled from "styled-components";
+
+import { useCountryLeagueListContext } from "@/context/hooks/useContext";
+
+import Countries from "./Countries/Countries";
+import GoBackButton from "./GoBackButton/GoBackButton";
+import Leagues from "./Leagues/Leagues";
+import SearchInputField from "./SearchInputField/SearchinputField";
+
+export const StyledContainer = styled("div")`
+    /* border: 1px solid var(--tx-primary); */
+    width: max-content;
+    max-width: 150px;
+    /* min-width: 150px; */
+    height: max-content;
+    padding: 10px 5px;
+    /* border-radius: 10px; */
+    margin: 20px 0 0 10px;
+    box-shadow: 0px 0px 10px 1px gray;
+    position: sticky;
+    top: 0px;
+    max-height: 80vh;
+    overflow-y: scroll;
+`;
 
 export default function CountriesLeagues() {
     const { selectedCountry } = useCountryLeagueListContext();
@@ -14,17 +32,4 @@ export default function CountriesLeagues() {
             {selectedCountry ? <Leagues /> : <Countries />}
         </StyledContainer>
     );
-}
-
-{
-    /* <div style={{ position: "sticky", top: "2%", marginLeft: "2px" }}>
-     <span>
-          <svg
-               xmlns="http://www.w3.org/2000/svg"
-               height="1em"
-               viewBox="0 0 448 512">
-               <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-          </svg>
-     </span>
-</div>; */
 }

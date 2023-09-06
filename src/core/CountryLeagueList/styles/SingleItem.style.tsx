@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledContainer = styled("div")`
+export const StyledLeagueOrCountryContainer = styled("div")`
     border: 1px solid transparent;
     &:hover {
         cursor: pointer;
