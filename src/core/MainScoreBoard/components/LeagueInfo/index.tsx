@@ -2,10 +2,10 @@ import LeagueInfoNavigation from "@/core/Nav/LeagueInfoNavigation/LeagueInfoNavi
 import LeagueInfoRoutes from "@/routes/LeagueInfoRoutes";
 
 export default function LeagueInfo() {
-     return (
-          <>
-               <LeagueInfoNavigation />
-               <LeagueInfoRoutes />
-          </>
-     );
+    return (
+        <>
+            <LeagueInfoNavigation />
+            <LeagueInfoRoutes />
+        </>
+    );
 }

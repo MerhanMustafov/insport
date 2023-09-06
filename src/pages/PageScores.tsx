@@ -8,42 +8,42 @@ import { activeLinkObserver } from "@/observers/ActiveLinkObserver";
 import PageScoresRoutes from "@/routes/PageScoresRoutes";
 
 const StyledPageScoreContainer = styled("div")`
-     margin: 0 auto;
-     max-width: var(--max-width-app-content);
-     flex-grow: 1;
-     width: 100%;
-     display: grid;
-     grid-template-rows: max-content auto;
-     grid-template-columns: max-content 20px auto;
-     grid-template-areas: "Soccer_Side . Soccer_Main";
+    margin: 0 auto;
+    max-width: var(--max-width-app-content);
+    flex-grow: 1;
+    width: 100%;
+    display: grid;
+    grid-template-rows: max-content auto;
+    grid-template-columns: max-content 20px auto;
+    grid-template-areas: "Soccer_Side . Soccer_Main";
 
-     box-shadow: 0px 5px 20px 1px gray;
-     min-height: 100%;
+    box-shadow: 0px 5px 20px 1px gray;
+    min-height: 100%;
 `;
 
 const StyleSoccerSide = styled("div")`
-     grid-area: Soccer_Side;
+    grid-area: Soccer_Side;
 `;
 
 const StyleSoccerMain = styled("div")`
-     grid-area: Soccer_Main;
-     /* width: 100%; */
-     /* overflow: hidden; */
+    grid-area: Soccer_Main;
+    /* width: 100%; */
+    /* overflow: hidden; */
 `;
 export default function PageScores() {
-     useEffect(() => {
-          activeLinkObserver.appNav.notify("Scores");
-     }, []);
+    useEffect(() => {
+        activeLinkObserver.appNav.notify("Scores");
+    }, []);
 
-     return (
-          <StyledPageScoreContainer>
-               <StyleSoccerSide>
-                    <CountryLeagueList />
-               </StyleSoccerSide>
+    return (
+        <StyledPageScoreContainer>
+            <StyleSoccerSide>
+                <CountryLeagueList />
+            </StyleSoccerSide>
 
-               <StyleSoccerMain>
-                    <PageScoresRoutes />
-               </StyleSoccerMain>
-          </StyledPageScoreContainer>
-     );
+            <StyleSoccerMain>
+                <PageScoresRoutes />
+            </StyleSoccerMain>
+        </StyledPageScoreContainer>
+    );
 }

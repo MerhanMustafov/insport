@@ -6,24 +6,24 @@ import Results from "@/core/MainScoreBoard/components/LeagueInfo/components/Resu
 import Standings from "@/core/MainScoreBoard/components/LeagueInfo/components/Standings/Standings";
 
 export default function LeagueInfoRoutes() {
-     return (
-          <Routes>
-               <Route
-                    path="/*"
-                    element={<Fixtures />}
-               ></Route>
-               <Route
-                    path="/live"
-                    element={<Live />}
-               ></Route>
-               <Route
-                    path="/results"
-                    element={<Results />}
-               ></Route>
-               <Route
-                    path="/standings"
-                    element={<Standings />}
-               ></Route>
-          </Routes>
-     );
+    return (
+        <Routes>
+            <Route
+                path="/*"
+                element={<Fixtures />}
+            ></Route>
+            <Route
+                path="/live"
+                element={<Live />}
+            ></Route>
+            <Route
+                path="/results"
+                element={<Results />}
+            ></Route>
+            <Route
+                path="/standings"
+                element={<Standings />}
+            ></Route>
+        </Routes>
+    );
 }

@@ -6,18 +6,18 @@ import Leagues from "./Leagues";
 import SearchInputField from "./SearchInputField";
 
 export default function CountriesLeagues() {
-     const { selectedCountry } = useCountryLeagueListContext();
+    const { selectedCountry } = useCountryLeagueListContext();
 
-     return (
-          <StyledContainer>
-               {selectedCountry ? <GoBackButton /> : <SearchInputField />}
-               {selectedCountry ? <Leagues /> : <Countries />}
-          </StyledContainer>
-     );
+    return (
+        <StyledContainer>
+            {selectedCountry ? <GoBackButton /> : <SearchInputField />}
+            {selectedCountry ? <Leagues /> : <Countries />}
+        </StyledContainer>
+    );
 }
 
 {
-     /* <div style={{ position: "sticky", top: "2%", marginLeft: "2px" }}>
+    /* <div style={{ position: "sticky", top: "2%", marginLeft: "2px" }}>
      <span>
           <svg
                xmlns="http://www.w3.org/2000/svg"

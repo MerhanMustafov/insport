@@ -6,17 +6,17 @@ import PageScores from "@/pages/PageScores";
 import { urlPaths } from "./urlPaths";
 
 export default function AppRoutes() {
-     return (
-          <Routes>
-               <Route
-                    path="/*"
-                    element={<PageScores />}
-               />
+    return (
+        <Routes>
+            <Route
+                path="/*"
+                element={<PageScores />}
+            />
 
-               <Route
-                    path={urlPaths.NEWS}
-                    element={<PageNews />}
-               />
-          </Routes>
-     );
+            <Route
+                path={urlPaths.NEWS}
+                element={<PageNews />}
+            />
+        </Routes>
+    );
 }

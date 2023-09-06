@@ -5,28 +5,28 @@ import styled from "styled-components";
 import { activeLinkObserver } from "@/observers/ActiveLinkObserver";
 
 const StyledPageNewsContainer = styled("div")`
-     border: 2px solid blue;
-     margin: 0 auto;
-     max-width: var(--max-width-app-content);
-     flex-grow: 1;
-     width: 100%;
-     display: grid;
-     grid-template-rows: auto;
-     grid-template-columns: max-content 20px auto;
-     grid-template-areas: "Soccer_Side . Soccer_Main";
+    border: 2px solid blue;
+    margin: 0 auto;
+    max-width: var(--max-width-app-content);
+    flex-grow: 1;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: max-content 20px auto;
+    grid-template-areas: "Soccer_Side . Soccer_Main";
 
-     box-shadow: 0px 5px 20px 1px gray;
-     min-height: 100%;
-     font-size: clamp(1rem, 2.5vw, 1.5rem);
+    box-shadow: 0px 5px 20px 1px gray;
+    min-height: 100%;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
 `;
 
 export default function PageNews() {
-     useEffect(() => {
-          activeLinkObserver.appNav.notify("News");
-     }, []);
-     return (
-          <StyledPageNewsContainer>
-               <div>This Page is in Maintenance</div>
-          </StyledPageNewsContainer>
-     );
+    useEffect(() => {
+        activeLinkObserver.appNav.notify("News");
+    }, []);
+    return (
+        <StyledPageNewsContainer>
+            <div>This Page is in Maintenance</div>
+        </StyledPageNewsContainer>
+    );
 }

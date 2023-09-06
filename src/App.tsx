@@ -3,15 +3,15 @@ import AppLayout from "@/layouts/app/AppLayout";
 import AppRoutes from "@/routes/AppRoutes";
 
 function App() {
-     const { theme } = useTheme();
+    const { theme } = useTheme();
 
-     return (
-          <div style={{ ...(theme as React.CSSProperties) }}>
-               <AppLayout>
-                    <AppRoutes />
-               </AppLayout>
-          </div>
-     );
+    return (
+        <div style={{ ...(theme as React.CSSProperties) }}>
+            <AppLayout>
+                <AppRoutes />
+            </AppLayout>
+        </div>
+    );
 }
 
 export default App;

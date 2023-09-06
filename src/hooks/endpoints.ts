@@ -1,3 +1,3 @@
 export const endpoints = {
-     FIXTURES: "/fixtures"
+    FIXTURES: "/fixtures"
 };

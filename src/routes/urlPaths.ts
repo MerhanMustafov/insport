@@ -1,5 +1,5 @@
 export const urlPaths = {
-     HOME: "/",
-     SCORES: "/scores",
-     NEWS: "/news"
+    HOME: "/",
+    SCORES: "/scores",
+    NEWS: "/news"
 };

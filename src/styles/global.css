@@ -3,19 +3,19 @@
 @import url(./root.css);
 
 html {
-     font-size: 62.5%;
+    font-size: 62.5%;
 }
 
 body {
-     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
 }
 
 ul {
-     list-style: none;
+    list-style: none;
 }
 
 a {
-     text-decoration: none;
+    text-decoration: none;
 }
 
 /* const size = {
