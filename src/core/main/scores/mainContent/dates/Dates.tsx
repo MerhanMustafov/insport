@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-import { useMainScoreBoardContext } from "../../hooks/useMainScoreBoardContext";
-import DateBox from "./components/DateBox";
+import { useMainScoreBoardContext } from "@/context/hooks/useContext";
+
+import DateBox from "./DateBox";
 
 const StyledContainer = styled("div")`
     grid-area: PageScores_Dates;

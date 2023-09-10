@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useMainScoreBoardContext } from "../../../../hooks/useMainScoreBoardContext";
+import { useMainScoreBoardContext } from "@/context/hooks/useContext";
 
 const StyledContainer = styled("div")<{ $isActive: boolean }>`
     position: relative;

@@ -1,14 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 
-import MainScoreBoard from "@/core/MainScoreBoard";
+import MainScore from "@/core/main/scores/mainContent/MainScore";
 
 export default function PageScoresRoutes() {
     return (
         <Routes>
             <Route
                 path="/*"
-                // path="/football/:countryName/:leagueName/:leagueId"
-                element={<MainScoreBoard />}
+                element={<MainScore />}
             />
         </Routes>
     );

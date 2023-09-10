@@ -1,19 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 
-import CountryLeagueFixtures from "@/core/MainScoreBoard/components/CountryLeagueFixtures";
-import LeagueInfo from "@/core/MainScoreBoard/components/LeagueInfo";
+// import LeagueInfo from "@/core/MainScoreBoard/components/LeagueInfo";
+import AllFixtures from "@/core/main/scores/mainContent/allFixtures/AllFixtures";
 
 export default function MainScoreBoardRoutes() {
     return (
         <Routes>
             <Route
                 path="/*"
-                element={<CountryLeagueFixtures />}
+                element={<AllFixtures />}
             />
-            <Route
+            {/* <Route
                 path="/football/:countryName/:leagueName/:leagueId/*"
                 element={<LeagueInfo />}
-            />
+            /> */}
         </Routes>
     );
 }

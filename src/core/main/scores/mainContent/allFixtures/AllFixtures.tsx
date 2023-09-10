@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-import Dates from "@/core/MainScoreBoard/components/Dates";
+import { useMainScoreBoardContext } from "@/context/hooks/useContext";
+import Dates from "@/core/main/scores/mainContent/dates/Dates";
 import axiosInstance from "@/lib/axios/axiosConfig";
 import { IAxiosData } from "@/models/api";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { useMainScoreBoardContext } from "../../hooks/useMainScoreBoardContext";
-import CountryFixtures from "./components/CountryFixtures";
+import CountryFixtures from "./components/CountryFixtures/CountryFixtures";
 import { IFixture } from "./models/index";
 
 const StyledContainer = styled("div")`

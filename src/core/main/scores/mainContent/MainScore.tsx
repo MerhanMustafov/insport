@@ -1,6 +1,5 @@
+import { MainScoreBoardProvider } from "@/context/MainScoreBoard.context";
 import MainScoreBoardRoutes from "@/routes/MainScoreBoardRoutes";
-
-import { MainScoreBoardProvider } from "./context/MainScoreBoard.context";
 
 export default function MainScoreBoard() {
     return (

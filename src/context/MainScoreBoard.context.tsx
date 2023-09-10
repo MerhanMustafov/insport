@@ -1,15 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 
-import { IUseDatesHook, useDatesHook } from "../hooks/useDatesHook";
+import { IUseDatesHook, useDatesHook } from "@/hooks/useDatesHook";
 
 interface IMainScoreBoardContext {
     children: React.ReactNode;
 }
 
-interface IMainScoreBoardProps extends IUseDatesHook {
-    x?: string;
-}
-export const MainScoreBoardContext = createContext({} as IMainScoreBoardProps);
+export const MainScoreBoardContext = createContext({} as IUseDatesHook);
 
 export function MainScoreBoardProvider(props: IMainScoreBoardContext) {
     const { children } = props;
