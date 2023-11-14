@@ -1,7 +1,9 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.detectIndentation": false,
-    "editor.insertSpaces": false,
-    "editor.indentSize": 4,
-    "editor.tabSize": 4
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.indentSize": 2,
+  "editor.tabSize": 2,
+
+  "cSpell.allowedSchemas": ["trivago"]
 }
