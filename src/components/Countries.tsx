@@ -21,7 +21,21 @@ export default function Countries() {
     <div>
       {data &&
         data.response.map((country) => (
-          <div key={`${country.code}-${country.name}`}>{country.name}</div>
+          <div
+            style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+            key={`${country.code}-${country.name}`}
+          >
+            <div>
+              {country.name}: {country.code}
+            </div>
+            <div style={{ width: "30px", height: "30px" }}>
+              <img
+                style={{ width: "100%", height: "100%" }}
+                src={country.flag}
+                alt="Country Flag"
+              />
+            </div>
+          </div>
         ))}
       <h1 onClick={getCountries}>Countries</h1>
     </div>

@@ -8,7 +8,7 @@ interface CountriesReturnType {
   response: {
     name: string;
     code: string;
-    search: string;
+    flag: string;
   }[];
 }
 
