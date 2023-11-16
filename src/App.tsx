@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "@/global/redux/store";
 
 import Countries from "@/components/Countries";
-import "@/styles/global.css";
+import "@/styles/global.scss";
 
 function App() {
   return (
