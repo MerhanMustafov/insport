@@ -3,14 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 
 import { store } from "@/global/redux/store";
 
-import Countries from "@/components/Countries";
+import AppLayout from "@/layouts/AppLayout";
+import AppRoutes from "@/router/AppRoutes";
 import "@/styles/global.scss";
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Countries />
+        <AppLayout>
+          <AppRoutes />
+        </AppLayout>
       </BrowserRouter>
     </Provider>
   );

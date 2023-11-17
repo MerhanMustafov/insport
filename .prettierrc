@@ -10,20 +10,12 @@
   "bracketSpacing": true,
   "jsxSingleQuote": false,
   "bracketSameLine": false,
-  "singleAttributePerLine": true,
+  "singleAttributePerLine": false,
 
   "arrowParens": "always",
   "trailingComma": "none",
 
-  "importOrder": [
-    "^react(.*)",
-    "<THIRD_PARTY_MODULES>",
-    "^styled-components$",
-    "@/global/constants/app.constants",
-    "^@/global(.*)",
-    "@/(.*)",
-    "^[./]"
-  ],
+  "importOrder": ["^react(.*)", "<THIRD_PARTY_MODULES>", "^styled-components$", "@/global/constants/app.constants", "^@/global(.*)", "@/(.*)", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }
