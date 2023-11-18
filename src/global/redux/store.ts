@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-
-import { apiSlice } from "@/global/redux/rtkq/countries";
+import { countriesApiSlice } from "@/global/redux/rtkq/countries";
+import { leaguesApiSlice } from "@/global/redux/rtkq/leagues";
 
 export const store = configureStore({
   reducer: {
-    [apiSlice.reducerPath]: apiSlice.reducer
+    [countriesApiSlice.reducerPath]: countriesApiSlice.reducer,
+    [leaguesApiSlice.reducerPath]: leaguesApiSlice.reducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(countriesApiSlice.middleware).concat(leaguesApiSlice.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

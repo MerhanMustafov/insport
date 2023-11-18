@@ -1,15 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 import { INSPORT_FOOTBALL_BASE_URL } from "@/global/constants/app.constants";
-
 import { QueryParamsType, getQueryString } from "@/global/redux/utils/getQueryString";
 
 interface CountriesReturnType {
-  response: {
+  data: {
     name: string;
     code: string;
     flag: string;
   }[];
+  numberOfCountries: number;
 }
 
 interface CountriesQueryParamsType extends QueryParamsType {
@@ -18,8 +17,8 @@ interface CountriesQueryParamsType extends QueryParamsType {
   search?: string;
 }
 
-export const apiSlice = createApi({
-  reducerPath: "api",
+export const countriesApiSlice = createApi({
+  reducerPath: "countriesApi",
   baseQuery: fetchBaseQuery({ baseUrl: INSPORT_FOOTBALL_BASE_URL }),
   endpoints: (build) => ({
     getCountries: build.query<CountriesReturnType, void>({
@@ -34,4 +33,4 @@ export const apiSlice = createApi({
   })
 });
 
-export const { useLazyGetCountriesQuery, useLazyGetSingleCountryQuery } = apiSlice;
+export const { useGetCountriesQuery, useLazyGetSingleCountryQuery } = countriesApiSlice;
