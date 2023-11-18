@@ -1,11 +1,10 @@
 import styled from "styled-components";
-
-import CountriesAndLeagues from "@/components/CountriesAndLeagues";
+import CountriesAndLeagues from "@/sections/CountriesAndLeagues";
 
 const StyledLandingPage = styled.div`
   border: 1px solid red;
   display: grid;
-  margin: 50px 0 0 0;
+  margin: 10px 0 0 0;
   /* width: 100%; */
   height: auto;
 `;

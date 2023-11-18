@@ -1,8 +1,6 @@
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-
 import { store } from "@/global/redux/store";
-
 import AppLayout from "@/layouts/AppLayout";
 import AppRoutes from "@/router/AppRoutes";
 import "@/styles/global.scss";

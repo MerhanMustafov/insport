@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import AppNavigation from "@/components/AppNavigation";
 
 interface AppLayoutProps {

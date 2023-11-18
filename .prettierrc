@@ -15,7 +15,15 @@
   "arrowParens": "always",
   "trailingComma": "none",
 
-  "importOrder": ["^react(.*)", "<THIRD_PARTY_MODULES>", "^styled-components$", "@/global/constants/app.constants", "^@/global(.*)", "@/(.*)", "^[./]"],
-  "importOrderSeparation": true,
+  "importOrder": [
+    "^react(.*)",
+    "<THIRD_PARTY_MODULES>",
+    "^styled-components$",
+    "@/global/constants/app.constants",
+    "^@/global(.*)",
+    "@/(.*)",
+    "^[./]"
+  ],
+  "importOrderSeparation": false,
   "importOrderSortSpecifiers": true
 }

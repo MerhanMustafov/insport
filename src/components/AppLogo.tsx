@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
 import styled from "styled-components";
-
 import { LANDING } from "@/router/pathConsts";
 
 const StyledLogoWrapper = styled.div`
