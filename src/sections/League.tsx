@@ -13,9 +13,9 @@ const StyledLeague = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1px 5px;
-  gap: 5px;
+  gap: 10px;
   max-width: 150px;
-  min-width: 110px;
+  min-width: 150px;
   cursor: pointer;
   &:hover {
     box-shadow: #000000 0px 0px 10px -2px;

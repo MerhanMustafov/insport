@@ -34,3 +34,27 @@ export const countriesApiSlice = createApi({
 });
 
 export const { useGetCountriesQuery, useLazyGetSingleCountryQuery } = countriesApiSlice;
+
+/**
+ * @DESCRIPTION
+ * Function to filter countries by country name
+ *
+ * @param countries of @type {CountriesReturnType} | undefined
+ * @param search of @type string
+ *
+ * @returns @type {CountriesReturnType} | undefined
+ */
+
+export const filterCountriesUtil = (
+  countries: CountriesReturnType | undefined,
+  search: string
+): CountriesReturnType | undefined => {
+  if (!countries) return;
+  if (!search) return countries;
+
+  const regex = new RegExp(`^${search}.*`, "i");
+  return {
+    ...countries,
+    data: countries?.data.filter((country) => regex.test(country.name))
+  } as CountriesReturnType;
+};

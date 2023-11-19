@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useGetCountriesQuery } from "@/global/redux/rtkq/countries";
+import { filterCountriesUtil, useGetCountriesQuery } from "@/global/redux/rtkq/countries";
 import { useLazyGetLeaguesByCountryNameQuery } from "@/global/redux/rtkq/leagues";
 import Country from "@/sections/Country";
 import League from "@/sections/League";
@@ -10,18 +10,17 @@ const StyledWrapper = styled.div`
   margin: 0px 3px;
   box-shadow: #000000 0px 0px 7px -1px;
   border-radius: 5px;
-  /* border: 1px solid #000000; */
+  min-height: 300px;
+  min-width: 150px;
 `;
 
 const StyledCountryListWrapper = styled.div`
-  /* border: 1px solid #000000; */
   display: flex;
   flex-direction: column;
   gap: 5px;
 `;
 
 const StyledCountriesWrapper = styled.div`
-  /* border: 1px solid #000000; */
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -33,10 +32,7 @@ const StyledCountriesHeadWrapper = styled.div`
   flex-direction: row;
   width: 100%;
   flex-wrap: nowrap;
-  /* gap: 10px; */
   align-items: center;
-  /* border: 1px solid #000000; */
-  /* padding: 5px 10px; */
   width: 100%;
   max-width: 150px;
   min-width: 120px;
@@ -53,17 +49,20 @@ const StyledInputWrapper = styled.div`
     box-shadow: #1183d6 0px 0px 7px -1px;
   }
 `;
+
 const StyledCountryInput = styled.input`
   width: 100%;
   outline-style: none;
   padding: 5px 7px;
   border: none;
 `;
+
 const StyledIcon = styled.span`
   font-size: 1.6rem;
   padding-left: 3px;
   cursor: pointer;
 `;
+
 const StyledLeaguesWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -104,6 +103,7 @@ const LeagueCountryName = styled.div`
 `;
 
 export default function CountriesAndLeagues() {
+  // RTK Queries
   const {
     data: countries,
     isLoading: isCountriesLoading,
@@ -113,32 +113,60 @@ export default function CountriesAndLeagues() {
     getLeaguesBeCountryName,
     { data: leagues, isLoading: isLeaguesLoading, isError: isLeaguesError }
   ] = useLazyGetLeaguesByCountryNameQuery();
+
+  // Local state
   const [showLeagues, setShowLeagues] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<{ name: string; flag: string }>({
     name: "",
     flag: ""
   });
+  const [search, setSearch] = useState("");
+  const [filteredCountries, setFilteredCountries] = useState<typeof countries>(undefined);
 
-  useEffect(() => {
-    setShowLeagues(false);
-  }, []);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearch(e.target.value);
+  };
 
-  const handleCountryClick = (name: string, flag: string) => {
+  const handleCountryClick = (name: string, flag: string): void => {
     getLeaguesBeCountryName(name, true);
     setSelectedCountry({ name, flag });
     setShowLeagues(true);
   };
 
-  const handleLeagueClick = () => {
+  const handleLeagueClick = (): void => {
     // TODO: implement corresponding logic
   };
 
-  const handleBackClick = () => {
+  const handleBackClick = (): void => {
     setShowLeagues(false);
+    setFilteredCountries(undefined);
   };
 
+  const handleFilterCountriesData = () => {
+    const filteredCountriesData = filterCountriesUtil(countries, search);
+    setFilteredCountries(filteredCountriesData);
+  };
+
+  useEffect(() => {
+    setShowLeagues(false);
+  }, []);
+
+  useEffect(() => {
+    const filterWithDeleay = setTimeout(() => {
+      handleFilterCountriesData();
+    }, 1000);
+
+    return () => clearTimeout(filterWithDeleay);
+  }, [search]);
+
+  const countriesData = filteredCountries?.data || countries?.data || [];
+
   if (isCountriesLoading || isLeaguesLoading) {
-    return <h1>loading...</h1>;
+    return (
+      <StyledWrapper>
+        <h1>Loading...</h1>
+      </StyledWrapper>
+    );
   }
 
   if (isCountriesError || isLeaguesError) {
@@ -147,16 +175,22 @@ export default function CountriesAndLeagues() {
 
   return (
     <StyledWrapper>
-      {!showLeagues && countries && countries?.data.length > 0 && (
+      {!showLeagues && (
         <StyledCountriesWrapper>
           <StyledCountriesHeadWrapper>
-            <StyledInputWrapper>
+            <StyledInputWrapper onClick={handleFilterCountriesData}>
               <StyledIcon>&#x1F50D;&#xFE0E;</StyledIcon>
-              <StyledCountryInput type="text" placeholder="Type ..." />
+              <StyledCountryInput
+                type="text"
+                placeholder="Type ..."
+                spellCheck={false}
+                value={search}
+                onChange={handleInputChange}
+              />
             </StyledInputWrapper>
           </StyledCountriesHeadWrapper>
           <StyledCountryListWrapper>
-            {countries?.data.map((country, i) => (
+            {countriesData.map((country, i) => (
               <Country
                 key={`${country.code}-${i}`}
                 {...country}

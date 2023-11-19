@@ -14,7 +14,7 @@ const StyledCountry = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1px 5px;
-  gap: 5px;
+  gap: 10px;
   max-width: 150px;
   min-width: 110px;
   cursor: pointer;
