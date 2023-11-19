@@ -23,7 +23,7 @@ const StyledSide = styled.div`
 `;
 const StyledMain = styled.div`
   grid-area: LANDING_PAGE_MAIN;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 export default function LandingPage() {
