@@ -2,14 +2,14 @@ import styled from "styled-components";
 import CountriesAndLeagues from "@/sections/CountriesAndLeagues";
 
 const StyledLandingPage = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: grid;
   margin: 10px 0 0 0;
   /* width: 100%; */
   height: auto;
 `;
 const StyledLandingPageContent = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-template-rows: auto;
@@ -19,7 +19,7 @@ const StyledLandingPageContent = styled.div`
 `;
 const StyledSide = styled.div`
   grid-area: LANDING_PAGE_SIDE;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 const StyledMain = styled.div`
   grid-area: LANDING_PAGE_MAIN;

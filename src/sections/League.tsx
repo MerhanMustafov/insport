@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import Image from "@/components/Image";
 
-interface CountryProps {
+interface LeagueProps {
   name: string;
-  code?: string;
-  flag: string;
-  handleCountryClick: (name: string, flag: string) => void;
+  logo: string;
+  handleLeagueClick: () => void;
 }
 
-const StyledCountry = styled.div`
+const StyledLeague = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -24,21 +23,20 @@ const StyledCountry = styled.div`
   }
 `;
 
-const StyledCountryName = styled.div`
+const StyledLeagueName = styled.div`
   color: #000000;
   font-size: 1.3rem;
   letter-spacing: 0.05rem;
 `;
 
-export default function Country({ name, flag, handleCountryClick }: CountryProps) {
+export default function League({ name, logo, handleLeagueClick }: LeagueProps) {
   const handleClick = () => {
-    handleCountryClick(name, flag);
+    handleLeagueClick();
   };
-
   return (
-    <StyledCountry onClick={handleClick}>
-      <StyledCountryName>{name}</StyledCountryName>
-      <Image image={flag} />
-    </StyledCountry>
+    <StyledLeague onClick={handleClick}>
+      <StyledLeagueName>{name}</StyledLeagueName>
+      <Image image={logo} />
+    </StyledLeague>
   );
 }
