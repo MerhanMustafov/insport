@@ -21,7 +21,7 @@ interface LeaguesReturnType {
 export const leaguesApiSlice = createApi({
   reducerPath: "leaguesApi",
   baseQuery: fetchBaseQuery({ baseUrl: INSPORT_FOOTBALL_BASE_URL }),
-  keepUnusedDataFor: 60 * 60 * 24,
+  keepUnusedDataFor: 60 * 60 * 24, // 24 hours
   endpoints: (build) => ({
     getLeaguesByCountryName: build.query<LeaguesReturnType, string>({
       query: (countryName: string) => `/leagues/${countryName}`

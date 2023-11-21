@@ -29,9 +29,7 @@ export default function LandingPage() {
   return (
     <StyledLandingPage>
       <StyledLandingPageContent>
-        <StyledSide>
-          <CountriesAndLeagues />
-        </StyledSide>
+        <StyledSide>{/* <CountriesAndLeagues /> */}</StyledSide>
         <StyledMain>
           <DateSpecificMatchView />
         </StyledMain>

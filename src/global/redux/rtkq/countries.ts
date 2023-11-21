@@ -20,6 +20,7 @@ interface CountriesQueryParamsType extends QueryParamsType {
 export const countriesApiSlice = createApi({
   reducerPath: "countriesApi",
   baseQuery: fetchBaseQuery({ baseUrl: INSPORT_FOOTBALL_BASE_URL }),
+  keepUnusedDataFor: 60 * 60 * 24, // 24 hours
   endpoints: (build) => ({
     getCountries: build.query<CountriesReturnType, void>({
       query: () => "/countries"
