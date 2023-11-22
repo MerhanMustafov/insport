@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { DayIndiceType, weekDaysLookUpFactory } from "@/global/utils/weekDaysLookUpFactory";
 
 const StyledAllCalendarsWrapper = styled.div`
   font-size: 2rem;
@@ -28,11 +29,6 @@ const StyledCalendarCell = styled("div")`
   justify-content: center;
   border: none;
   padding: 5px 15px;
-  /* &.calendar___head_days {
-    color: #ffffff;
-    color: #000000;
-    border: none;
-  } */
   &.selected-date {
     color: #ffffff;
     background: #000000;
@@ -41,6 +37,9 @@ const StyledCalendarCell = styled("div")`
     color: #ffffff;
     pointer-events: none;
     background: #f3f3f3;
+  }
+  &.weekend {
+    color: red;
   }
 `;
 
@@ -93,41 +92,53 @@ const monthsLookUp = {
   11: 10,
   12: 11
 };
+
 export default function DateSpecificMatchView() {
-  const [selectedYear, setSelectedYear] = useState(2013);
-  const [selectedMonth, setSelectedMonth] = useState<keyof typeof monthsLookUp>(6);
+  const [selectedYear] = useState(2013);
+  const [selectedMonth] = useState<keyof typeof monthsLookUp>(7);
   const [selectedDay, setSelectedDay] = useState<number | null>(-1);
 
-  function getFirstWeekEmptyDays(year: number, month: number) {
+  function getFirstWeekEmptyDays(year: number, month: number, firstDayOfWeek: DayIndiceType = 1) {
     const _date = new Date(year, month, 1);
-    const day = _date.getDay() as keyof typeof daysLookUp;
-    return Array.from(Array(daysLookUp[day] - 1).keys());
+    const day = _date.getDay();
+    return Array.from(Array(weekDaysLookUpFactory(firstDayOfWeek)[day] - 1).keys());
   }
 
-  function getLastWeekEmptyDays(year: number, month: number, days: number) {
-    const _date = new Date(year, month, days);
-    const day = _date.getDay() as keyof typeof daysLookUp;
-    return Array.from(Array(7 - daysLookUp[day]).keys());
+  function getLastWeekEmptyDays(
+    year: number,
+    month: number,
+    lastDay: number,
+    firstDayOfWeek: DayIndiceType = 1
+  ) {
+    const _date = new Date(year, month, lastDay);
+    const day = _date.getDay();
+    return Array.from(Array(7 - weekDaysLookUpFactory(firstDayOfWeek)[day]).keys());
   }
 
-  function getDaysInMonth(year: number, month: number) {
+  function getDaysInMonth(year: number, month: number, firstDayOfWeek: DayIndiceType = 1) {
     const _date = new Date(year, month, 1);
 
     const daysInMonth = [];
     let totalDay = 0;
 
     while (_date.getMonth() === month) {
-      daysInMonth.push(_date.getDate());
+      const isWeekend = _date.getDay() === 0 || _date.getDay() === 6;
+      daysInMonth.push({ month, date: _date.getDate(), isWeekend });
       totalDay += 1;
       _date.setDate(_date.getDate() + 1);
     }
-    getFirstWeekEmptyDays(year, month).forEach(() => daysInMonth.unshift(null));
-    getLastWeekEmptyDays(year, month, totalDay).forEach(() => daysInMonth.push(null));
+    getFirstWeekEmptyDays(year, month, firstDayOfWeek).forEach(() =>
+      daysInMonth.unshift({ month, date: null, isWeekend: false })
+    );
+    getLastWeekEmptyDays(year, month, totalDay, firstDayOfWeek).forEach(() =>
+      daysInMonth.push({ month, date: null, isWeekend: false })
+    );
 
     return daysInMonth;
   }
 
   const arrayOfDaysInMonth = getDaysInMonth(selectedYear, monthsLookUp[selectedMonth]);
+  console.log(arrayOfDaysInMonth);
 
   const onDateClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const day = Number((e.target as HTMLDivElement).id);
@@ -141,7 +152,7 @@ export default function DateSpecificMatchView() {
 
   return (
     <StyledAllCalendarsWrapper>
-      <StyledCalendarWrapper key={`#${Math.random() * 100 * Math.random()}`}>
+      <StyledCalendarWrapper>
         <StyledCalendarHeader>
           <div>
             {selectedYear} {months[selectedMonth]}
@@ -149,21 +160,24 @@ export default function DateSpecificMatchView() {
         </StyledCalendarHeader>
 
         <StyledCalendarContent>
-          {Object.values(weekDays).map((d) => (
-            <StyledCalendarCell className="calendar___head_days" key={d}>
-              {d}
+          {Object.values(weekDays).map((dayString) => (
+            <StyledCalendarCell
+              key={`${dayString}-${Math.random() * 90}`}
+              className="calendar___head_days"
+            >
+              {dayString}
             </StyledCalendarCell>
           ))}
-          {arrayOfDaysInMonth.map((day) => (
+          {arrayOfDaysInMonth.map(({ month, date, isWeekend }) => (
             <StyledCalendarCell
               onClick={(e) => onDateClick(e)}
-              id={`${day}`}
-              className={`${day === selectedDay ? "selected-date" : ""} ${
-                day === null ? "empty-day" : ""
-              }`}
-              key={day}
+              id={`${date}`}
+              className={`${
+                date === selectedDay && month === selectedMonth ? "selected-date" : ""
+              } ${date === null ? "empty-day" : ""} ${isWeekend ? "weekend" : ""}`}
+              key={`${month}-${date}-${Math.random() * 100}`}
             >
-              {day}
+              {date}
             </StyledCalendarCell>
           ))}
         </StyledCalendarContent>
