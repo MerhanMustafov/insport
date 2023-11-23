@@ -46,10 +46,10 @@ const StyledCalendarCell = styled("div")`
 
 export default function DateSpecificMatchView() {
   const [selectedYear] = useState(2013);
-  const [selectedMonth] = useState<keyof typeof monthsLookUp>(7);
+  const [selectedMonth] = useState<keyof typeof monthsLookUp>(8);
   const [selectedDay, setSelectedDay] = useState<number>(-1);
 
-  const { weekDayStrings, daysInMonth } = getDaysInMonth(selectedYear, selectedMonth - 1, 1);
+  const { weekDayStrings, daysInMonth } = getDaysInMonth(selectedYear, selectedMonth, 1);
 
   const onDateClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const day = Number((e.target as HTMLDivElement).id);

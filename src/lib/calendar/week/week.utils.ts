@@ -42,7 +42,7 @@ export function getArrayOfWeekDaysString(dayIndice: DayIndiceType = 1) {
 /**
  *
  * @param {number} year - in format YYYY (e.g. 2021 || 2000 || 1990 || 1095)
- * @param {number} month - the 0 is January and 11 is December e.g. 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |10 | 11
+ * @param {number} month - the 1 is January and 12 is December e.g. 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |11 | 12
  * @param {DayIndiceType} firstDayOfWeek - 0 | 1 | 2 | 3 | 4 | 5 | 6 - where 0 is Sunday and 6 is Saturday (default is 1 - Monday)
  * @returns - e.g. [ 0, 1, 2, 3, 4, 5, 6 ] || [ 0, 1, 2, 3 ] || [ 0, 1, 2, 3, 4, 5 ] ...
  */
@@ -51,7 +51,8 @@ export function getFirstWeekEmptyDays(
   month: number,
   firstDayOfWeek: DayIndiceType = 1
 ) {
-  const _date = new Date(year, month, 1);
+  // month should be subtacted by 1 because of the JS Date object when passing it to the Date constructor
+  const _date = new Date(year, month - 1, 1);
   const day = _date.getDay();
   return Array.from(Array(weekDaysLookUpFactory(firstDayOfWeek)[day] - 1).keys());
 }
@@ -59,7 +60,7 @@ export function getFirstWeekEmptyDays(
 /**
  *
  * @param {number} year - in format YYYY (e.g. 2021 || 2000 || 1990 || 1095)
- * @param {number} month - the 0 is January and 11 is December e.g. 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |10 | 11
+ * @param {number} month - the 1 is January and 12 is December e.g. 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |11 | 12
  * @param {number} lastDay - the last day of the month e.g. 28 | 29 | 30 | 31
  * @param {DayIndiceType} firstDayOfWeek - 0 | 1 | 2 | 3 | 4 | 5 | 6 - where 0 is Sunday and 6 is Saturday (default is 1 - Monday)
  * @returns - e.g. [ 0, 1, 2, 3, 4, 5, 6 ] || [ 0, 1, 2, 3 ] || [ 0, 1, 2, 3, 4, 5 ] ...
@@ -70,7 +71,8 @@ export function getLastWeekEmptyDays(
   lastDay: number,
   firstDayOfWeek: DayIndiceType = 1
 ) {
-  const _date = new Date(year, month, lastDay);
+  // month should be subtacted by 1 because of the JS Date object when passing it to the Date constructor
+  const _date = new Date(year, month - 1, lastDay);
   const day = _date.getDay();
   return Array.from(Array(7 - weekDaysLookUpFactory(firstDayOfWeek)[day]).keys());
 }
