@@ -32,16 +32,26 @@ export const calendarSlice = createSlice({
   name: "calendar",
   initialState,
   reducers: {
-    setInitialCalendarData(state, action: PayloadAction<{ date: Date }>) {
-      const { date } = action.payload;
+    setInitialCalendarData(
+      state,
+      action: PayloadAction<{ date: Date; firstDayOfTheWeek?: WeekDaysZeroBasedType }>
+    ) {
+      const { date, firstDayOfTheWeek } = action.payload;
+
+      const firstWeekDay =
+        firstDayOfTheWeek !== undefined && (firstDayOfTheWeek >= 0 || firstDayOfTheWeek <= 6)
+          ? firstDayOfTheWeek
+          : 1;
+
       state.selectedYear = date.getFullYear();
       state.selectedMonth = (date.getMonth() + 1) as MonthNumbersNormalType;
       state.selectedDayOfTheMonth = date.getDate() as NumberOfDaysInAMonthType;
+      state.firstDayOfWeek = firstWeekDay;
 
       const { weekDaysStrings, daysInMonth } = getDaysInMonth(
         state.selectedYear,
         state.selectedMonth,
-        state.firstDayOfWeek
+        firstWeekDay
       );
 
       state.weekDaysStrings = weekDaysStrings;
