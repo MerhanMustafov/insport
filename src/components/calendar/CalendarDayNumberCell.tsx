@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
+import { setSelectedDayOfTheMonth } from "@/global/redux/slices/calendar.slice";
 import { MonthNumbersNormalType, NumberOfDaysInAMonthType } from "@/lib/calendar/calendar.types";
 
 const StyledCalendarCell = styled("div")`
@@ -25,23 +27,20 @@ const StyledCalendarCell = styled("div")`
 interface CalendarDayNumberCellProps {
   monthNumber: MonthNumbersNormalType;
   dayNumberInMonth: NumberOfDaysInAMonthType | null;
-  selectedDayOfTheMonth: NumberOfDaysInAMonthType | -1;
-  selectedMonth: MonthNumbersNormalType;
   isWeekendDay: boolean;
-  setSelectedDayOfTheMonth: (date: NumberOfDaysInAMonthType | -1) => void;
 }
 
 export default function CalendarDayNumberCell({
   dayNumberInMonth,
-  selectedDayOfTheMonth,
-  selectedMonth,
   isWeekendDay,
-  monthNumber,
-  setSelectedDayOfTheMonth
+  monthNumber
 }: CalendarDayNumberCellProps) {
+  const dispatch = useAppDispatch();
+  const { selectedMonth, selectedDayOfTheMonth } = useAppSelector((state) => state.calendar);
+
   const handleDateClick = () => {
     if (dayNumberInMonth) {
-      setSelectedDayOfTheMonth(dayNumberInMonth);
+      dispatch(setSelectedDayOfTheMonth(dayNumberInMonth));
     }
   };
 

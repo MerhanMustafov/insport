@@ -1,12 +1,6 @@
 import styled from "styled-components";
+import { useAppSelector } from "@/global/redux/reduxHooks";
 import CalendardayNumberCell from "@/components/calendar/CalendarDayNumberCell";
-import {
-  DaysInMonthType,
-  MonthNumbersNormalType,
-  NumberOfDaysInAMonthType,
-  WeekDaysStringLongType,
-  WeekDaysStringShortType
-} from "@/lib/calendar/calendar.types";
 
 const StyledWrapper = styled.div`
   display: grid;
@@ -36,26 +30,12 @@ const StyledCalendarCell = styled("div")`
   }
 `;
 
-interface CalendarBodyProps {
-  weekDayStrings: WeekDaysStringShortType[] | WeekDaysStringLongType[];
-  daysInMonth: DaysInMonthType[];
-  selectedMonth: MonthNumbersNormalType;
-  selectedDayOfTheMonth: NumberOfDaysInAMonthType | -1;
-  today: NumberOfDaysInAMonthType;
-  setSelectedDayOfTheMonth: (date: NumberOfDaysInAMonthType | -1) => void;
-}
+export default function CalendarBody() {
+  const { weekDaysStrings, daysInMonth } = useAppSelector((state) => state.calendar);
 
-export default function CalendarBody({
-  daysInMonth,
-  weekDayStrings,
-  selectedDayOfTheMonth,
-  selectedMonth,
-  // today,
-  setSelectedDayOfTheMonth
-}: CalendarBodyProps) {
   return (
     <StyledWrapper>
-      {weekDayStrings.map((dayString) => (
+      {weekDaysStrings.map((dayString) => (
         <StyledCalendarCell
           key={`${dayString}-${Math.random() * 100}`}
           className="calendar___head_days"
@@ -67,11 +47,8 @@ export default function CalendarBody({
         <CalendardayNumberCell
           key={`${monthNumber}-${Math.random() * 200}-${dayNumberInMonth || Math.random() * 200}`}
           dayNumberInMonth={dayNumberInMonth}
-          selectedDayOfTheMonth={selectedDayOfTheMonth}
-          selectedMonth={selectedMonth}
           isWeekendDay={isWeekendDay}
           monthNumber={monthNumber}
-          setSelectedDayOfTheMonth={setSelectedDayOfTheMonth}
         />
       ))}
     </StyledWrapper>

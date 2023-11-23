@@ -2,7 +2,6 @@ import {
   DaysInMonthType,
   MonthNumbersNormalType,
   NumberOfDaysInAMonthType,
-  WeekDaysNormalType,
   WeekDaysStringType,
   WeekDaysZeroBasedType
 } from "@/lib/calendar/calendar.types";
@@ -90,7 +89,7 @@ export function getDaysInMonth(
   year: number,
   month: MonthNumbersNormalType,
   firstDayOfWeek: WeekDaysZeroBasedType = 1
-): { daysInMonth: DaysInMonthType[]; weekDayStrings: WeekDaysStringType } {
+): { daysInMonth: DaysInMonthType[]; weekDaysStrings: WeekDaysStringType } {
   // month should be subtacted by 1 because of the JS Date object when passing it to the Date constructor
   const _date = new Date(year, month - 1, 1);
 
@@ -106,7 +105,7 @@ export function getDaysInMonth(
     totalDay += 1;
     _date.setDate(_date.getDate() + 1);
   }
-  const weekDayStrings = getArrayOfWeekDaysStringShort(firstDayOfWeek);
+  const weekDaysStrings = getArrayOfWeekDaysStringShort(firstDayOfWeek);
 
   // the month passed is the normal month so inside the function it should onece again be subtracted by 1
   getFirstWeekEmptyDays(year, month, firstDayOfWeek).forEach(() =>
@@ -118,5 +117,5 @@ export function getDaysInMonth(
     daysInMonth.push({ monthNumber: month, dayNumberInMonth: null, isWeekendDay: false })
   );
 
-  return { daysInMonth, weekDayStrings };
+  return { daysInMonth, weekDaysStrings };
 }

@@ -1,17 +1,8 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+import { useAppDispatch } from "@/global/redux/reduxHooks";
+import { setInitialCalendarData } from "@/global/redux/slices/calendar.slice";
 import CalendarBody from "@/components/calendar/CalendarBody";
-import {
-  MonthNumbersNormalType,
-  NumberOfDaysInAMonthType,
-  WeekDaysZeroBasedType
-} from "@/lib/calendar/calendar.types";
-import { getDaysInMonth } from "@/lib/calendar/calendar.utils";
-
-interface CalendarPropTypes {
-  date?: Date;
-  firstDayOfWeek?: WeekDaysZeroBasedType;
-}
 
 const StyledAllCalendarsWrapper = styled.div`
   font-size: 2rem;
@@ -24,40 +15,17 @@ const StyledCalendarWrapper = styled.div`
   font-size: 2rem;
 `;
 
-/**
- *
- * @props date - Date object
- * @props firstDayOfWeek - 0 for Sunday, 1 for Monday, etc.
- */
-export default function Calendar({ date = new Date(), firstDayOfWeek }: CalendarPropTypes) {
-  const [selectedYear] = useState(date.getFullYear());
-  const [selectedMonth] = useState((date.getMonth() + 1) as MonthNumbersNormalType);
-  const [selectedDayOftheMonth, setSelectedDayOfTheMonth] = useState(
-    date.getDate() as NumberOfDaysInAMonthType | -1
-  );
-  const [today] = useState(date.getDate() as NumberOfDaysInAMonthType);
+export default function Calendar() {
+  const dispatch = useAppDispatch();
 
-  const { weekDayStrings, daysInMonth } = getDaysInMonth(
-    selectedYear,
-    selectedMonth,
-    firstDayOfWeek
-  );
-
-  const onDateClick = (dayNumber: NumberOfDaysInAMonthType | -1) => {
-    setSelectedDayOfTheMonth(dayNumber);
-  };
+  useEffect(() => {
+    dispatch(setInitialCalendarData({ date: new Date() }));
+  }, []);
 
   return (
     <StyledAllCalendarsWrapper>
       <StyledCalendarWrapper>
-        <CalendarBody
-          weekDayStrings={weekDayStrings}
-          daysInMonth={daysInMonth}
-          selectedMonth={selectedMonth}
-          selectedDayOfTheMonth={selectedDayOftheMonth}
-          setSelectedDayOfTheMonth={onDateClick}
-          today={today}
-        />
+        <CalendarBody />
       </StyledCalendarWrapper>
     </StyledAllCalendarsWrapper>
   );

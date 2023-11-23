@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { countriesApiSlice } from "@/global/redux/rtkq/countries";
 import { leaguesApiSlice } from "@/global/redux/rtkq/leagues";
+import { calendarSlice } from "@/global/redux/slices/calendar.slice";
 
 export const store = configureStore({
   reducer: {
     [countriesApiSlice.reducerPath]: countriesApiSlice.reducer,
-    [leaguesApiSlice.reducerPath]: leaguesApiSlice.reducer
+    [leaguesApiSlice.reducerPath]: leaguesApiSlice.reducer,
+    [calendarSlice.name]: calendarSlice.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(countriesApiSlice.middleware).concat(leaguesApiSlice.middleware)
