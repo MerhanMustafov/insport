@@ -5,22 +5,25 @@ import { MonthNumbersNormalType, NumberOfDaysInAMonthType } from "@/lib/calendar
 
 const StyledCalendarCell = styled("div")`
   cursor: pointer;
-  border: 1px solid #000000;
   display: flex;
   justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  line-height: 1.9rem;
+  height: 2.4rem;
+  width: 2.4rem;
   border: none;
-  padding: 5px 15px;
+  color: #000000;
+  padding: 10px 18px;
   &.selected-day {
+    background: #003854;
     color: #ffffff;
-    background: #000000;
   }
   &.empty-day {
-    color: #ffffff;
-    pointer-events: none;
-    background: #f3f3f3;
+    border: none;
   }
   &.weekend {
-    color: red;
+    color: #fe0101;
   }
 `;
 
@@ -48,8 +51,8 @@ export default function CalendarDayNumberCell({
     <StyledCalendarCell
       onClick={handleDateClick}
       id={`${dayNumberInMonth === null ? Math.random() * 150 : dayNumberInMonth}`}
-      className={`${
-        dayNumberInMonth === selectedDayOfTheMonth && monthNumber === selectedMonth
+      className={` ${
+        dayNumberInMonth === selectedDayOfTheMonth && selectedMonth === monthNumber
           ? "selected-day"
           : ""
       } ${dayNumberInMonth === null ? "empty-day" : ""} ${isWeekendDay ? "weekend" : ""}`}

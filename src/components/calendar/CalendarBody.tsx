@@ -3,31 +3,27 @@ import { useAppSelector } from "@/global/redux/reduxHooks";
 import CalendardayNumberCell from "@/components/calendar/CalendarDayNumberCell";
 
 const StyledWrapper = styled.div`
+  border: 1px solid #000000;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
   display: grid;
   grid-template-columns: repeat(7, max-content);
   grid-template-rows: auto;
   justify-items: stretch;
 `;
 
-const StyledCalendarCell = styled("div")`
+const StyledWeekDayCell = styled("div")`
   cursor: pointer;
-  border: 1px solid #000000;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  height: 2.4rem;
+  width: 2.4rem;
+  white-space: nowrap;
   display: flex;
   justify-content: center;
+  align-items: center;
   border: none;
-  padding: 5px 15px;
-  &.selected-day {
-    color: #ffffff;
-    background: #000000;
-  }
-  &.empty-day {
-    color: #ffffff;
-    pointer-events: none;
-    background: #f3f3f3;
-  }
-  &.weekend {
-    color: red;
-  }
+  padding: 10px 18px;
+  color: rgb(161, 161, 161);
 `;
 
 export default function CalendarBody() {
@@ -36,12 +32,9 @@ export default function CalendarBody() {
   return (
     <StyledWrapper>
       {weekDaysStrings.map((dayString) => (
-        <StyledCalendarCell
-          key={`${dayString}-${Math.random() * 100}`}
-          className="calendar___head_days"
-        >
+        <StyledWeekDayCell key={`${dayString}-${Math.random() * 100}`}>
           {dayString}
-        </StyledCalendarCell>
+        </StyledWeekDayCell>
       ))}
       {daysInMonth.map(({ monthNumber, dayNumberInMonth, isWeekendDay }) => (
         <CalendardayNumberCell
