@@ -1,4 +1,11 @@
-export const months = {
+import {
+  MonthNumbersNormalType,
+  MonthNumbersZeroBasedType,
+  MonthStringsLongType,
+  MonthStringsShortType
+} from "@/lib/calendar/calendar.types";
+
+export const monthsLong: { [key in MonthNumbersNormalType]: MonthStringsLongType } = {
   1: "January",
   2: "February",
   3: "March",
@@ -13,12 +20,27 @@ export const months = {
   12: "December"
 };
 
+export const monthsShort: { [key in MonthNumbersNormalType]: MonthStringsShortType } = {
+  1: "Jan",
+  2: "Feb",
+  3: "Mar",
+  4: "Apr",
+  5: "May",
+  6: "Jun",
+  7: "Jul",
+  8: "Aug",
+  9: "Sept",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec"
+};
+
 /**
  * @Description
  * key - months from 1 to 12 \
  * value - months from 0 to 11 (the months indices returned from Date object)
  */
-export const monthsLookUp = {
+export const monthsLookUp: { [Key in MonthNumbersNormalType]: MonthNumbersZeroBasedType } = {
   1: 0,
   2: 1,
   3: 2,

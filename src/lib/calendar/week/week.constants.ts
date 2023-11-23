@@ -1,6 +1,6 @@
-export type DayIndiceType = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+import { WeekDaysLookUpLong, WeekDaysLookUpShort } from "@/lib/calendar/calendar.types";
 
-export const weekDaysLookUp = {
+export const weekDaysLookUpShort: WeekDaysLookUpShort = {
   0: [
     { dayIndex: 0, dayString: "Sun" }, // sunday first
     { dayIndex: 1, dayString: "Mon" }, // monday
@@ -63,5 +63,71 @@ export const weekDaysLookUp = {
     { dayIndex: 3, dayString: "Wed" }, // wednesday
     { dayIndex: 4, dayString: "Thu" }, // thursday
     { dayIndex: 5, dayString: "Fri" } // friday last
+  ]
+};
+
+export const weekDaysLookUpLong: WeekDaysLookUpLong = {
+  0: [
+    { dayIndex: 0, dayString: "Sunday" }, // sunday first
+    { dayIndex: 1, dayString: "Monday" }, // monday
+    { dayIndex: 2, dayString: "Tuesday" }, // tuesday
+    { dayIndex: 3, dayString: "Wednesday" }, // wednesday
+    { dayIndex: 4, dayString: "Thursday" }, // thursday
+    { dayIndex: 5, dayString: "Friday" }, // friday
+    { dayIndex: 6, dayString: "Monday" } // saturday last
+  ],
+  1: [
+    { dayIndex: 1, dayString: "Monday" }, // monday first
+    { dayIndex: 2, dayString: "Tuesday" }, // tuesday
+    { dayIndex: 3, dayString: "Wednesday" }, // wednesday
+    { dayIndex: 4, dayString: "Thursday" }, // thursday
+    { dayIndex: 5, dayString: "Friday" }, // friday
+    { dayIndex: 6, dayString: "Saturday" }, // saturday
+    { dayIndex: 0, dayString: "Sunday" } // sunday last
+  ],
+  2: [
+    { dayIndex: 2, dayString: "Tuesday" }, // tuesday first
+    { dayIndex: 3, dayString: "Wednesday" }, // wednesday
+    { dayIndex: 4, dayString: "Thursday" }, // thursday
+    { dayIndex: 5, dayString: "Friday" }, // friday
+    { dayIndex: 6, dayString: "Saturday" }, // saturday
+    { dayIndex: 0, dayString: "Sunday" }, // sunday
+    { dayIndex: 1, dayString: "Monday" } // monday last
+  ],
+  3: [
+    { dayIndex: 3, dayString: "Wednesday" }, // wednesday first
+    { dayIndex: 4, dayString: "Thursday" }, // thursday
+    { dayIndex: 5, dayString: "Friday" }, // friday
+    { dayIndex: 6, dayString: "Saturday" }, // saturday
+    { dayIndex: 0, dayString: "Sunday" }, // sunday
+    { dayIndex: 1, dayString: "Monday" }, // monday
+    { dayIndex: 2, dayString: "Tuesday" } // tuesday last
+  ],
+  4: [
+    { dayIndex: 4, dayString: "Thursday" }, // thursday first
+    { dayIndex: 5, dayString: "Friday" }, // friday
+    { dayIndex: 6, dayString: "Saturday" }, // saturday
+    { dayIndex: 0, dayString: "Sunday" }, // sunday
+    { dayIndex: 1, dayString: "Monday" }, // monday
+    { dayIndex: 2, dayString: "Tuesday" }, // tuesday
+    { dayIndex: 3, dayString: "Wednesday" } // wednesday last
+  ],
+  5: [
+    { dayIndex: 5, dayString: "Friday" }, // friday first
+    { dayIndex: 6, dayString: "Saturday" }, // saturday
+    { dayIndex: 0, dayString: "Sunday" }, // sunday
+    { dayIndex: 1, dayString: "Monday" }, // monday
+    { dayIndex: 2, dayString: "Tuesday" }, // tuesday
+    { dayIndex: 3, dayString: "Wednesday" }, // wednesday
+    { dayIndex: 4, dayString: "Thursday" } // thursday last
+  ],
+  6: [
+    { dayIndex: 6, dayString: "Saturday" }, // saturday first
+    { dayIndex: 0, dayString: "Sunday" }, // sunday
+    { dayIndex: 1, dayString: "Monday" }, // monday
+    { dayIndex: 2, dayString: "Tuesday" }, // tuesday
+    { dayIndex: 3, dayString: "Wednesday" }, // wednesday
+    { dayIndex: 4, dayString: "Thursday" }, // thursday
+    { dayIndex: 5, dayString: "Friday" } // friday last
   ]
 };

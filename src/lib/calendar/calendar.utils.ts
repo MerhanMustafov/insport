@@ -1,6 +1,13 @@
-import { DayIndiceType } from "@/lib/calendar/week/week.constants";
 import {
-  getArrayOfWeekDaysString,
+  DaysInMonthType,
+  MonthNumbersNormalType,
+  NumberOfDaysInAMonthType,
+  WeekDaysNormalType,
+  WeekDaysStringType,
+  WeekDaysZeroBasedType
+} from "@/lib/calendar/calendar.types";
+import {
+  getArrayOfWeekDaysStringShort,
   getFirstWeekEmptyDays,
   getLastWeekEmptyDays
 } from "@/lib/calendar/week/week.utils";
@@ -60,50 +67,55 @@ import {
  * What you pass as argument month is 1 to 12 (the normal months)
  * but inside the function it is transformed from 0 to 11 ( or in ather words subtracted by 1 because of the JS Date object)
  * and then the return value is once again transformed into normal months from 1 to 12 (added 1).
- * To summarize, you pass notmal month numbers and get back normal month numbers.
- * @param {DayIndiceType} firstDayOfWeek - 0 | 1 | 2 | 3 | 4 | 5 | 6 - where 0 is Sunday and 6 is Saturday (default is 1 - Monday)
+ * To summarize, you pass normal month numbers (1 to 12) and get back normal month numbers (1 to 12).
+ * @param {WeekDaysZeroBasedType} firstDayOfWeek - 0 | 1 | 2 | 3 | 4 | 5 | 6 - where 0 is Sunday and 6 is Saturday (default is 1 - Monday)
  * @returns an object with
- * @key daysInMonth - e.g. [{month: 1, date: 1, isWeekend: false}, {month: 1, date: 2, isWeekend: true}, ...]
+ * @key daysInMonth - e.g. [{monthNumber: 1, dayNumberInMonth: 1, isWeekendDay: false}, {monthNumber: 1, dayNumberInMonth: 2, isWeekendDay: true}, ...]
  * and
  * @key weekDayStrings - e.g. ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] || ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Mon']
  *
  * @example getDaysInMonth(2021, 1, 1) // returns {
  *    daysInMonth: [
- *        {month: 1, date: 1, isWeekend: false},
- *        {month: 1, date: 2, isWeekend: true},
- *        {month: 1, date: 3, isWeekend: true},
- *        {month: 1, date: 4, isWeekend: false},
+ *        {monthNumber: 1, dayNumberInMonth: 1, isWeekendDay: false},
+ *        {monthNumber: 1, dayNumberInMonth: 2, isWeekendDay: true},
+ *        {monthNumber: 1, dayNumberInMonth: 3, isWeekendDay: true},
+ *        {monthNumber: 1, dayNumberInMonth: 4, isWeekendDay: false},
  *        ...
  *    ],
  *    weekDayStrings: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
  *  }
  *
  */
-export function getDaysInMonth(year: number, month: number, firstDayOfWeek: DayIndiceType = 1) {
+export function getDaysInMonth(
+  year: number,
+  month: MonthNumbersNormalType,
+  firstDayOfWeek: WeekDaysZeroBasedType = 1
+): { daysInMonth: DaysInMonthType[]; weekDayStrings: WeekDaysStringType } {
   // month should be subtacted by 1 because of the JS Date object when passing it to the Date constructor
   const _date = new Date(year, month - 1, 1);
 
-  const daysInMonth = [];
+  const daysInMonth: DaysInMonthType[] = [];
   let totalDay = 0;
 
   // month should be subtacted by 1 inside the while condition because of the JS Date object
   while (_date.getMonth() === month - 1) {
-    const isWeekend = _date.getDay() === 0 || _date.getDay() === 6;
+    const isWeekendDay = _date.getDay() === 0 || _date.getDay() === 6;
+    const dayNumberInMonth = _date.getDate() as NumberOfDaysInAMonthType;
     // month should be added 1 so the returned month is normal
-    daysInMonth.push({ month: month + 1, date: _date.getDate(), isWeekend });
+    daysInMonth.push({ monthNumber: month, dayNumberInMonth, isWeekendDay });
     totalDay += 1;
     _date.setDate(_date.getDate() + 1);
   }
-  const weekDayStrings = getArrayOfWeekDaysString(firstDayOfWeek);
+  const weekDayStrings = getArrayOfWeekDaysStringShort(firstDayOfWeek);
 
   // the month passed is the normal month so inside the function it should onece again be subtracted by 1
   getFirstWeekEmptyDays(year, month, firstDayOfWeek).forEach(() =>
-    daysInMonth.unshift({ month: month, date: null, isWeekend: false })
+    daysInMonth.unshift({ monthNumber: month, dayNumberInMonth: null, isWeekendDay: false })
   );
 
   // the month passed is the normal month so inside the function it should onece again be subtracted by 1
   getLastWeekEmptyDays(year, month, totalDay, firstDayOfWeek).forEach(() =>
-    daysInMonth.push({ month: month, date: null, isWeekend: false })
+    daysInMonth.push({ monthNumber: month, dayNumberInMonth: null, isWeekendDay: false })
   );
 
   return { daysInMonth, weekDayStrings };
