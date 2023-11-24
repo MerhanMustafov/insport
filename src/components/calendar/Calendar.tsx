@@ -18,7 +18,7 @@ export default function Calendar() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setInitialCalendarData({ date: new Date(2022, 1, 1) }));
+    dispatch(setInitialCalendarData());
   }, []);
 
   return (

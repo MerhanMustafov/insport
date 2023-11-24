@@ -13,8 +13,7 @@ const StyledCalendarCell = styled("div")`
   color: #000000;
   padding: 10px 0px;
   &.selected-day {
-    background: #001e28;
-    color: #ffffff;
+    background: #d2d2d2;
   }
   &.empty-day {
     border: none;
