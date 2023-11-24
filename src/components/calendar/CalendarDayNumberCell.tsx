@@ -5,16 +5,13 @@ import { MonthNumbersNormalType, NumberOfDaysInAMonthType } from "@/lib/calendar
 
 const StyledCalendarCell = styled("div")`
   cursor: pointer;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.4rem;
-  line-height: 1.9rem;
-  height: 2.4rem;
-  width: 2.4rem;
-  border: none;
+  font-size: 1rem;
   color: #000000;
-  padding: 10px 18px;
+  padding: 10px 0px;
   &.selected-day {
     background: #001e28;
     color: #ffffff;

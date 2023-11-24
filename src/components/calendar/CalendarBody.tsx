@@ -13,14 +13,12 @@ const StyledWeekDayCell = styled("div")`
   cursor: pointer;
   font-size: 1.2rem;
   line-height: 1.6rem;
-  height: 2.4rem;
-  width: 2.4rem;
   white-space: nowrap;
   display: flex;
   justify-content: center;
   align-items: center;
   border: none;
-  padding: 10px 18px;
+  padding: 10px 10px;
   color: rgb(161, 161, 161);
 `;
 

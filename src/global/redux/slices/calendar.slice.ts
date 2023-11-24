@@ -9,6 +9,7 @@ import {
 import { getDaysInMonth } from "@/lib/calendar/calendar.utils";
 
 interface CalendarStateType {
+  currentYear: number;
   selectedYear: number;
   selectedMonth: MonthNumbersNormalType;
   selectedDayOfTheMonth: NumberOfDaysInAMonthType | -1;
@@ -29,6 +30,7 @@ interface CalendarStateType {
 
 const currentDate = new Date();
 const initialState: CalendarStateType = {
+  currentYear: currentDate.getFullYear(),
   selectedYear: currentDate.getFullYear(),
   selectedMonth: (currentDate.getMonth() + 1) as MonthNumbersNormalType,
   selectedDayOfTheMonth: currentDate.getDate() as NumberOfDaysInAMonthType,
