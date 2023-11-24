@@ -21,7 +21,7 @@ const StyledSide = styled.div`
   grid-area: LANDING_PAGE_SIDE;
 `;
 const StyledMain = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   grid-area: LANDING_PAGE_MAIN;
 `;
 
@@ -29,7 +29,9 @@ export default function LandingPage() {
   return (
     <StyledLandingPage>
       <StyledLandingPageContent>
-        <StyledSide>{/* <CountriesAndLeagues /> */}</StyledSide>
+        <StyledSide>
+          <CountriesAndLeagues />
+        </StyledSide>
         <StyledMain>
           <DateSpecificMatchView />
         </StyledMain>

@@ -16,7 +16,7 @@ const StyledCalendarCell = styled("div")`
   color: #000000;
   padding: 10px 18px;
   &.selected-day {
-    background: #003854;
+    background: #001e28;
     color: #ffffff;
   }
   &.empty-day {
@@ -30,16 +30,21 @@ const StyledCalendarCell = styled("div")`
 interface CalendarDayNumberCellProps {
   monthNumber: MonthNumbersNormalType;
   dayNumberInMonth: NumberOfDaysInAMonthType | null;
+  yearNumber: number;
   isWeekendDay: boolean;
 }
 
 export default function CalendarDayNumberCell({
   dayNumberInMonth,
   isWeekendDay,
-  monthNumber
+  monthNumber,
+  yearNumber
 }: CalendarDayNumberCellProps) {
   const dispatch = useAppDispatch();
-  const { selectedMonth, selectedDayOfTheMonth } = useAppSelector((state) => state.calendar);
+  const { activeDate } = useAppSelector((state) => state.calendar);
+  const { activeYear, activeMonth, activeDay } = activeDate;
+  const isCurrentlySelectedDay =
+    activeYear === yearNumber && activeMonth === monthNumber && activeDay === dayNumberInMonth;
 
   const handleDateClick = () => {
     if (dayNumberInMonth) {
@@ -51,11 +56,9 @@ export default function CalendarDayNumberCell({
     <StyledCalendarCell
       onClick={handleDateClick}
       id={`${dayNumberInMonth === null ? Math.random() * 150 : dayNumberInMonth}`}
-      className={` ${
-        dayNumberInMonth === selectedDayOfTheMonth && selectedMonth === monthNumber
-          ? "selected-day"
-          : ""
-      } ${dayNumberInMonth === null ? "empty-day" : ""} ${isWeekendDay ? "weekend" : ""}`}
+      className={` ${isCurrentlySelectedDay ? "selected-day" : ""} ${
+        dayNumberInMonth === null ? "empty-day" : ""
+      } ${isWeekendDay ? "weekend" : ""}`}
       key={`${monthNumber}-${dayNumberInMonth ? dayNumberInMonth : ""}-${Math.random() * 100}`}
     >
       {dayNumberInMonth}

@@ -58,6 +58,7 @@ export type MonthLookUpType = {
 };
 
 export type DaysInMonthType = {
+  yearNumber: number;
   monthNumber: MonthNumbersNormalType;
   dayNumberInMonth: NumberOfDaysInAMonthType | null;
   isWeekendDay: boolean;

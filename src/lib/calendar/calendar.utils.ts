@@ -101,7 +101,7 @@ export function getDaysInMonth(
     const isWeekendDay = _date.getDay() === 0 || _date.getDay() === 6;
     const dayNumberInMonth = _date.getDate() as NumberOfDaysInAMonthType;
     // month should be added 1 so the returned month is normal
-    daysInMonth.push({ monthNumber: month, dayNumberInMonth, isWeekendDay });
+    daysInMonth.push({ yearNumber: year, monthNumber: month, dayNumberInMonth, isWeekendDay });
     totalDay += 1;
     _date.setDate(_date.getDate() + 1);
   }
@@ -109,12 +109,22 @@ export function getDaysInMonth(
 
   // the month passed is the normal month so inside the function it should onece again be subtracted by 1
   getFirstWeekEmptyDays(year, month, firstDayOfWeek).forEach(() =>
-    daysInMonth.unshift({ monthNumber: month, dayNumberInMonth: null, isWeekendDay: false })
+    daysInMonth.unshift({
+      yearNumber: year,
+      monthNumber: month,
+      dayNumberInMonth: null,
+      isWeekendDay: false
+    })
   );
 
   // the month passed is the normal month so inside the function it should onece again be subtracted by 1
   getLastWeekEmptyDays(year, month, totalDay, firstDayOfWeek).forEach(() =>
-    daysInMonth.push({ monthNumber: month, dayNumberInMonth: null, isWeekendDay: false })
+    daysInMonth.push({
+      yearNumber: year,
+      monthNumber: month,
+      dayNumberInMonth: null,
+      isWeekendDay: false
+    })
   );
 
   return { daysInMonth, weekDaysStrings };

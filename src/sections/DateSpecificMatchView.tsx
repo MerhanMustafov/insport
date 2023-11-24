@@ -4,7 +4,6 @@ export default function DateSpecificMatchView() {
   return (
     <div>
       <Calendar />
-      <h1>TODO: DateSpecificMatchView</h1>
     </div>
   );
 }

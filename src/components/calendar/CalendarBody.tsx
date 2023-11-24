@@ -3,8 +3,6 @@ import { useAppSelector } from "@/global/redux/reduxHooks";
 import CalendardayNumberCell from "@/components/calendar/CalendarDayNumberCell";
 
 const StyledWrapper = styled.div`
-  border: 1px solid #000000;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
   display: grid;
   grid-template-columns: repeat(7, max-content);
   grid-template-rows: auto;
@@ -36,12 +34,13 @@ export default function CalendarBody() {
           {dayString}
         </StyledWeekDayCell>
       ))}
-      {daysInMonth.map(({ monthNumber, dayNumberInMonth, isWeekendDay }) => (
+      {daysInMonth.map(({ yearNumber, monthNumber, dayNumberInMonth, isWeekendDay }) => (
         <CalendardayNumberCell
           key={`${monthNumber}-${Math.random() * 200}-${dayNumberInMonth || Math.random() * 200}`}
           dayNumberInMonth={dayNumberInMonth}
           isWeekendDay={isWeekendDay}
           monthNumber={monthNumber}
+          yearNumber={yearNumber}
         />
       ))}
     </StyledWrapper>
