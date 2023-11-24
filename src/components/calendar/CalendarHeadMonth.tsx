@@ -1,3 +1,5 @@
+import { TfiAngleLeft } from "react-icons/tfi";
+import { TfiAngleRight } from "react-icons/tfi";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { setSelectedMonth, updateCalendarData } from "@/global/redux/slices/calendar.slice";
@@ -9,24 +11,33 @@ const StyledCalendarHeadLeft = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  color: transparent;
-  &:hover {
-    color: white;
-  }
+  color: white;
+  align-items: stretch;
 `;
 
-const StyledArrowButton = styled.span`
+const StyledArrowLeft = styled(TfiAngleLeft)`
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 1.5rem;
-  font-size: 1.5rem;
-  /* color: transparent; */
+  font-size: 2rem;
+  height: 100%;
+`;
+
+const StyledArrowRight = styled(TfiAngleRight)`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 1.5rem;
+  font-size: 2rem;
 `;
 
 const StyledEmpty = styled.div`
   width: 1.5rem;
+  height: 100%;
 `;
 
 const StyledMonthName = styled.span`
@@ -36,6 +47,7 @@ const StyledMonthName = styled.span`
   width: 8rem;
   font-size: 1.5rem;
   color: white;
+  height: 100%;
 `;
 
 export default function CalendarHeadMonth() {
@@ -55,13 +67,13 @@ export default function CalendarHeadMonth() {
   return (
     <StyledCalendarHeadLeft>
       {selectedMonth > 1 ? (
-        <StyledArrowButton onClick={onPreviouseMonthClick}>&lt;</StyledArrowButton>
+        <StyledArrowLeft onClick={onPreviouseMonthClick}>&lt;</StyledArrowLeft>
       ) : (
         <StyledEmpty></StyledEmpty>
       )}
       <StyledMonthName>{monthsLong[selectedMonth]}</StyledMonthName>
       {selectedMonth < 12 ? (
-        <StyledArrowButton onClick={onNextMonthClick}>&gt;</StyledArrowButton>
+        <StyledArrowRight onClick={onNextMonthClick}>&gt;</StyledArrowRight>
       ) : (
         <StyledEmpty></StyledEmpty>
       )}

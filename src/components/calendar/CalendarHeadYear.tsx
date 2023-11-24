@@ -1,3 +1,5 @@
+import { TfiAngleLeft } from "react-icons/tfi";
+import { TfiAngleRight } from "react-icons/tfi";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { setSelectedYear, updateCalendarData } from "@/global/redux/slices/calendar.slice";
@@ -7,23 +9,31 @@ const StyledCalendarHeadRight = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  color: transparent;
-  &:hover {
-    color: white;
-  }
+  color: white;
 `;
 
-const StyledArrowButton = styled.span`
+const StyledArrowLeft = styled(TfiAngleLeft)`
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 1.5rem;
-  font-size: 1.2rem;
+  font-size: 2rem;
+  height: 100%;
+`;
+const StyledArrowRight = styled(TfiAngleRight)`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  font-size: 2rem;
+  height: 100%;
 `;
 
 const StyledEmpty = styled.div`
   width: 1.5rem;
+  height: 100%;
 `;
 
 const StyledYear = styled.span`
@@ -33,6 +43,7 @@ const StyledYear = styled.span`
   width: 3.5rem;
   font-size: 1.2rem;
   color: white;
+  height: 100%;
 `;
 
 export default function CalendarHeadYear() {
@@ -51,7 +62,7 @@ export default function CalendarHeadYear() {
   return (
     <StyledCalendarHeadRight>
       {selectedYear > 2022 ? (
-        <StyledArrowButton onClick={onPreviouseYearClick}>&lt;</StyledArrowButton>
+        <StyledArrowLeft onClick={onPreviouseYearClick}>&lt;</StyledArrowLeft>
       ) : (
         <StyledEmpty></StyledEmpty>
       )}
@@ -59,7 +70,7 @@ export default function CalendarHeadYear() {
       {selectedYear === currentYear + 1 ? (
         <StyledEmpty></StyledEmpty>
       ) : (
-        <StyledArrowButton onClick={onNextYearClick}>&gt;</StyledArrowButton>
+        <StyledArrowRight onClick={onNextYearClick}>&gt;</StyledArrowRight>
       )}
     </StyledCalendarHeadRight>
   );
