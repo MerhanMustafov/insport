@@ -23,7 +23,6 @@ const StyledCalendarCell = styled("div")`
     color: #fe0101;
   }
 `;
-
 interface CalendarDayNumberCellProps {
   monthNumber: MonthNumbersNormalType;
   dayNumberInMonth: NumberOfDaysInAMonthType | null;
@@ -40,6 +39,7 @@ export default function CalendarDayNumberCell({
   const dispatch = useAppDispatch();
   const { activeDate } = useAppSelector((state) => state.calendar);
   const { activeYear, activeMonth, activeDay } = activeDate;
+
   const isCurrentlySelectedDay =
     activeYear === yearNumber && activeMonth === monthNumber && activeDay === dayNumberInMonth;
 

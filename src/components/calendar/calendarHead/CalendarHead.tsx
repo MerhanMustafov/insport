@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import CalendatHeadMonth from "@/components/calendar/CalendarHeadMonth";
-import CalendarHeadYear from "@/components/calendar/CalendarHeadYear";
+import CalendatHeadMonth from "@/components/calendar/calendarHead/CalendarHeadMonth";
+import CalendarHeadYear from "@/components/calendar/calendarHead/CalendarHeadYear";
 
 const StyledWrapper = styled.div`
   background: #001e28;
