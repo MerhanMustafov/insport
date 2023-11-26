@@ -5,6 +5,7 @@ interface Props {
   altText?: string;
   width?: string; // // ex: 25px || 2rem || 50%...
   height?: string; // // ex: 25px || 2rem || 50%...
+  border?: string; // ex: 1px solid red
 }
 
 interface ImageWrapperProps {
@@ -24,9 +25,9 @@ const StyledImage = styled.img`
   height: 100%;
 `;
 
-export default function Image({ image, altText, width, height }: Props) {
+export default function Image({ image, altText, width, height, border }: Props) {
   return (
-    <StyledImageWrapper width={width} height={height}>
+    <StyledImageWrapper width={width} height={height} border={border}>
       <StyledImage src={image} alt={altText || "image"} />
     </StyledImageWrapper>
   );

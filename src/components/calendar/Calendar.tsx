@@ -12,6 +12,7 @@ const StyledWrapper = styled.div`
   grid-template-rows: auto;
   font-family: sans-serif;
   width: max-content;
+  background-color: #ffffff;
 `;
 
 export default function Calendar() {
