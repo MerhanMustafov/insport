@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { setSelectedDayOfTheMonth } from "@/global/redux/slices/calendar.slice";
 import { toggleCalendar } from "@/global/redux/slices/toggle.slice";
 import { MonthNumbersNormalType, NumberOfDaysInAMonthType } from "@/lib/calendar/calendar.types";
+import { SOCCER } from "@/router/pathConsts";
 
-const StyledCalendarCell = styled("div")`
+const StyledCalendarCell = styled(Link)`
   cursor: pointer;
   border: none;
   display: flex;
@@ -44,14 +46,15 @@ export default function CalendarDayNumberCell({
     activeYear === yearNumber && activeMonth === monthNumber && activeDay === dayNumberInMonth;
 
   const handleDateClick = () => {
+    dispatch(toggleCalendar());
     if (dayNumberInMonth) {
       dispatch(setSelectedDayOfTheMonth(dayNumberInMonth));
-      dispatch(toggleCalendar());
     }
   };
 
   return (
     <StyledCalendarCell
+      to={`${SOCCER}/${yearNumber}-${monthNumber}-${dayNumberInMonth as number}`}
       onClick={handleDateClick}
       id={`${dayNumberInMonth === null ? Math.random() * 150 : dayNumberInMonth}`}
       className={` ${isCurrentlySelectedDay ? "selected-day" : ""} ${

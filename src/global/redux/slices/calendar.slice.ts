@@ -26,6 +26,21 @@ interface CalendarStateType {
     activeMonth: MonthNumbersNormalType;
     activeDay: NumberOfDaysInAMonthType;
   };
+  today: {
+    todayYear: number;
+    todayMonth: MonthNumbersNormalType;
+    todayDay: NumberOfDaysInAMonthType;
+  };
+  yesterday: {
+    yesterdayYear: number;
+    yesterdayMonth: MonthNumbersNormalType;
+    yesterdayDay: NumberOfDaysInAMonthType;
+  };
+  tomorrow: {
+    tomorrowYear: number;
+    tomorrowMonth: MonthNumbersNormalType;
+    tomorrowDay: NumberOfDaysInAMonthType;
+  };
 }
 
 const currentDate = new Date();
@@ -41,6 +56,21 @@ const initialState: CalendarStateType = {
     activeMonth: (currentDate.getMonth() + 1) as MonthNumbersNormalType,
     activeDay: currentDate.getDate() as NumberOfDaysInAMonthType
   },
+  today: {
+    todayYear: currentDate.getFullYear(),
+    todayMonth: (currentDate.getMonth() + 1) as MonthNumbersNormalType,
+    todayDay: currentDate.getDate() as NumberOfDaysInAMonthType
+  },
+  yesterday: {
+    yesterdayYear: currentDate.getFullYear(),
+    yesterdayMonth: (currentDate.getMonth() + 1) as MonthNumbersNormalType,
+    yesterdayDay: (currentDate.getDate() - 1) as NumberOfDaysInAMonthType
+  },
+  tomorrow: {
+    tomorrowYear: currentDate.getFullYear(),
+    tomorrowMonth: (currentDate.getMonth() + 1) as MonthNumbersNormalType,
+    tomorrowDay: (currentDate.getDate() + 1) as NumberOfDaysInAMonthType
+  },
 
   weekDaysStrings: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
   daysInMonth: []
@@ -51,6 +81,7 @@ export const calendarSlice = createSlice({
   initialState,
   reducers: {
     setInitialCalendarData(state) {
+      // this sets the calendar initial body data and does it inside the  calendar itself
       const { weekDaysStrings, daysInMonth } = getDaysInMonth(
         state.selectedYear,
         state.selectedMonth,
@@ -59,6 +90,36 @@ export const calendarSlice = createSlice({
 
       state.weekDaysStrings = weekDaysStrings;
       state.daysInMonth = daysInMonth;
+    },
+    updateCalendarData(state) {
+      // this is used only when the user clicks year or month in the calendar header
+      // first is beeing set the new year and month and then the calendar body is updated
+      const { weekDaysStrings, daysInMonth } = getDaysInMonth(
+        state.selectedYear,
+        state.selectedMonth,
+        state.firstDayOfWeek
+      );
+
+      state.weekDaysStrings = weekDaysStrings;
+      state.daysInMonth = daysInMonth;
+    },
+    setNewCalendarDate(
+      state,
+      action: PayloadAction<{
+        year: number;
+        month: MonthNumbersNormalType;
+        day: NumberOfDaysInAMonthType;
+      }>
+    ) {
+      // this is used only when the user clicks on a day in the calendar body
+      state.selectedYear = action.payload.year;
+      state.selectedMonth = action.payload.month;
+      state.selectedDayOfTheMonth = action.payload.day;
+      state.activeDate = {
+        activeYear: action.payload.year,
+        activeMonth: action.payload.month,
+        activeDay: action.payload.day
+      };
     },
     setFirstDayOfWeek(state, action: PayloadAction<WeekDaysZeroBasedType>) {
       state.firstDayOfWeek = action.payload;
@@ -76,25 +137,16 @@ export const calendarSlice = createSlice({
         activeMonth: state.selectedMonth,
         activeDay: action.payload as NumberOfDaysInAMonthType
       };
-    },
-    updateCalendarData(state) {
-      const { weekDaysStrings, daysInMonth } = getDaysInMonth(
-        state.selectedYear,
-        state.selectedMonth,
-        state.firstDayOfWeek
-      );
-
-      state.weekDaysStrings = weekDaysStrings;
-      state.daysInMonth = daysInMonth;
     }
   }
 });
 
 export const {
   setInitialCalendarData,
+  updateCalendarData,
+  setNewCalendarDate,
   setFirstDayOfWeek,
   setSelectedYear,
   setSelectedMonth,
-  setSelectedDayOfTheMonth,
-  updateCalendarData
+  setSelectedDayOfTheMonth
 } = calendarSlice.actions;

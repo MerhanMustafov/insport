@@ -81,7 +81,6 @@ interface IDataReturnType {
 export const fixturesApiSlice = createApi({
   reducerPath: "fixturesApi",
   baseQuery: fetchBaseQuery({ baseUrl: INSPORT_FOOTBALL_BASE_URL }),
-  // keepUnusedDataFor: 60 * 60 * 24, // 24 hours
   endpoints: (build) => ({
     getFixturesByDate: build.query<IDataReturnType, string>({
       query: (date: string) => `/fixtures/${date}`

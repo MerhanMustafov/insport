@@ -18,6 +18,7 @@ export const toggleSlice = createSlice({
   reducers: {
     toggleCalendar: (state) => {
       state.calendar.isCalendarOpen = !state.calendar.isCalendarOpen;
+      console.log("toggleCalendar", state.calendar.isCalendarOpen);
     }
   }
 });

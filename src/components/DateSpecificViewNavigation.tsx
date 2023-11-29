@@ -1,15 +1,19 @@
 import { RxCalendar } from "react-icons/rx";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { toggleCalendar } from "@/global/redux/slices/toggle.slice";
 import ClickAwayBackGroundContainer from "@/components/ClickAwayBackGroundContainer";
 import Calendar from "@/components/calendar/Calendar";
+import { getFormatedDateYYYYMMDD } from "@/lib/calendar/calendar.utils";
+import { SOCCER } from "@/router/pathConsts";
 
 const StyledNav = styled.nav`
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7);
   padding: 10px 5px;
   position: relative;
   width: 100%;
+  border-radius: 10px;
 `;
 
 const StyledUl = styled.ul`
@@ -21,6 +25,11 @@ const StyledUl = styled.ul`
 
 const StyledNavText = styled.span`
   font-size: 1.4rem;
+`;
+const StyledNavLink = styled(Link)`
+  font-size: 1.4rem;
+  color: black;
+  text-decoration: none;
 `;
 
 const StyledCalendarIcon = styled(RxCalendar)`
@@ -39,8 +48,15 @@ const StyledCalendarWrapper = styled.div`
 export default function DateSpecificViewNavigation() {
   const dispatch = useAppDispatch();
   const { isCalendarOpen } = useAppSelector((state) => state.toggle.calendar);
-  const { activeDate } = useAppSelector((state) => state.calendar);
+  const { activeDate, today, tomorrow, yesterday } = useAppSelector((state) => state.calendar);
   const { activeDay, activeMonth, activeYear } = activeDate;
+  const { todayDay, todayMonth, todayYear } = today;
+  const { tomorrowDay, tomorrowMonth, tomorrowYear } = tomorrow;
+  const { yesterdayDay, yesterdayMonth, yesterdayYear } = yesterday;
+  const _currentlySelectedDate = getFormatedDateYYYYMMDD(activeYear, activeMonth, activeDay);
+  const _todayDate = getFormatedDateYYYYMMDD(todayYear, todayMonth, todayDay, "-");
+  const _tomorrowDate = getFormatedDateYYYYMMDD(tomorrowYear, tomorrowMonth, tomorrowDay, "-");
+  const _yesterdayDate = getFormatedDateYYYYMMDD(yesterdayYear, yesterdayMonth, yesterdayDay, "-");
 
   const handleCalendarToggle = () => {
     dispatch(toggleCalendar());
@@ -54,13 +70,10 @@ export default function DateSpecificViewNavigation() {
       <StyledUl>
         <StyledCalendarIcon onClick={handleCalendarToggle} />
         {/* TODO: add replace with Live if live set/exists */}
-        <StyledNavText>
-          {activeDay < 10 ? `0${activeDay}` : activeDay}/
-          {activeMonth < 10 ? `0${activeMonth}` : activeMonth}/{activeYear}
-        </StyledNavText>
-        <StyledNavText>Yesterday</StyledNavText>
-        <StyledNavText>Today</StyledNavText>
-        <StyledNavText>Tomorrow</StyledNavText>
+        <StyledNavText>{_currentlySelectedDate}</StyledNavText>
+        <StyledNavLink to={`${SOCCER}/${_yesterdayDate}`}>Yesterday</StyledNavLink>
+        <StyledNavLink to={`${SOCCER}/${_todayDate}`}>Today</StyledNavLink>
+        <StyledNavLink to={`${SOCCER}/${_tomorrowDate}`}>Tomorrow</StyledNavLink>
       </StyledUl>
       {isCalendarOpen && (
         <>

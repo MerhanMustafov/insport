@@ -19,7 +19,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        warnAfter: 1000
+        warnAfter: 2000
       }
     })
       .concat(countriesApiSlice.middleware)

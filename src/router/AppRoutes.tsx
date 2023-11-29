@@ -7,6 +7,7 @@ export default function AppRoutes() {
     <Routes>
       <Route path={LANDING} element={<LandingPage />} />
       <Route path={SOCCER} element={<LandingPage />} />
+      <Route path={`${SOCCER}/:date`} element={<LandingPage />} />
     </Routes>
   );
 }
