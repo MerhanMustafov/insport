@@ -1,6 +1,7 @@
 import { RxCalendar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useNavigationDayActiveLink } from "@/global/hooks/useNavigationDayActiveLink";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { toggleCalendar } from "@/global/redux/slices/toggle.slice";
 import ClickAwayBackGroundContainer from "@/components/ClickAwayBackGroundContainer";
@@ -25,11 +26,23 @@ const StyledUl = styled.ul`
 
 const StyledNavText = styled.span`
   font-size: 1.4rem;
+  &.other {
+    border-bottom: 2px solid #ff0040;
+  }
 `;
 const StyledNavLink = styled(Link)`
   font-size: 1.4rem;
   color: black;
   text-decoration: none;
+  &.today {
+    border-bottom: 2px solid #ff0040;
+  }
+  &.yesterday {
+    border-bottom: 2px solid #ff0040;
+  }
+  &.tomorrow {
+    border-bottom: 2px solid #ff0040;
+  }
 `;
 
 const StyledCalendarIcon = styled(RxCalendar)`
@@ -47,12 +60,15 @@ const StyledCalendarWrapper = styled.div`
 
 export default function DateSpecificViewNavigation() {
   const dispatch = useAppDispatch();
+  const selectedDayStatus = useNavigationDayActiveLink();
   const { isCalendarOpen } = useAppSelector((state) => state.toggle.calendar);
   const { activeDate, today, tomorrow, yesterday } = useAppSelector((state) => state.calendar);
+
   const { activeDay, activeMonth, activeYear } = activeDate;
   const { todayDay, todayMonth, todayYear } = today;
   const { tomorrowDay, tomorrowMonth, tomorrowYear } = tomorrow;
   const { yesterdayDay, yesterdayMonth, yesterdayYear } = yesterday;
+
   const _currentlySelectedDate = getFormatedDateYYYYMMDD(activeYear, activeMonth, activeDay);
   const _todayDate = getFormatedDateYYYYMMDD(todayYear, todayMonth, todayDay, "-");
   const _tomorrowDate = getFormatedDateYYYYMMDD(tomorrowYear, tomorrowMonth, tomorrowDay, "-");
@@ -69,11 +85,21 @@ export default function DateSpecificViewNavigation() {
     <StyledNav>
       <StyledUl>
         <StyledCalendarIcon onClick={handleCalendarToggle} />
-        {/* TODO: add replace with Live if live set/exists */}
-        <StyledNavText>{_currentlySelectedDate}</StyledNavText>
-        <StyledNavLink to={`${SOCCER}/${_yesterdayDate}`}>Yesterday</StyledNavLink>
-        <StyledNavLink to={`${SOCCER}/${_todayDate}`}>Today</StyledNavLink>
-        <StyledNavLink to={`${SOCCER}/${_tomorrowDate}`}>Tomorrow</StyledNavLink>
+        <StyledNavText className={selectedDayStatus.other.cl}>
+          {_currentlySelectedDate}
+        </StyledNavText>
+        <StyledNavLink
+          className={selectedDayStatus.yesterday.cl}
+          to={`${SOCCER}/${_yesterdayDate}`}
+        >
+          Yesterday
+        </StyledNavLink>
+        <StyledNavLink className={selectedDayStatus.today.cl} to={`${SOCCER}/${_todayDate}`}>
+          Today
+        </StyledNavLink>
+        <StyledNavLink className={selectedDayStatus.tomorrow.cl} to={`${SOCCER}/${_tomorrowDate}`}>
+          Tomorrow
+        </StyledNavLink>
       </StyledUl>
       {isCalendarOpen && (
         <>

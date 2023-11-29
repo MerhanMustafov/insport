@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface IToggleState {
   calendar: {
@@ -18,7 +18,6 @@ export const toggleSlice = createSlice({
   reducers: {
     toggleCalendar: (state) => {
       state.calendar.isCalendarOpen = !state.calendar.isCalendarOpen;
-      console.log("toggleCalendar", state.calendar.isCalendarOpen);
     }
   }
 });
