@@ -25,31 +25,29 @@ export default function DateSpecificMatchView() {
     isLoading: isFixturesLoading,
     isError: isFixturesError
   } = useGetFixturesByDateQuery("2023-11-26");
+  if (fixturesData) {
+    console.log(fixturesData);
+  }
 
-  console.log("fixturesData: ", fixturesData);
   if (isFixturesLoading) return <div>Loading...</div>;
 
   return (
     <StyledWrapper>
       <DateSpecificViewNavigation />
-
-      {fixturesData &&
-        Object.entries(fixturesData).map(([key, value]) =>
-          Object.entries(value).map(([k, v]) =>
-            v.map((d) => (
-              <div>
-                <div>
-                  {d.teams.home.name} <Image image={d.teams.home.logo} />{" "}
-                </div>
-                <div>
-                  {d.teams.away.name} <Image image={d.teams.away.logo} />
-                </div>
-              </div>
-            ))
-          )
-        )}
-
-      <StyledLeagueFixturesWrapper>
+      {/* {Object.values(fixturesData).forEach((arr) => {
+        arr.map((d) => <div>{d?.league?.country}</div>);
+      })} */}
+      {/* {fixturesData &&
+        Object.values(fixturesData).map((d) => (
+          <div style={{ width: "100%" }}>
+            {.map((x) => (
+              <>
+                <SingleFixture status={x.fixture.status.short} teams={x.teams} goals={x.goals} />
+              </>
+            ))}
+          </div>
+        ))} */}
+      {/* <StyledLeagueFixturesWrapper>
         <LeagueInfoFixtureHead />
         <SingleFixture />
         <SingleFixture />
@@ -57,7 +55,7 @@ export default function DateSpecificMatchView() {
         <SingleFixture />
         <SingleFixture />
         <SingleFixture />
-      </StyledLeagueFixturesWrapper>
+      </StyledLeagueFixturesWrapper> */}
     </StyledWrapper>
   );
 }
@@ -73,8 +71,8 @@ const StyledSingleFixture = styled.div`
   column-gap: 2rem;
   align-items: center;
   padding: 0.5rem 1.6rem;
-  /* width: 90%; */
-  margin: 0 0 0 calc(50px + 20px);
+  /* width: 100%; */
+  /* margin: 0 0 0 calc(50px + 20px); */
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
   /* border: 1px solid black; */
 `;
@@ -106,31 +104,58 @@ const StyldResult = styled.span`
   font-weight: bold;
 `;
 
-function SingleFixture() {
+interface SingleFixtureProps {
+  status: string;
+  teams: {
+    home: {
+      name: string;
+      logo: string;
+    };
+    away: {
+      name: string;
+      logo: string;
+    };
+  };
+  goals: {
+    home: number | null;
+    away: number | null;
+  };
+}
+
+function SingleFixture({
+  status,
+  teams: {
+    home: { name: homeName, logo: homeLogo },
+    away: { name: awayName, logo: awayLogo }
+  },
+  goals: { home: homeGoals, away: awayGoals }
+}: SingleFixtureProps) {
   return (
     <StyledSingleFixture>
-      <StyledStatus>FT</StyledStatus>
+      <StyledStatus>{status}</StyledStatus>
       <StyledTeamsWrapper>
         <StyledTeamWrapper>
-          <StyldResult>1</StyldResult>
+          <StyldResult>{homeGoals}</StyldResult>
           <Image
-            image="https://crests.football-data.org/66.svg"
+            // image="https://crests.football-data.org/66.svg"
+            image={homeLogo}
             width="20px"
             height="25px"
             altText="Manchester United Logo"
           />
-          <StyledTeamName>Manchester United</StyledTeamName>
+          <StyledTeamName>{homeName}</StyledTeamName>
         </StyledTeamWrapper>
 
         <StyledTeamWrapper>
-          <StyldResult>1</StyldResult>
+          <StyldResult>{awayGoals}</StyldResult>
           <Image
-            image="https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png"
+            // image="https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png"
+            image={awayLogo}
             width="20px"
             height="25px"
             altText="Manchester United Logo"
           />
-          <StyledTeamName>Leverpool</StyledTeamName>
+          <StyledTeamName>{awayName}</StyledTeamName>
         </StyledTeamWrapper>
       </StyledTeamsWrapper>
     </StyledSingleFixture>

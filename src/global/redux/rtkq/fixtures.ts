@@ -23,15 +23,7 @@ interface FixtureDataReturnType {
       elapsed: number;
     };
   };
-  league: {
-    id: number;
-    name: string;
-    country: string;
-    logo: string;
-    flag: string;
-    season: number;
-    round: string;
-  };
+  league: League;
   teams: {
     home: {
       id: number;
@@ -70,12 +62,28 @@ interface FixtureDataReturnType {
   };
 }
 
+interface League {
+  id: number;
+  name: string;
+  country: string;
+  logo: string;
+  flag: string;
+  season: number;
+  round: string;
+}
 export const fixturesApiSlice = createApi({
   reducerPath: "fixturesApi",
   baseQuery: fetchBaseQuery({ baseUrl: INSPORT_FOOTBALL_BASE_URL }),
   // keepUnusedDataFor: 60 * 60 * 24, // 24 hours
   endpoints: (build) => ({
-    getFixturesByDate: build.query<any, string>({
+    getFixturesByDate: build.query<
+      {
+        [countryName: string]: {
+          [leagueName: string]: { data: FixtureDataReturnType[]; leagueInfo: League };
+        };
+      },
+      string
+    >({
       query: (date: string) => `/fixtures/${date}`
     })
   })
