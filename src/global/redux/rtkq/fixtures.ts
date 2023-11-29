@@ -1,41 +1,41 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { INSPORT_FOOTBALL_BASE_URL } from "@/global/constants/app.constants";
 
-interface FixtureDataReturnType {
+interface IFixture {
   fixture: {
     id: number;
-    referee: string;
+    referee: string | null;
     timezone: string;
-    date: string;
+    date: Date;
     timestamp: number;
     periods: {
-      first: number;
-      second: null;
+      first: number | null;
+      second: number | null;
     };
     venue: {
       id: number | null;
-      name: string;
-      city: string;
+      name: string | null;
+      city: string | null;
     };
     status: {
       long: string;
       short: string;
-      elapsed: number;
+      elapsed: number | null;
     };
   };
-  league: League;
+  league: ILeague;
   teams: {
     home: {
       id: number;
       name: string;
       logo: string;
-      winner: null;
+      winner: true;
     };
     away: {
       id: number;
       name: string;
       logo: string;
-      winner: null;
+      winner: false;
     };
   };
   goals: {
@@ -44,7 +44,7 @@ interface FixtureDataReturnType {
   };
   score: {
     halftime: {
-      home: number | number;
+      home: number | null;
       away: number | null;
     };
     fulltime: {
@@ -61,29 +61,29 @@ interface FixtureDataReturnType {
     };
   };
 }
-
-interface League {
+interface ILeague {
   id: number;
   name: string;
   country: string;
   logo: string;
   flag: string;
-  season: number;
+  season: 2023;
   round: string;
+}
+interface IDataReturnType {
+  [countryName: string]: {
+    [leagueName: string]: {
+      leagueInfo: ILeague;
+      leagueData: IFixture[];
+    };
+  };
 }
 export const fixturesApiSlice = createApi({
   reducerPath: "fixturesApi",
   baseQuery: fetchBaseQuery({ baseUrl: INSPORT_FOOTBALL_BASE_URL }),
   // keepUnusedDataFor: 60 * 60 * 24, // 24 hours
   endpoints: (build) => ({
-    getFixturesByDate: build.query<
-      {
-        [countryName: string]: {
-          [leagueName: string]: { data: FixtureDataReturnType[]; leagueInfo: League };
-        };
-      },
-      string
-    >({
+    getFixturesByDate: build.query<IDataReturnType, string>({
       query: (date: string) => `/fixtures/${date}`
     })
   })

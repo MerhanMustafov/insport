@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { setSelectedDayOfTheMonth } from "@/global/redux/slices/calendar.slice";
+import { toggleCalendar } from "@/global/redux/slices/toggle.slice";
 import { MonthNumbersNormalType, NumberOfDaysInAMonthType } from "@/lib/calendar/calendar.types";
 
 const StyledCalendarCell = styled("div")`
@@ -45,6 +46,7 @@ export default function CalendarDayNumberCell({
   const handleDateClick = () => {
     if (dayNumberInMonth) {
       dispatch(setSelectedDayOfTheMonth(dayNumberInMonth));
+      dispatch(toggleCalendar());
     }
   };
 

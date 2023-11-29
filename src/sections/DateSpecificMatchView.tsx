@@ -1,5 +1,6 @@
 import { TfiAngleRight } from "react-icons/tfi";
 import styled from "styled-components";
+import { useAppSelector } from "@/global/redux/reduxHooks";
 import { useGetFixturesByDateQuery } from "@/global/redux/rtkq/fixtures";
 import DateSpecificViewNavigation from "@/components/DateSpecificViewNavigation";
 import Image from "@/components/Image";
@@ -11,51 +12,74 @@ const StyledWrapper = styled.nav`
   gap: 2rem;
   padding: 0px 20px 0 0;
 `;
+const StyledLeaguesWrapper = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5rem;
+  width: 100%;
+  /* background: #6e6e6e; */
+`;
 
 const StyledLeagueFixturesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+  /* background: #001e28; */
+  background: #ffffff;
+  /* border: 3px solid #001e28; */
+  padding: 5px;
 `;
 
 export default function DateSpecificMatchView() {
+  const { activeYear, activeMonth, activeDay } = useAppSelector(
+    (state) => state.calendar.activeDate
+  );
   const {
     data: fixturesData,
     isLoading: isFixturesLoading,
+    isFetching: isFixturesFetching,
     isError: isFixturesError
-  } = useGetFixturesByDateQuery("2023-11-26");
-  if (fixturesData) {
-    console.log(fixturesData);
-  }
+  } = useGetFixturesByDateQuery(`${activeYear}-${activeMonth}-${activeDay}`);
+  const isLoading = isFixturesFetching || isFixturesLoading;
 
-  if (isFixturesLoading) return <div>Loading...</div>;
+  if (isFixturesError) return <div>Error has occured</div>;
 
   return (
     <StyledWrapper>
       <DateSpecificViewNavigation />
-      {/* {Object.values(fixturesData).forEach((arr) => {
-        arr.map((d) => <div>{d?.league?.country}</div>);
-      })} */}
-      {/* {fixturesData &&
-        Object.values(fixturesData).map((d) => (
-          <div style={{ width: "100%" }}>
-            {.map((x) => (
-              <>
-                <SingleFixture status={x.fixture.status.short} teams={x.teams} goals={x.goals} />
-              </>
-            ))}
-          </div>
-        ))} */}
-      {/* <StyledLeagueFixturesWrapper>
-        <LeagueInfoFixtureHead />
-        <SingleFixture />
-        <SingleFixture />
-        <SingleFixture />
-        <SingleFixture />
-        <SingleFixture />
-        <SingleFixture />
-      </StyledLeagueFixturesWrapper> */}
+      <StyledLeaguesWrapper>
+        {isLoading && <div>Loading...</div>}
+        {!isLoading &&
+          fixturesData &&
+          Object.values(fixturesData).map((leagueData) => {
+            return Object.values(leagueData).map(({ leagueInfo, leagueData }) => {
+              return (
+                <StyledLeagueFixturesWrapper>
+                  <LeagueInfoFixtureHead
+                    key={leagueInfo.id}
+                    leagueId={leagueInfo.id}
+                    countryName={leagueInfo.country}
+                    leagueName={leagueInfo.name}
+                    leagueLogo={leagueInfo.logo}
+                  />
+                  {leagueData.map((leaguFuxtureData) => {
+                    return (
+                      <SingleFixture
+                        key={leaguFuxtureData.fixture.id}
+                        fixtureId={leaguFuxtureData.fixture.id}
+                        teams={leaguFuxtureData.teams}
+                        status={leaguFuxtureData.fixture.status.short}
+                        goals={leaguFuxtureData.goals}
+                      />
+                    );
+                  })}
+                </StyledLeagueFixturesWrapper>
+              );
+            });
+          })}
+      </StyledLeaguesWrapper>
     </StyledWrapper>
   );
 }
@@ -73,8 +97,10 @@ const StyledSingleFixture = styled.div`
   padding: 0.5rem 1.6rem;
   /* width: 100%; */
   /* margin: 0 0 0 calc(50px + 20px); */
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+  /* border-bottom: 1px solid black; */
   /* border: 1px solid black; */
+  /* background: #c0bebe; */
 `;
 
 const StyledStatus = styled.span`
@@ -120,9 +146,11 @@ interface SingleFixtureProps {
     home: number | null;
     away: number | null;
   };
+  fixtureId: number;
 }
 
 function SingleFixture({
+  fixtureId,
   status,
   teams: {
     home: { name: homeName, logo: homeLogo },
@@ -141,7 +169,7 @@ function SingleFixture({
             image={homeLogo}
             width="20px"
             height="25px"
-            altText="Manchester United Logo"
+            altText="logo"
           />
           <StyledTeamName>{homeName}</StyledTeamName>
         </StyledTeamWrapper>
@@ -153,7 +181,7 @@ function SingleFixture({
             image={awayLogo}
             width="20px"
             height="25px"
-            altText="Manchester United Logo"
+            altText="logo"
           />
           <StyledTeamName>{awayName}</StyledTeamName>
         </StyledTeamWrapper>
@@ -171,8 +199,11 @@ const StyledBlockHeaderWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  width: 100%;
+  color: white;
+  /* box-shadow: 0px 0px 5px 0px rgb(0, 119, 119); */
+  /* width: 100%; */
+  padding: 0.5rem 1.6rem;
+  background: #001e28;
 `;
 
 const StyledLeagueName = styled.span`
@@ -203,19 +234,25 @@ const StyledArrowRight = styled(TfiAngleRight)`
   margin-right: 1rem;
 `;
 
-function LeagueInfoFixtureHead() {
+interface LeagueInfoFixtureHeadProps {
+  leagueName: string;
+  countryName: string;
+  leagueLogo: string;
+  leagueId: number;
+}
+function LeagueInfoFixtureHead({
+  leagueId,
+  countryName,
+  leagueName,
+  leagueLogo
+}: LeagueInfoFixtureHeadProps) {
   return (
     <StyledBlockHeaderWrapper>
       <StyledLeftWrapper>
-        <Image
-          image="https://dorve.com/wp-content/uploads/2023/08/premierleague-1024x1024.png"
-          width="50px"
-          height="50px"
-          altText="Premier League Logo"
-        />
+        <Image image={leagueLogo} width="20px" height="23px" altText="logo" />
         <StyledLeagueCountryTextWrapper>
-          <StyledLeagueName>Premier League</StyledLeagueName>
-          <StyledCountryName>England</StyledCountryName>
+          <StyledLeagueName>{leagueName}</StyledLeagueName>
+          <StyledCountryName>{countryName}</StyledCountryName>
         </StyledLeagueCountryTextWrapper>
       </StyledLeftWrapper>
 
