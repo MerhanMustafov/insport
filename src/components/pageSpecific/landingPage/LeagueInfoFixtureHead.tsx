@@ -1,6 +1,6 @@
 import { TfiAngleRight } from "react-icons/tfi";
 import styled from "styled-components";
-import Image from "@/components/Image";
+import Image from "@/components/shared/Image";
 
 const StyledBlockHeaderWrapper = styled.div`
   display: flex;

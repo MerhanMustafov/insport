@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import AppLogo from "@/components/AppLogo";
+import AppLogo from "@/components/shared/AppLogo";
 import { SOCCER } from "@/router/pathConsts";
 
 const StyledNav = styled.nav`

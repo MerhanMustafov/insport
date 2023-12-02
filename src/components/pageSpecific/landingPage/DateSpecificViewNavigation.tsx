@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { useNavigationDayActiveLink } from "@/global/hooks/useNavigationDayActiveLink";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { toggleCalendar } from "@/global/redux/slices/toggle.slice";
-import ClickAwayBackGroundContainer from "@/components/ClickAwayBackGroundContainer";
 import Calendar from "@/components/calendar/Calendar";
+import ClickAwayBackGroundContainer from "@/components/shared/ClickAwayBackGroundContainer";
 import { getFormatedDateYYYYMMDD } from "@/lib/calendar/calendar.utils";
 import { SOCCER } from "@/router/pathConsts";
 

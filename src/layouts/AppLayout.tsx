@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import AppNavigation from "@/components/AppNavigation";
+import AppNavigation from "@/components/shared/AppNavigation";
 
 interface AppLayoutProps {
   children: React.ReactElement;

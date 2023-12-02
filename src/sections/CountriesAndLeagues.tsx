@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { filterCountriesUtil, useGetCountriesQuery } from "@/global/redux/rtkq/countries";
 import { useLazyGetLeaguesByCountryNameQuery } from "@/global/redux/rtkq/leagues";
-import Country from "@/sections/Country";
-import League from "@/sections/League";
+import Country from "@/components/pageSpecific/landingPage/Country";
+import League from "@/components/pageSpecific/landingPage/League";
 
 const StyledWrapper = styled.div`
   padding: 10px;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Image from "@/components/Image";
+import Image from "@/components/shared/Image";
 
 const StyledSingleFixture = styled.div`
   display: grid;
