@@ -18,6 +18,7 @@ interface LeaguesReturnType {
   numberOfLeagues: number;
 }
 
+// NOTE: Think for how log will you cache the data
 export const leaguesApiSlice = createApi({
   reducerPath: "leaguesApi",
   baseQuery: fetchBaseQuery({ baseUrl: INSPORT_FOOTBALL_BASE_URL }),
@@ -25,9 +26,16 @@ export const leaguesApiSlice = createApi({
   endpoints: (build) => ({
     getLeaguesByCountryName: build.query<LeaguesReturnType, string>({
       query: (countryName: string) => `/leagues/${countryName}`
+    }),
+    getLeagueInfoById: build.query<any, string>({
+      // league info and league standing data
+      query: (leagueId) => `/singleLeague/${leagueId}`
     })
   })
 });
 
-export const { useGetLeaguesByCountryNameQuery, useLazyGetLeaguesByCountryNameQuery } =
-  leaguesApiSlice;
+export const {
+  useGetLeaguesByCountryNameQuery,
+  useLazyGetLeaguesByCountryNameQuery,
+  useGetLeagueInfoByIdQuery
+} = leaguesApiSlice;

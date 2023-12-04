@@ -1,7 +1,7 @@
 const PATHS = {
   LANDING: "/",
   SOCCER: "/soccer",
-  LEAGUE: "/soccer/league"
+  LEAGUES: "/soccer/leagues"
 };
 
-export const { LANDING, SOCCER, LEAGUE } = PATHS;
+export const { LANDING, SOCCER, LEAGUES } = PATHS;
