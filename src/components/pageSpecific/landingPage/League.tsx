@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import Image from "@/components/shared/Image";
+import { LEAGUE } from "@/router/pathConsts";
 
 interface LeagueProps {
+  id: number;
   name: string;
   logo: string;
-  handleLeagueClick: () => void;
+  handleLeagueClick: (path: string) => void;
 }
 
 const StyledLeague = styled.div`
@@ -29,10 +31,12 @@ const StyledLeagueName = styled.div`
   letter-spacing: 0.05rem;
 `;
 
-export default function League({ name, logo, handleLeagueClick }: LeagueProps) {
+export default function League({ id, name, logo, handleLeagueClick }: LeagueProps) {
   const handleClick = () => {
-    handleLeagueClick();
+    const path = `${LEAGUE}/${id}`;
+    handleLeagueClick(path);
   };
+
   return (
     <StyledLeague onClick={handleClick}>
       <StyledLeagueName>{name}</StyledLeagueName>

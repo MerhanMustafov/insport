@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { filterCountriesUtil, useGetCountriesQuery } from "@/global/redux/rtkq/countries";
 import { useLazyGetLeaguesByCountryNameQuery } from "@/global/redux/rtkq/leagues";
@@ -103,6 +104,7 @@ const LeagueCountryName = styled.div`
 `;
 
 export default function CountriesAndLeagues() {
+  const navigate = useNavigate();
   // RTK Queries
   const {
     data: countries,
@@ -133,8 +135,8 @@ export default function CountriesAndLeagues() {
     setShowLeagues(true);
   };
 
-  const handleLeagueClick = (): void => {
-    // TODO: implement corresponding logic
+  const handleLeagueClick = (path: string): void => {
+    navigate(path);
   };
 
   const handleBackClick = (): void => {
@@ -211,6 +213,7 @@ export default function CountriesAndLeagues() {
             {leagues?.data?.map((data) => (
               <League
                 key={data.league.id}
+                id={data.league.id}
                 name={data.league.name}
                 logo={data.league.logo}
                 handleLeagueClick={handleLeagueClick}
