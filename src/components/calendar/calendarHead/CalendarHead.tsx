@@ -9,6 +9,7 @@ const StyledWrapper = styled.div`
   grid-template-columns: max-content auto max-content;
   grid-template-rows: auto;
   grid-template-areas: "CALENDAR_HEAD_LEFT . CALENDAR_HEAD_RIGHT";
+  border-radius: inherit;
 `;
 
 export default function CalendarHead() {

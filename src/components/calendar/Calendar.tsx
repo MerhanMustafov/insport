@@ -13,6 +13,7 @@ const StyledWrapper = styled.div`
   font-family: sans-serif;
   width: max-content;
   background-color: #ffffff;
+  border-radius: inherit;
 `;
 
 export default function Calendar() {

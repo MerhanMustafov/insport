@@ -7,6 +7,7 @@ const StyledWrapper = styled.div`
   grid-template-columns: repeat(7, max-content);
   grid-template-rows: auto;
   justify-items: stretch;
+  border-radius: inherit;
 `;
 
 export default function CalendarBody() {

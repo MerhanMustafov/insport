@@ -11,10 +11,9 @@ import { SOCCER } from "@/router/pathConsts";
 
 const StyledNav = styled.nav`
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7);
-  padding: 10px 5px;
-  position: relative;
+  padding: 1rem 0.5rem;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 1rem;
 `;
 
 const StyledUl = styled.ul`
@@ -44,6 +43,9 @@ const StyledNavLink = styled(Link)`
     border-bottom: 2px solid #ff0040;
   }
 `;
+const StyledCalendarContainer = styled.div`
+  position: relative;
+`;
 
 const StyledCalendarIcon = styled(RxCalendar)`
   cursor: pointer;
@@ -54,8 +56,9 @@ const StyledCalendarIcon = styled(RxCalendar)`
 const StyledCalendarWrapper = styled.div`
   position: absolute;
   z-index: 100;
-  top: 100%;
+  top: calc(100% + 1rem);
   left: 0px;
+  border-radius: 1rem;
 `;
 
 export default function DateSpecificViewNavigation() {
@@ -84,7 +87,19 @@ export default function DateSpecificViewNavigation() {
   return (
     <StyledNav>
       <StyledUl>
-        <StyledCalendarIcon onClick={handleCalendarToggle} />
+        <StyledCalendarContainer>
+          <StyledCalendarIcon onClick={handleCalendarToggle} />
+          {isCalendarOpen && (
+            <>
+              <ClickAwayBackGroundContainer
+                onClick={clickAwayHandler}
+              ></ClickAwayBackGroundContainer>
+              <StyledCalendarWrapper>
+                <Calendar />
+              </StyledCalendarWrapper>
+            </>
+          )}
+        </StyledCalendarContainer>
         <StyledNavText className={selectedDayStatus.other.cl}>
           {_currentlySelectedDate}
         </StyledNavText>
@@ -101,14 +116,6 @@ export default function DateSpecificViewNavigation() {
           Tomorrow
         </StyledNavLink>
       </StyledUl>
-      {isCalendarOpen && (
-        <>
-          <ClickAwayBackGroundContainer onClick={clickAwayHandler}></ClickAwayBackGroundContainer>
-          <StyledCalendarWrapper>
-            <Calendar />
-          </StyledCalendarWrapper>
-        </>
-      )}
     </StyledNav>
   );
 }
