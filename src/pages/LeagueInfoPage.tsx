@@ -43,9 +43,9 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin: 100px auto 0 auto;
+  margin: 0px auto 0 auto;
   width: max-content;
-  border: 10px solid red;
+  /* border: 10px solid red; */
   position: relative;
 `;
 
@@ -62,11 +62,12 @@ const StyledImagesWrapper = styled.div`
 interface IImage {
   n: number;
   rotateN: number;
+  currSelected: number;
   total: number;
 }
 
 const StyledImageWrapper = styled.div<IImage>`
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   display: flex;
   width: 150px;
   height: 150px;
@@ -80,8 +81,8 @@ const StyledImageWrapper = styled.div<IImage>`
     )
     translateZ(20vw);
   &:hover {
-    scale: ${(props) => (props.n === 0 ? 1.1 : 1)};
-    margin-bottom: ${(props) => (props.n === 0 ? 15 : 0)}px;
+    scale: ${(props) => (props.n === props.currSelected ? 1.1 : 1)};
+    margin-bottom: ${(props) => (props.n === props.currSelected ? 15 : 0)}px;
   }
 `;
 
@@ -92,6 +93,7 @@ const StyledImage = styled.img`
 
 export default function LeagueInfoPage() {
   const [imagesArray] = useState(imgArr);
+  const [rotateN, setRotateN] = useState(0);
   const [currSelected, setCurrSelected] = useState(0);
   // const params = useParams();
   // const { data, isLoading, isError } = useGetLeagueInfoByIdQuery(params.leagueId as string);
@@ -99,10 +101,24 @@ export default function LeagueInfoPage() {
   // console.log("LeagueInfoPage: ", data);
 
   const handleNext = () => {
-    setCurrSelected((prev) => prev + 1);
+    setRotateN((prev) => prev + 1);
+    setCurrSelected((prev) => {
+      if (prev === 0) {
+        return imagesArray.length - 1;
+      } else {
+        return prev - 1;
+      }
+    });
   };
   const handlePrev = () => {
-    setCurrSelected((prev) => prev - 1);
+    setRotateN((prev) => prev - 1);
+    setCurrSelected((prev) => {
+      if (prev === imagesArray.length - 1) {
+        return 0;
+      } else {
+        return prev + 1;
+      }
+    });
   };
 
   return (
@@ -128,7 +144,12 @@ export default function LeagueInfoPage() {
           </div>
           <StyledImagesWrapper>
             {imagesArray.map((img, i, arr) => (
-              <StyledImageWrapper total={arr.length} n={i} rotateN={currSelected}>
+              <StyledImageWrapper
+                total={arr.length}
+                n={i}
+                currSelected={currSelected}
+                rotateN={rotateN}
+              >
                 <StyledImage src={img} alt="image" />
               </StyledImageWrapper>
             ))}
