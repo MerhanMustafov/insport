@@ -1,3 +1,4 @@
+import { TargetAndTransition, motion } from "framer-motion";
 import styled from "styled-components";
 import AppNavigation from "@/components/shared/AppNavigation";
 
@@ -38,9 +39,13 @@ const StyledContent = styled.div`
 `;
 
 export default function AppLayout({ children }: AppLayoutProps) {
+  const headerAnimationConfig: TargetAndTransition = {
+    height: ["0%", "100%"],
+    transition: { ease: "easeIn", duration: 1 }
+  };
   return (
     <StyledLayout>
-      <StyledHeader>
+      <StyledHeader as={motion.div} animate={headerAnimationConfig}>
         <AppNavigation />
       </StyledHeader>
       <StyledMain>

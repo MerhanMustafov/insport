@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { TargetAndTransition, motion } from "framer-motion";
 import styled from "styled-components";
 import AppLogo from "@/components/shared/AppLogo";
 import { SOCCER } from "@/router/pathConsts";
@@ -30,9 +31,12 @@ const StyledLinkWrapper = styled.li`
   padding: 5px 10px;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(motion(Link))`
   color: inherit;
+  margin: 0 10px;
 `;
+
+const linkesAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 1.3 } };
 
 export default function AppNavigation() {
   return (
@@ -40,7 +44,12 @@ export default function AppNavigation() {
       <AppLogo />
       <StyledUL>
         <StyledLinkWrapper>
-          <StyledLink to={SOCCER}>Soccer</StyledLink>
+          <StyledLink animate={linkesAnimationConfig} to={SOCCER}>
+            Soccer
+          </StyledLink>
+          <StyledLink animate={linkesAnimationConfig} to="threejs">
+            Three
+          </StyledLink>
         </StyledLinkWrapper>
       </StyledUL>
     </StyledNav>

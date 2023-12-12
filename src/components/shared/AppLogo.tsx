@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { TargetAndTransition, motion } from "framer-motion";
 import styled from "styled-components";
 import { LANDING } from "@/router/pathConsts";
 
@@ -38,8 +39,10 @@ export default function AppLogo() {
     navigate(LANDING);
   };
 
+  const logoAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 1 } };
+
   return (
-    <StyledLogoWrapper onClick={onLogoClick}>
+    <StyledLogoWrapper as={motion.div} animate={logoAnimationConfig} onClick={onLogoClick}>
       <StyledIN>In</StyledIN>
       <StyledSPORT>Sport</StyledSPORT>
     </StyledLogoWrapper>
