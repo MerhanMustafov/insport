@@ -1,3 +1,4 @@
+import { TargetAndTransition, motion } from "framer-motion";
 import styled from "styled-components";
 import CountriesAndLeagues from "@/sections/CountriesAndLeagues";
 import DateSpecificMatchView from "@/sections/DateSpecificMatchView";
@@ -26,13 +27,23 @@ const StyledMain = styled.div`
 `;
 
 export default function LandingPage() {
+  const sideAnimationConfig: TargetAndTransition = {
+    opacity: [0, 1],
+    overflow: ["hidden", "visible"],
+    transition: { delay: 1.3, ease: "easeIn", duration: 1 }
+  };
+  const mainAnimationConfig: TargetAndTransition = {
+    opacity: [0, 1],
+    overflow: ["hidden", "visible"],
+    transition: { delay: 2.3, ease: "easeIn", duration: 1 }
+  };
   return (
     <StyledLandingPage>
       <StyledLandingPageContent>
-        <StyledSide>
+        <StyledSide as={motion.div} animate={sideAnimationConfig}>
           <CountriesAndLeagues />
         </StyledSide>
-        <StyledMain>
+        <StyledMain as={motion.div} animate={mainAnimationConfig}>
           <DateSpecificMatchView />
         </StyledMain>
       </StyledLandingPageContent>

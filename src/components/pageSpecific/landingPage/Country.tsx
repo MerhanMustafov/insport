@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import Image from "@/components/shared/Image";
 
@@ -36,7 +37,12 @@ export default function Country({ name, flag, handleCountryClick }: CountryProps
   };
 
   return (
-    <StyledCountry onClick={handleClick}>
+    <StyledCountry
+      onClick={handleClick}
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1, transition: { delay: 0.1 } }}
+    >
       <StyledCountryName>{name}</StyledCountryName>
       <Image image={flag} />
     </StyledCountry>

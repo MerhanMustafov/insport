@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { TargetAndTransition, motion } from "framer-motion";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { useGetFixturesByDateQuery } from "@/global/redux/rtkq/fixtures";
@@ -70,7 +71,12 @@ export default function DateSpecificMatchView() {
         Object.values(fixturesData).map((leagueData) => {
           return Object.values(leagueData).map(({ leagueInfo, leagueData }) => {
             return (
-              <StyledLeagueFixturesWrapper key={leagueInfo.id}>
+              <StyledLeagueFixturesWrapper
+                key={leagueInfo.id}
+                as={motion.nav}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1, transition: { delay: 0.1 } }}
+              >
                 <LeagueInfoFixtureHead
                   leagueId={leagueInfo.id}
                   countryName={leagueInfo.country}
