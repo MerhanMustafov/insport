@@ -39,7 +39,7 @@ export default function AppLogo() {
     navigate(LANDING);
   };
 
-  const logoAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 1 } };
+  const logoAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 0.2 } };
 
   return (
     <StyledLogoWrapper as={motion.div} animate={logoAnimationConfig} onClick={onLogoClick}>

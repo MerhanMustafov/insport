@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { TargetAndTransition, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { useGetFixturesByDateQuery } from "@/global/redux/rtkq/fixtures";

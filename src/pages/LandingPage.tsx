@@ -30,12 +30,12 @@ export default function LandingPage() {
   const sideAnimationConfig: TargetAndTransition = {
     opacity: [0, 1],
     overflow: ["hidden", "visible"],
-    transition: { delay: 1.3, ease: "easeIn", duration: 1 }
+    transition: { delay: 0.3, ease: "easeIn" }
   };
   const mainAnimationConfig: TargetAndTransition = {
     opacity: [0, 1],
     overflow: ["hidden", "visible"],
-    transition: { delay: 2.3, ease: "easeIn", duration: 1 }
+    transition: { delay: 0.4, ease: "easeIn" }
   };
   return (
     <StyledLandingPage>

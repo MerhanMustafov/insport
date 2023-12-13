@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "@/pages/LandingPage";
 import LeagueInfoPage from "@/pages/LeagueInfoPage";
-import ThreeJSDemo from "@/pages/ThreeJSDemo";
 import { LANDING, LEAGUES, SOCCER } from "@/router/pathConsts";
 
 export default function AppRoutes() {
@@ -11,7 +10,6 @@ export default function AppRoutes() {
       <Route path={SOCCER} element={<LandingPage />} />
       <Route path={`${SOCCER}/:date`} element={<LandingPage />} />
       <Route path={`${LEAGUES}/:leagueId`} element={<LeagueInfoPage />} />
-      <Route path="/threejs" element={<ThreeJSDemo />} />
     </Routes>
   );
 }

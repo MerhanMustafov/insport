@@ -36,7 +36,7 @@ const StyledLink = styled(motion(Link))`
   margin: 0 10px;
 `;
 
-const linkesAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 1.3 } };
+const linkesAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 0.1 } };
 
 export default function AppNavigation() {
   return (
@@ -46,9 +46,6 @@ export default function AppNavigation() {
         <StyledLinkWrapper>
           <StyledLink animate={linkesAnimationConfig} to={SOCCER}>
             Soccer
-          </StyledLink>
-          <StyledLink animate={linkesAnimationConfig} to="threejs">
-            Three
           </StyledLink>
         </StyledLinkWrapper>
       </StyledUL>
