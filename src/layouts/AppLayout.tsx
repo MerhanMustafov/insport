@@ -8,12 +8,13 @@ interface AppLayoutProps {
 const StyledLayout = styled.div`
   display: grid;
   flex-direction: column;
-  grid-template-columns: 1fr;
-  grid-template-rows: max-content 1fr;
+  grid-template-columns: 10px 1fr 10px;
+  grid-template-rows: max-content 15px 1fr;
   grid-template-areas:
-    "APP_HEADER"
-    "APP_MAIN";
-  height: 100vh;
+    "APP_HEADER APP_HEADER APP_HEADER"
+    ". . ."
+    ". APP_MAIN .";
+  min-height: 100vh;
 `;
 
 const StyledHeader = styled.div`
@@ -35,7 +36,6 @@ const StyledMain = styled.div`
 const StyledContent = styled.div`
   width: 100%;
   max-width: 1900px;
-  padding: 5px 10px;
 `;
 
 export default function AppLayout({ children }: AppLayoutProps) {

@@ -18,6 +18,41 @@ interface LeaguesReturnType {
   numberOfLeagues: number;
 }
 
+interface LeagueStandingReturnType {
+  leagueData: {
+    id: number;
+    country: string;
+    flag: string;
+    logo: string;
+    name: string;
+    season: number;
+  };
+  standing: {
+    rank: number;
+    team: {
+      id: number;
+      name: string;
+      logo: string;
+    };
+    points: number;
+    group: string;
+    form: string;
+    status: string;
+    description: string;
+    goalsDiff: number;
+    all: StandingMatchStats;
+    away: StandingMatchStats;
+    home: StandingMatchStats;
+  }[];
+}
+
+interface StandingMatchStats {
+  draw: number;
+  lose: number;
+  played: number;
+  win: number;
+  goals: { for: number; against: number };
+}
 // NOTE: Think for how log will you cache the data
 export const leaguesApiSlice = createApi({
   reducerPath: "leaguesApi",
@@ -27,9 +62,14 @@ export const leaguesApiSlice = createApi({
     getLeaguesByCountryName: build.query<LeaguesReturnType, string>({
       query: (countryName: string) => `/leagues/${countryName}`
     }),
-    getLeagueInfoById: build.query<any, string>({
+    getLeagueStanding: build.query<LeagueStandingReturnType, { leagueId: number; season: number }>({
       // league info and league standing data
-      query: (leagueId) => `/singleLeague/${leagueId}`
+      query: (args) => {
+        const { leagueId, season } = args;
+        return {
+          url: `/standing/${leagueId}/${season}`
+        };
+      }
     })
   })
 });
@@ -37,5 +77,5 @@ export const leaguesApiSlice = createApi({
 export const {
   useGetLeaguesByCountryNameQuery,
   useLazyGetLeaguesByCountryNameQuery,
-  useGetLeagueInfoByIdQuery
+  useGetLeagueStandingQuery
 } = leaguesApiSlice;
