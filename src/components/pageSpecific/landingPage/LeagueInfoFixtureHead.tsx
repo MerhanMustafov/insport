@@ -49,15 +49,15 @@ interface LeagueInfoFixtureHeadProps {
 }
 
 export default function LeagueInfoFixtureHead({
-  leagueId,
+  // leagueId,
   countryName,
   leagueName,
-  leagueLogo
+  // leagueLogo
 }: LeagueInfoFixtureHeadProps) {
   return (
     <StyledBlockHeaderWrapper>
       <StyledLeftWrapper>
-        <Image image={leagueLogo} width="30px" height="33px" altText="logo" />
+        {/* <Image image={leagueLogo} width="30px" height="33px" altText="logo" /> */}
         <StyledLeagueCountryTextWrapper>
           <StyledLeagueName>{leagueName}</StyledLeagueName>
           <StyledCountryName>{countryName}</StyledCountryName>

@@ -59,7 +59,7 @@ interface SingleFixtureProps {
 }
 
 export default function SingleFixture({
-  fixtureId,
+  // fixtureId,
   status,
   teams: {
     home: { name: homeName, logo: homeLogo },
@@ -73,13 +73,13 @@ export default function SingleFixture({
       <StyledTeamsWrapper>
         <StyledTeamWrapper>
           <StyldResult>{homeGoals}</StyldResult>
-          <Image image={homeLogo} width="24px" height="24px" altText="logo" />
+          {/* <Image image={homeLogo} width="24px" height="24px" altText="logo" /> */}
           <StyledTeamName>{homeName}</StyledTeamName>
         </StyledTeamWrapper>
 
         <StyledTeamWrapper>
           <StyldResult>{awayGoals}</StyldResult>
-          <Image image={awayLogo} width="23px" height="20px" altText="logo" />
+          {/* <Image image={awayLogo} width="23px" height="20px" altText="logo" /> */}
           <StyledTeamName>{awayName}</StyledTeamName>
         </StyledTeamWrapper>
       </StyledTeamsWrapper>
