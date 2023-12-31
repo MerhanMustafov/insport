@@ -27,31 +27,21 @@ interface LeagueStandingReturnType {
     name: string;
     season: number;
   };
-  standing: {
-    rank: number;
-    team: {
-      id: number;
-      name: string;
-      logo: string;
-    };
-    points: number;
-    group: string;
-    form: string;
-    status: string;
-    description: string;
-    goalsDiff: number;
-    all: StandingMatchStats;
-    away: StandingMatchStats;
-    home: StandingMatchStats;
-  }[];
+  standing: StandingKeys[];
 }
 
-interface StandingMatchStats {
-  draw: number;
-  lose: number;
-  played: number;
-  win: number;
-  goals: { for: number; against: number };
+export interface StandingKeys {
+  teamId: number, 
+  '#' : number,
+  Team: string,
+  PTS: number,
+  P: number,
+  W: number,
+  D: number,
+  L: number,
+  GF: number,
+  GA: number,
+  GD: number,
 }
 // NOTE: Think for how log will you cache the data
 export const leaguesApiSlice = createApi({
