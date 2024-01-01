@@ -9,7 +9,7 @@ export default function AppRoutes() {
       <Route path={LANDING} element={<LandingPage />} />
       <Route path={SOCCER} element={<LandingPage />} />
       <Route path={`${SOCCER}/:date`} element={<LandingPage />} />
-      <Route path={`${LEAGUES}/:leagueId`} element={<LeagueInfoPage />} />
+      <Route path={`${LEAGUES}/:leagueId/:section`} element={<LeagueInfoPage />} />
     </Routes>
   );
 }

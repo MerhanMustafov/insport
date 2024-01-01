@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { LEAGUES } from "@/router/pathConsts";
+
 // import Image from "@/components/shared/Image";
 
 interface LeagueProps {
@@ -33,7 +34,7 @@ const StyledLeagueName = styled.div`
 
 export default function League({ id, name, logo, handleLeagueClick }: LeagueProps) {
   const handleClick = () => {
-    const path = `${LEAGUES}/${id}`;
+    const path = `${LEAGUES}/${id}/table`;
     handleLeagueClick(path);
   };
 
