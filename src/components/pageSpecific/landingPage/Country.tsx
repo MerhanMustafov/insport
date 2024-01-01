@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+
 // import Image from "@/components/shared/Image";
 
 interface CountryProps {
@@ -14,14 +15,15 @@ const StyledCountry = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1px 5px;
+  padding: 2px 10px;
   gap: 10px;
   max-width: 150px;
   min-width: 110px;
   cursor: pointer;
   &:hover {
     box-shadow: #000000 0px 0px 10px -2px;
-    scale: 0.95;
+    scale: 0.97;
+    border-radius: 10px;
   }
 `;
 

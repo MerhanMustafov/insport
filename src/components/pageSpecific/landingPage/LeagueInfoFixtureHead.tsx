@@ -1,6 +1,8 @@
 import { TfiAngleRight } from "react-icons/tfi";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Image from "@/components/shared/Image";
+import { LEAGUES } from "@/router/pathConsts";
 
 const StyledBlockHeaderWrapper = styled.div`
   display: flex;
@@ -11,6 +13,10 @@ const StyledBlockHeaderWrapper = styled.div`
   border-radius: 10px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
     sans-serif;
+  cursor: pointer;
+  &:hover {
+    background-color: #f1f1f1;
+  }
 `;
 
 const StyledLeagueName = styled.span`
@@ -49,13 +55,17 @@ interface LeagueInfoFixtureHeadProps {
 }
 
 export default function LeagueInfoFixtureHead({
-  // leagueId,
+  leagueId,
   countryName,
-  leagueName,
-  // leagueLogo
+  leagueName // leagueLogo
 }: LeagueInfoFixtureHeadProps) {
+  const navigate = useNavigate();
+
+  const onLeagueInfoClick = () => {
+    navigate(`${LEAGUES}/${leagueId}/table`);
+  };
   return (
-    <StyledBlockHeaderWrapper>
+    <StyledBlockHeaderWrapper onClick={onLeagueInfoClick}>
       <StyledLeftWrapper>
         {/* <Image image={leagueLogo} width="30px" height="33px" altText="logo" /> */}
         <StyledLeagueCountryTextWrapper>

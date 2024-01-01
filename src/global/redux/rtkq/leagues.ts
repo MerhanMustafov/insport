@@ -31,17 +31,87 @@ interface LeagueStandingReturnType {
 }
 
 export interface StandingKeys {
-  teamId: number, 
-  '#' : number,
-  Team: string,
-  PTS: number,
-  P: number,
-  W: number,
-  D: number,
-  L: number,
-  GF: number,
-  GA: number,
-  GD: number,
+  teamId: number;
+  "#": number;
+  Team: string;
+  PTS: number;
+  P: number;
+  W: number;
+  D: number;
+  L: number;
+  GF: number;
+  GA: number;
+  GD: number;
+}
+
+interface IFixture {
+  fixture: {
+    id: number;
+    referee: string | null;
+    timezone: string;
+    date: Date;
+    timestamp: number;
+    periods: {
+      first: number | null;
+      second: number | null;
+    };
+    venue: {
+      id: number | null;
+      name: string | null;
+      city: string | null;
+    };
+    status: {
+      long: string;
+      short: string;
+      elapsed: number | null;
+    };
+  };
+  league: ILeague;
+  teams: {
+    home: {
+      id: number;
+      name: string;
+      logo: string;
+      winner: true;
+    };
+    away: {
+      id: number;
+      name: string;
+      logo: string;
+      winner: false;
+    };
+  };
+  goals: {
+    home: number | null;
+    away: number | null;
+  };
+  score: {
+    halftime: {
+      home: number | null;
+      away: number | null;
+    };
+    fulltime: {
+      home: number | null;
+      away: number | null;
+    };
+    extratime: {
+      home: number | null;
+      away: number | null;
+    };
+    penalty: {
+      home: number | null;
+      away: number | null;
+    };
+  };
+}
+interface ILeague {
+  id: number;
+  name: string;
+  country: string;
+  logo: string;
+  flag: string;
+  season: 2023;
+  round: string;
 }
 // NOTE: Think for how log will you cache the data
 export const leaguesApiSlice = createApi({
@@ -60,6 +130,18 @@ export const leaguesApiSlice = createApi({
           url: `/standing/${leagueId}/${season}`
         };
       }
+    }),
+    getLeagueFixturesByStatus: build.query<
+      IFixture[],
+      { leagueId: number; season: number; status: string }
+    >({
+      query: (args) => {
+        const { leagueId, season, status } = args;
+
+        return {
+          url: `/fixtures/${leagueId}/${season}/${status}`
+        };
+      }
     })
   })
 });
@@ -67,5 +149,6 @@ export const leaguesApiSlice = createApi({
 export const {
   useGetLeaguesByCountryNameQuery,
   useLazyGetLeaguesByCountryNameQuery,
-  useGetLeagueStandingQuery
+  useGetLeagueStandingQuery,
+  useGetLeagueFixturesByStatusQuery
 } = leaguesApiSlice;
