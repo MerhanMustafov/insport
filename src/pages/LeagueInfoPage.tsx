@@ -32,7 +32,7 @@ const StyledBackWrapper = styled.div`
 
 const statusLookup = {
   upcoming: "NS",
-  live: "LIVE",
+  live: "LIVE-1H-2H-HT-ET-BT-P-INT",
   finished: "FT"
 };
 export default function LeagueInfoPage() {

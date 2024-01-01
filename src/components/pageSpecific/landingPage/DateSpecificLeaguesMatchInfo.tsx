@@ -85,12 +85,20 @@ export default function DateSpecificMatchView() {
                 />
                 <StyledFixtureWrapper>
                   {leagueData.map((leaguFuxtureData) => {
+                    const matchDate = new Date(leaguFuxtureData.fixture.date);
+                    const matchTime = `${matchDate.getUTCHours()}:${
+                      matchDate.getUTCMinutes() < 10
+                        ? `0${matchDate.getUTCMinutes()}`
+                        : matchDate.getUTCMinutes()
+                    }`;
+
                     return (
                       <SingleFixture
                         key={leaguFuxtureData.fixture.id}
                         fixtureId={leaguFuxtureData.fixture.id}
                         teams={leaguFuxtureData.teams}
-                        status={leaguFuxtureData.fixture.status.short}
+                        status={leaguFuxtureData.fixture.status}
+                        matchTime={matchTime}
                         goals={leaguFuxtureData.goals}
                       />
                     );

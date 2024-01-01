@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { INSPORT_FOOTBALL_BASE_URL } from "@/global/constants/app.constants";
+import { IFixtureStatus } from "@/types/fixtureStatus.type";
 
 interface LeaguesReturnType {
   data: {
@@ -60,11 +61,7 @@ interface IFixture {
       name: string | null;
       city: string | null;
     };
-    status: {
-      long: string;
-      short: string;
-      elapsed: number | null;
-    };
+    status: IFixtureStatus;
   };
   league: ILeague;
   teams: {

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "@/components/shared/Image";
+import { IFixtureStatus } from "@/types/fixtureStatus.type";
 
 const StyledSingleFixture = styled.div`
   display: grid;
@@ -14,6 +15,9 @@ const StyledSingleFixture = styled.div`
 
 const StyledStatus = styled.span`
   font-size: 1.6rem;
+  &.status-live {
+    color: #ff0040;
+  }
 `;
 
 const StyledTeamsWrapper = styled.div`
@@ -40,7 +44,8 @@ const StyldResult = styled.span`
 `;
 
 interface SingleFixtureProps {
-  status: string;
+  status: IFixtureStatus;
+  matchTime: string;
   teams: {
     home: {
       name: string;
@@ -61,15 +66,24 @@ interface SingleFixtureProps {
 export default function SingleFixture({
   // fixtureId,
   status,
+  matchTime,
   teams: {
     home: { name: homeName, logo: homeLogo },
     away: { name: awayName, logo: awayLogo }
   },
   goals: { home: homeGoals, away: awayGoals }
 }: SingleFixtureProps) {
+  function getMatchStatus(status: IFixtureStatus) {
+    if (status.short === "NS") return matchTime;
+    if (status.short === "HT") return "HT";
+    if (status.short === "FT") return "FT";
+    if (status.elapsed) return `${status.elapsed}'`;
+  }
+  const matchStatus = getMatchStatus(status);
+  const isLive = status.elapsed && status.short !== "NS" && status.short !== "FT";
   return (
     <StyledSingleFixture>
-      <StyledStatus>{status}</StyledStatus>
+      <StyledStatus className={isLive ? "status-live" : ""}>{matchStatus}</StyledStatus>
       <StyledTeamsWrapper>
         <StyledTeamWrapper>
           <StyldResult>{homeGoals}</StyldResult>

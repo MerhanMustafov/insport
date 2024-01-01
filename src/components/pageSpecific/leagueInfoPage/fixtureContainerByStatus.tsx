@@ -28,6 +28,7 @@ export default function FixtureContainerByStatus({
     season: todayYear,
     status: status
   });
+
   if (leagueDataByStatusLoading) return <div>Loading...</div>;
   if (leagueDataByStatusError) return <div>Error...</div>;
   if (leagueDataByStatus?.length === 0) return <NoMatchesAvailable />;
@@ -35,13 +36,21 @@ export default function FixtureContainerByStatus({
   return (
     <StyledFixtureWrapper>
       {leagueDataByStatus?.map((leaguFuxtureData) => {
+        const matchDate = new Date(leaguFuxtureData.fixture.date);
+        const matchTime = `${matchDate.getUTCHours()}:${
+          matchDate.getUTCMinutes() < 10
+            ? `0${matchDate.getUTCMinutes()}`
+            : matchDate.getUTCMinutes()
+        }`;
+
         return (
           <SingleFixture
             key={leaguFuxtureData.fixture.id}
             fixtureId={leaguFuxtureData.fixture.id}
             teams={leaguFuxtureData.teams}
-            status={leaguFuxtureData.fixture.status.short}
+            status={leaguFuxtureData.fixture.status}
             goals={leaguFuxtureData.goals}
+            matchTime={matchTime}
           />
         );
       })}
