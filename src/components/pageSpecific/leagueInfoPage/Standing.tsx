@@ -37,7 +37,7 @@ export default function Standing() {
     isLoading: standingLoading
   } = useGetLeagueStandingQuery({
     leagueId: Number(leagueId),
-    season: new Date().getFullYear() - 1
+    season: new Date().getFullYear()
   });
 
   if (standingLoading) return <div>Loading...</div>;
