@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useNavigationLeagueInfoLink } from "@/global/hooks/useNavigationLEagueInfoLink";
+import { useNavigationLeagueInfoLink } from "@/global/hooks/useNavigationLeagueInfoLink";
 import { LEAGUES } from "@/router/pathConsts";
 
 const StyledNav = styled.nav`
