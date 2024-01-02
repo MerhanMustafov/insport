@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import withScreenSize from "@/global/hoc/withScreenSize";
 import { useAppDispatch } from "@/global/redux/reduxHooks";
-import { toggleCountriesAndLeaguesOpen } from "@/global/redux/slices/toggle.slice";
+import { closeCountriesAndLeaguesOpen } from "@/global/redux/slices/toggle.slice";
 import { LEAGUES } from "@/router/pathConsts";
 
 // import Image from "@/components/shared/Image";
@@ -10,6 +11,7 @@ interface LeagueProps {
   name: string;
   logo: string;
   handleLeagueClick: (path: string) => void;
+  isMobile?: boolean;
 }
 
 const StyledLeague = styled.div`
@@ -35,12 +37,14 @@ const StyledLeagueName = styled.div`
   letter-spacing: 0.05rem;
 `;
 
-export default function League({ id, name, logo, handleLeagueClick }: LeagueProps) {
+function League({ id, name, logo, handleLeagueClick, isMobile }: LeagueProps) {
   const dispatch = useAppDispatch();
   const handleClick = () => {
     const path = `${LEAGUES}/${id}/table`;
     handleLeagueClick(path);
-    dispatch(toggleCountriesAndLeaguesOpen());
+    if (isMobile) {
+      dispatch(closeCountriesAndLeaguesOpen());
+    }
   };
 
   return (
@@ -50,3 +54,5 @@ export default function League({ id, name, logo, handleLeagueClick }: LeagueProp
     </StyledLeague>
   );
 }
+
+export default withScreenSize(League);
