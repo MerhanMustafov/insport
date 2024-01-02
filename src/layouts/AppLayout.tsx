@@ -1,8 +1,18 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import withScreenSize from "@/global/hoc/withScreenSize";
+import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
+import {
+  closeCountriesAndLeaguesOpen,
+  toggleCountriesAndLeaguesOpen
+} from "@/global/redux/slices/toggle.slice";
 import AppNavigation from "@/components/shared/AppNavigation";
+import ClickAwayBackGroundContainer from "@/components/shared/ClickAwayBackGroundContainer";
+import CountriesAndLeagues from "@/sections/CountriesAndLeagues";
 
 interface AppLayoutProps {
   children: React.ReactElement;
+  isMobile?: boolean;
 }
 
 const StyledLayout = styled.div`
@@ -15,8 +25,28 @@ const StyledLayout = styled.div`
     ". . ."
     ". APP_MAIN .";
   min-height: 100vh;
+  position: relative;
 `;
 
+const StyledBurgerMenu = styled.div`
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 200px;
+  background: white;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #d0d0d0;
+  }
+`;
 const StyledHeader = styled.div`
   grid-area: APP_HEADER;
   background: #001e28;
@@ -38,9 +68,29 @@ const StyledContent = styled.div`
   max-width: 1900px;
 `;
 
-export default function AppLayout({ children }: AppLayoutProps) {
+function AppLayout({ children, isMobile }: AppLayoutProps) {
+  const { isCountriesAndLeaguesOpen } = useAppSelector((state) => state.toggle.burgerMenu);
+  const dispatch = useAppDispatch();
+  const handleBurgerMenuClick = () => {
+    dispatch(toggleCountriesAndLeaguesOpen());
+  };
+
+  useEffect(() => {
+    if (!isMobile) {
+      dispatch(closeCountriesAndLeaguesOpen());
+    }
+  }, [isMobile]);
+
   return (
     <StyledLayout>
+      {isCountriesAndLeaguesOpen && (
+        <>
+          <ClickAwayBackGroundContainer onClick={handleBurgerMenuClick} />
+          <StyledBurgerMenu>
+            <CountriesAndLeagues />
+          </StyledBurgerMenu>
+        </>
+      )}
       <StyledHeader>
         <AppNavigation />
       </StyledHeader>
@@ -50,3 +100,5 @@ export default function AppLayout({ children }: AppLayoutProps) {
     </StyledLayout>
   );
 }
+
+export default withScreenSize(AppLayout);

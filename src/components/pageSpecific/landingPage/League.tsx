@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useAppDispatch } from "@/global/redux/reduxHooks";
+import { toggleCountriesAndLeaguesOpen } from "@/global/redux/slices/toggle.slice";
 import { LEAGUES } from "@/router/pathConsts";
 
 // import Image from "@/components/shared/Image";
@@ -34,9 +36,11 @@ const StyledLeagueName = styled.div`
 `;
 
 export default function League({ id, name, logo, handleLeagueClick }: LeagueProps) {
+  const dispatch = useAppDispatch();
   const handleClick = () => {
     const path = `${LEAGUES}/${id}/table`;
     handleLeagueClick(path);
+    dispatch(toggleCountriesAndLeaguesOpen());
   };
 
   return (
