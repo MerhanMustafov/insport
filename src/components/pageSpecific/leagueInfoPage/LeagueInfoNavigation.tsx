@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+import withScreenSize from "@/global/hoc/withScreenSize";
 import { useNavigationLeagueInfoLink } from "@/global/hooks/useNavigationLeagueInfoLink";
 import { LEAGUES } from "@/router/pathConsts";
 
@@ -17,8 +18,8 @@ const StyledUl = styled.ul`
   gap: 2rem;
 `;
 
-const StyledNavLink = styled(Link)`
-  font-size: 1.4rem;
+const StyledNavLink = styled(Link)<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 1 : 1.4)}rem;
   color: black;
   text-decoration: none;
   &.finished {
@@ -35,26 +36,44 @@ const StyledNavLink = styled(Link)`
   }
 `;
 
-export default function LeagueInfoNavigation() {
+function LeagueInfoNavigation({ isMobile }: { isMobile?: boolean }) {
   const { leagueId, section } = useParams<{ leagueId: string; section: string }>();
   const activeLink = useNavigationLeagueInfoLink({ section });
 
   return (
     <StyledNav>
       <StyledUl>
-        <StyledNavLink to={`${LEAGUES}/${leagueId}/finished`} className={activeLink.finished.cl}>
+        <StyledNavLink
+          $isMobile={isMobile}
+          to={`${LEAGUES}/${leagueId}/finished`}
+          className={activeLink.finished.cl}
+        >
           Finished
         </StyledNavLink>
-        <StyledNavLink to={`${LEAGUES}/${leagueId}/live`} className={activeLink.live.cl}>
+        <StyledNavLink
+          $isMobile={isMobile}
+          to={`${LEAGUES}/${leagueId}/live`}
+          className={activeLink.live.cl}
+        >
           Live
         </StyledNavLink>
-        <StyledNavLink to={`${LEAGUES}/${leagueId}/upcoming`} className={activeLink.upcoming.cl}>
+        <StyledNavLink
+          $isMobile={isMobile}
+          to={`${LEAGUES}/${leagueId}/upcoming`}
+          className={activeLink.upcoming.cl}
+        >
           Upcoming
         </StyledNavLink>
-        <StyledNavLink to={`${LEAGUES}/${leagueId}/table`} className={activeLink.table.cl}>
+        <StyledNavLink
+          $isMobile={isMobile}
+          to={`${LEAGUES}/${leagueId}/table`}
+          className={activeLink.table.cl}
+        >
           Table
         </StyledNavLink>
       </StyledUl>
     </StyledNav>
   );
 }
+
+export default withScreenSize(LeagueInfoNavigation);

@@ -7,7 +7,6 @@ const StyledWrapper = styled.nav`
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
-  padding: 0px 20px 0 0;
 `;
 
 export default function DateSpecificMatchView() {

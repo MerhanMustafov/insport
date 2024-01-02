@@ -11,7 +11,7 @@ const StyledLandingPageContent = styled("div")<{ $isMobile?: boolean }>`
   grid-template-columns: max-content 1fr;
   grid-template-rows: auto;
   grid-template-areas: "LANDING_PAGE_SIDE LANDING_PAGE_MAIN";
-  gap: ${(props) => (props.$isMobile ? 0 : 5)}rem;
+  gap: ${(props) => (props.$isMobile ? 0 : 2)}rem;
 `;
 const StyledSide = styled.div`
   grid-area: LANDING_PAGE_SIDE;

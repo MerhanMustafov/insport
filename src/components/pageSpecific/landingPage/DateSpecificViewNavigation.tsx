@@ -1,6 +1,7 @@
 import { RxCalendar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import withScreenSize from "@/global/hoc/withScreenSize";
 import { useNavigationDayActiveLink } from "@/global/hooks/useNavigationDayActiveLink";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { toggleCalendar } from "@/global/redux/slices/toggle.slice";
@@ -20,17 +21,17 @@ const StyledUl = styled.ul`
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  gap: 2rem;
+  gap: 1.4rem;
 `;
 
-const StyledNavText = styled.span`
-  font-size: 1.4rem;
+const StyledNavText = styled.span<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 1 : 1.4)}rem;
   &.other {
     border-bottom: 2px solid #ff0040;
   }
 `;
-const StyledNavLink = styled(Link)`
-  font-size: 1.4rem;
+const StyledNavLink = styled(Link)<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 1 : 1.4)}rem;
   color: black;
   text-decoration: none;
   &.today {
@@ -47,9 +48,9 @@ const StyledCalendarContainer = styled.div`
   position: relative;
 `;
 
-const StyledCalendarIcon = styled(RxCalendar)`
+const StyledCalendarIcon = styled(RxCalendar)<{ $isMobile?: boolean }>`
   cursor: pointer;
-  font-size: 2.5rem;
+  font-size: ${(props) => (props.$isMobile ? 1.4 : 1.6)}rem;
   color: #001e28;
 `;
 
@@ -61,7 +62,7 @@ const StyledCalendarWrapper = styled.div`
   border-radius: 1rem;
 `;
 
-export default function DateSpecificViewNavigation() {
+function DateSpecificViewNavigation({ isMobile }: { isMobile?: boolean }) {
   const dispatch = useAppDispatch();
   const selectedDayStatus = useNavigationDayActiveLink();
   const { isCalendarOpen } = useAppSelector((state) => state.toggle.calendar);
@@ -88,7 +89,7 @@ export default function DateSpecificViewNavigation() {
     <StyledNav>
       <StyledUl>
         <StyledCalendarContainer>
-          <StyledCalendarIcon onClick={handleCalendarToggle} />
+          <StyledCalendarIcon $isMobile={isMobile} onClick={handleCalendarToggle} />
           {isCalendarOpen && (
             <>
               <ClickAwayBackGroundContainer
@@ -100,22 +101,33 @@ export default function DateSpecificViewNavigation() {
             </>
           )}
         </StyledCalendarContainer>
-        <StyledNavText className={selectedDayStatus.other.cl}>
+        <StyledNavText $isMobile={isMobile} className={selectedDayStatus.other.cl}>
           {_currentlySelectedDate}
         </StyledNavText>
         <StyledNavLink
+          $isMobile={isMobile}
           className={selectedDayStatus.yesterday.cl}
           to={`${SOCCER}/${_yesterdayDate}`}
         >
           Yesterday
         </StyledNavLink>
-        <StyledNavLink className={selectedDayStatus.today.cl} to={`${SOCCER}/${_todayDate}`}>
+        <StyledNavLink
+          $isMobile={isMobile}
+          className={selectedDayStatus.today.cl}
+          to={`${SOCCER}/${_todayDate}`}
+        >
           Today
         </StyledNavLink>
-        <StyledNavLink className={selectedDayStatus.tomorrow.cl} to={`${SOCCER}/${_tomorrowDate}`}>
+        <StyledNavLink
+          $isMobile={isMobile}
+          className={selectedDayStatus.tomorrow.cl}
+          to={`${SOCCER}/${_tomorrowDate}`}
+        >
           Tomorrow
         </StyledNavLink>
       </StyledUl>
     </StyledNav>
   );
 }
+
+export default withScreenSize(DateSpecificViewNavigation);

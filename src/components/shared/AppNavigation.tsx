@@ -8,11 +8,11 @@ import { toggleCountriesAndLeaguesOpen } from "@/global/redux/slices/toggle.slic
 import AppLogo from "@/components/shared/AppLogo";
 import { SOCCER } from "@/router/pathConsts";
 
-const StyledNav = styled.nav`
+const StyledNav = styled.nav<{ $isMobile?: boolean }>`
   display: grid;
   flex-direction: row;
   align-items: center;
-  grid-template-columns: max-content 10px max-content auto max-content;
+  grid-template-columns: max-content ${(props) => (props.$isMobile ? 3 : 10)}px max-content auto max-content;
   grid-template-rows: auto;
   grid-template-areas: "APP_NAV_LOGO . APP_NAV_MENU . APP_NAV_LINKS";
   width: 100%;
@@ -20,8 +20,7 @@ const StyledNav = styled.nav`
   background: transparent;
 
   color: #fff;
-  padding: 15px 20px;
-  font-size: 2rem;
+  padding: ${(props) => (props.$isMobile ? "5px 10px" : "10px 20px")};
 `;
 
 const StyledUL = styled.ul`
@@ -35,14 +34,17 @@ const StyledLinkWrapper = styled.li`
   padding: 5px 10px;
 `;
 
-const StyledLink = styled(motion(Link))`
+const StyledLink = styled(motion(Link))<{ $isMobile?: boolean }>`
   color: inherit;
   margin: 0 10px;
+  font-size: ${(props) => (props.$isMobile ? 1.4 : 2)}rem;
 `;
 
-const StyledBurderMenuWrapper = styled(motion.div)`
+const StyledBurderMenuWrapper = styled(motion.div)<{ $isMobile?: boolean }>`
   grid-area: APP_NAV_MENU;
-  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  font-size: ${(props) => (props.$isMobile ? 1.4 : 2.5)}rem;
   cursor: pointer;
 `;
 
@@ -59,19 +61,25 @@ function AppNavigation({ isMobile }: { isMobile?: boolean }) {
   };
 
   return (
-    <StyledNav>
+    <StyledNav $isMobile={isMobile}>
       <AppLogo />
       {showBurgerMenu && (
-        <StyledBurderMenuWrapper animate={linkesAnimationConfig} onClick={handleBurgerMenuClick}>
+        <StyledBurderMenuWrapper
+          $isMobile={isMobile}
+          animate={linkesAnimationConfig}
+          onClick={handleBurgerMenuClick}
+        >
           <RiMenuUnfoldLine />
         </StyledBurderMenuWrapper>
       )}
 
       <StyledUL>
         <StyledLinkWrapper>
-          <StyledLink animate={linkesAnimationConfig} to={SOCCER}>
-            Soccer
-          </StyledLink>
+          {!isMobile && (
+            <StyledLink $isMobile={isMobile} animate={linkesAnimationConfig} to={SOCCER}>
+              Soccer
+            </StyledLink>
+          )}
         </StyledLinkWrapper>
       </StyledUL>
     </StyledNav>

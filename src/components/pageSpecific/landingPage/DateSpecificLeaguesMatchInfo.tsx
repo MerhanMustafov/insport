@@ -16,7 +16,7 @@ const StyledLeaguesWrapper = styled.nav`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 5rem;
+  gap: 3rem;
   width: 100%;
 `;
 

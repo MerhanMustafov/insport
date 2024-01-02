@@ -1,38 +1,50 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import withScreenSize from "@/global/hoc/withScreenSize";
 import { useAppSelector } from "@/global/redux/reduxHooks";
 import { StandingKeys, useGetLeagueStandingQuery } from "@/global/redux/rtkq/leagues";
 
 const StyledWrapper = styled.div`
-  padding: 5px 10px 5px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
 `;
 
 const StyledTable = styled.table`
-  table-layout: fixed;
+  border: 1px solid #001e28;
   border-collapse: collapse;
+  table-layout: fixed;
   width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
   position: relative;
+
+  @media screen and (max-width: 430px) {
+    display: block;
+    table-layout: auto;
+    width: 90vw;
+    overflow-x: scroll;
+    position: relative;
+  }
 `;
 
-const StyledTableHead = styled.thead`
-  font-size: 1.3rem;
+const StyledTableHead = styled.thead<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 0.8 : 1.3)}rem;
   background: #001e28;
   color: white;
   position: sticky;
   top: -1px;
 `;
 
-const StyledTableBody = styled.tbody`
-  font-size: 1.2rem;
+const StyledTableBody = styled.tbody<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 0.6 : 1.2)}rem;
 `;
 const StyledTableRow = styled.tr``;
 
 const StyledTableHeadCell = styled.th`
   text-align: left;
-  padding: 1rem 1rem;
+  padding: 1rem;
 `;
 const StyledTableBodyCell = styled.td`
   text-align: left;
@@ -40,7 +52,7 @@ const StyledTableBodyCell = styled.td`
 `;
 
 const tableCols = ["#", "Team", "P", , "W", "D", "L", "GF", "GA", "GD", "PTS"];
-export default function Standing() {
+function Standing({ isMobile }: { isMobile?: boolean }) {
   const { currentYear } = useAppSelector((state) => state.calendar);
   const { leagueId } = useParams<{ leagueId: string }>();
   const {
@@ -58,14 +70,14 @@ export default function Standing() {
   return (
     <StyledWrapper>
       <StyledTable>
-        <StyledTableHead>
+        <StyledTableHead $isMobile={isMobile}>
           <StyledTableRow>
             {tableCols.map((k) => (
               <StyledTableHeadCell key={k}>{k}</StyledTableHeadCell>
             ))}
           </StyledTableRow>
         </StyledTableHead>
-        <StyledTableBody>
+        <StyledTableBody $isMobile={isMobile}>
           {standingData?.standing?.map((data) => (
             <StyledTableRow key={data.teamId}>
               {tableCols.map((key) => (
@@ -80,3 +92,5 @@ export default function Standing() {
     </StyledWrapper>
   );
 }
+
+export default withScreenSize(Standing);

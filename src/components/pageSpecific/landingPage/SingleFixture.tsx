@@ -1,19 +1,20 @@
 import styled from "styled-components";
+import withScreenSize from "@/global/hoc/withScreenSize";
 import { IFixtureStatus } from "@/types/fixtureStatus.type";
 
 const StyledSingleFixture = styled.div`
   display: grid;
   grid-template-columns: max-content max-content;
   grid-template-rows: auto;
-  column-gap: 2rem;
+  column-gap: 1rem;
   align-items: center;
-  padding: 0.5rem 1.6rem;
+  padding: 0.5rem 1rem;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 `;
 
-const StyledStatus = styled.span`
-  font-size: 1.6rem;
+const StyledStatus = styled.span<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 1 : 1.4)}rem;
   &.status-live {
     color: #ff0040;
   }
@@ -33,12 +34,12 @@ const StyledTeamWrapper = styled.div`
   gap: 1rem;
 `;
 
-const StyledTeamName = styled.span`
-  font-size: 1.6rem;
+const StyledTeamName = styled.span<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 1 : 1.4)}rem;
 `;
 
-const StyldResult = styled.span`
-  font-size: 1.6rem;
+const StyldResult = styled.span<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 1 : 1.4)}rem;
   font-weight: bold;
 `;
 
@@ -60,9 +61,10 @@ interface SingleFixtureProps {
     away: number | null;
   };
   fixtureId: number;
+  isMobile?: boolean;
 }
 
-export default function SingleFixture({
+function SingleFixture({
   // fixtureId,
   status,
   matchTime,
@@ -70,7 +72,8 @@ export default function SingleFixture({
     home: { name: homeName },
     away: { name: awayName }
   },
-  goals: { home: homeGoals, away: awayGoals }
+  goals: { home: homeGoals, away: awayGoals },
+  isMobile
 }: SingleFixtureProps) {
   function getMatchStatus(status: IFixtureStatus) {
     if (status.short === "NS") return matchTime;
@@ -82,20 +85,24 @@ export default function SingleFixture({
   const isLive = status.elapsed && status.short !== "NS" && status.short !== "FT";
   return (
     <StyledSingleFixture>
-      <StyledStatus className={isLive ? "status-live" : ""}>{matchStatus}</StyledStatus>
+      <StyledStatus $isMobile={isMobile} className={isLive ? "status-live" : ""}>
+        {matchStatus}
+      </StyledStatus>
       <StyledTeamsWrapper>
         <StyledTeamWrapper>
-          <StyldResult>{homeGoals}</StyldResult>
+          <StyldResult $isMobile={isMobile}>{homeGoals}</StyldResult>
           {/* <Image image={homeLogo} width="24px" height="24px" altText="logo" /> */}
-          <StyledTeamName>{homeName}</StyledTeamName>
+          <StyledTeamName $isMobile={isMobile}>{homeName}</StyledTeamName>
         </StyledTeamWrapper>
 
         <StyledTeamWrapper>
-          <StyldResult>{awayGoals}</StyldResult>
+          <StyldResult $isMobile={isMobile}>{awayGoals}</StyldResult>
           {/* <Image image={awayLogo} width="23px" height="20px" altText="logo" /> */}
-          <StyledTeamName>{awayName}</StyledTeamName>
+          <StyledTeamName $isMobile={isMobile}>{awayName}</StyledTeamName>
         </StyledTeamWrapper>
       </StyledTeamsWrapper>
     </StyledSingleFixture>
   );
 }
+
+export default withScreenSize(SingleFixture);

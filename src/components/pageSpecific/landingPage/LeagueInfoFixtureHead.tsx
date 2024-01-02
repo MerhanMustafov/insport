@@ -1,6 +1,7 @@
 import { TfiAngleRight } from "react-icons/tfi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import withScreenSize from "@/global/hoc/withScreenSize";
 import { LEAGUES } from "@/router/pathConsts";
 
 const StyledBlockHeaderWrapper = styled.div`
@@ -18,12 +19,12 @@ const StyledBlockHeaderWrapper = styled.div`
   }
 `;
 
-const StyledLeagueName = styled.span`
-  font-size: 1.6rem;
+const StyledLeagueName = styled.span<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 1.2 : 1.4)}rem;
 `;
 
-const StyledCountryName = styled.span`
-  font-size: 1.2rem;
+const StyledCountryName = styled.span<{ $isMobile?: boolean }>`
+  font-size: ${(props) => (props.$isMobile ? 1 : 1.2)}rem;
 `;
 
 const StyledLeftWrapper = styled.div`
@@ -40,9 +41,9 @@ const StyledLeagueCountryTextWrapper = styled.div`
   gap: 0.5rem;
 `;
 
-const StyledArrowRight = styled(TfiAngleRight)`
+const StyledArrowRight = styled(TfiAngleRight)<{ $isMobile?: boolean }>`
   cursor: pointer;
-  font-size: 2rem;
+  font-size: ${(props) => (props.$isMobile ? 1.2 : 1.4)}rem;
   margin-right: 1rem;
 `;
 
@@ -51,12 +52,13 @@ interface LeagueInfoFixtureHeadProps {
   countryName: string;
   leagueLogo: string;
   leagueId: number;
+  isMobile?: boolean;
 }
-
-export default function LeagueInfoFixtureHead({
+function LeagueInfoFixtureHead({
   leagueId,
   countryName,
-  leagueName // leagueLogo
+  leagueName, // leagueLogo
+  isMobile
 }: LeagueInfoFixtureHeadProps) {
   const navigate = useNavigate();
 
@@ -68,8 +70,8 @@ export default function LeagueInfoFixtureHead({
       <StyledLeftWrapper>
         {/* <Image image={leagueLogo} width="30px" height="33px" altText="logo" /> */}
         <StyledLeagueCountryTextWrapper>
-          <StyledLeagueName>{leagueName}</StyledLeagueName>
-          <StyledCountryName>{countryName}</StyledCountryName>
+          <StyledLeagueName $isMobile={isMobile}>{leagueName}</StyledLeagueName>
+          <StyledCountryName $isMobile={isMobile}>{countryName}</StyledCountryName>
         </StyledLeagueCountryTextWrapper>
       </StyledLeftWrapper>
 
@@ -79,3 +81,5 @@ export default function LeagueInfoFixtureHead({
     </StyledBlockHeaderWrapper>
   );
 }
+
+export default withScreenSize(LeagueInfoFixtureHead);
