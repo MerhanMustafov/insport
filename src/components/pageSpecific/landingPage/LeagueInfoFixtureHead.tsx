@@ -1,7 +1,6 @@
 import { TfiAngleRight } from "react-icons/tfi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Image from "@/components/shared/Image";
 import { LEAGUES } from "@/router/pathConsts";
 
 const StyledBlockHeaderWrapper = styled.div`

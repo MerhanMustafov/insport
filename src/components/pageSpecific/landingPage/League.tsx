@@ -4,8 +4,6 @@ import { useAppDispatch } from "@/global/redux/reduxHooks";
 import { closeCountriesAndLeaguesOpen } from "@/global/redux/slices/toggle.slice";
 import { LEAGUES } from "@/router/pathConsts";
 
-// import Image from "@/components/shared/Image";
-
 interface LeagueProps {
   id: number;
   name: string;
@@ -37,7 +35,7 @@ const StyledLeagueName = styled.div`
   letter-spacing: 0.05rem;
 `;
 
-function League({ id, name, logo, handleLeagueClick, isMobile }: LeagueProps) {
+function League({ id, name, handleLeagueClick, isMobile }: LeagueProps) {
   const dispatch = useAppDispatch();
   const handleClick = () => {
     const path = `${LEAGUES}/${id}/table`;

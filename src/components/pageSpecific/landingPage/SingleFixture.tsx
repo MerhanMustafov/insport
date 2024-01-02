@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Image from "@/components/shared/Image";
 import { IFixtureStatus } from "@/types/fixtureStatus.type";
 
 const StyledSingleFixture = styled.div`
@@ -68,8 +67,8 @@ export default function SingleFixture({
   status,
   matchTime,
   teams: {
-    home: { name: homeName, logo: homeLogo },
-    away: { name: awayName, logo: awayLogo }
+    home: { name: homeName },
+    away: { name: awayName }
   },
   goals: { home: homeGoals, away: awayGoals }
 }: SingleFixtureProps) {

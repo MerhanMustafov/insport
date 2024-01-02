@@ -6,7 +6,7 @@ import DateSpecificMatchView from "@/sections/DateSpecificMatchView";
 
 const StyledLandingPage = styled.div``;
 
-const StyledLandingPageContent = styled("div")<{ $isMobile: boolean }>`
+const StyledLandingPageContent = styled("div")<{ $isMobile?: boolean }>`
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-template-rows: auto;
@@ -20,7 +20,7 @@ const StyledMain = styled.div`
   grid-area: LANDING_PAGE_MAIN;
 `;
 
-function LandingPage({ isMobile }: { isMobile: boolean }) {
+function LandingPage({ isMobile }: { isMobile?: boolean }) {
   const sideAnimationConfig: TargetAndTransition = {
     opacity: [0, 1],
     overflow: ["hidden", "visible"],
