@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useAppSelector } from "@/global/redux/reduxHooks";
+
+// import { useAppSelector } from "@/global/redux/reduxHooks";
 
 const StyledSingleFixture = styled.div`
   position: fixed;
@@ -14,11 +15,10 @@ const StyledSingleFixture = styled.div`
 `;
 
 const SingleFixtureModal: React.FC = () => {
-  const { fixtureId } = useAppSelector((state) => state.trackCurrentData.singleFixture);
+  // const { fixtureId } = useAppSelector((state) => state.trackCurrentData.singleFixture);
 
   const onModalClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log("Modal clicked: ID: ", fixtureId);
   };
 
   return (
