@@ -22,7 +22,8 @@ module.exports = {
     "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     "@typescript-eslint/no-non-null-assertion": "off",
     "react-hooks/exhaustive-deps": "off",
-    "@typescript-eslint/no-floating-promises": "off"
+    "@typescript-eslint/no-floating-promises": "off",
+    "react-refresh/only-export-components": "off"
   },
   ignorePatterns: [".eslintrc.cjs", "vite.config.ts"]
 };

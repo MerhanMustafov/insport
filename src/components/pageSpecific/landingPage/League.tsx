@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import withScreenSize from "@/global/hoc/withScreenSize";
 import { useAppDispatch } from "@/global/redux/reduxHooks";
@@ -53,4 +54,4 @@ function League({ id, name, handleLeagueClick, isMobile }: LeagueProps) {
   );
 }
 
-export default withScreenSize(League);
+export default withScreenSize(League) as React.FC<LeagueProps>;

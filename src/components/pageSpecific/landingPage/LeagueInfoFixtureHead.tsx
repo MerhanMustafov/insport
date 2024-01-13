@@ -1,3 +1,4 @@
+import React from "react";
 import { TfiAngleRight } from "react-icons/tfi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -82,4 +83,4 @@ function LeagueInfoFixtureHead({
   );
 }
 
-export default withScreenSize(LeagueInfoFixtureHead);
+export default withScreenSize(LeagueInfoFixtureHead) as React.FC<LeagueInfoFixtureHeadProps>;

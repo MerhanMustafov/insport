@@ -1,5 +1,9 @@
+import React from "react";
 import styled from "styled-components";
 import withScreenSize from "@/global/hoc/withScreenSize";
+import { useAppDispatch } from "@/global/redux/reduxHooks";
+import { toggleSingleFixtureModal } from "@/global/redux/slices/toggle.slice";
+import { setSingleFixtureId } from "@/global/redux/slices/trackCurrentData.slice";
 import { IFixtureStatus } from "@/types/fixtureStatus.type";
 
 const StyledSingleFixture = styled.div`
@@ -65,7 +69,7 @@ interface SingleFixtureProps {
 }
 
 function SingleFixture({
-  // fixtureId,
+  fixtureId,
   status,
   matchTime,
   teams: {
@@ -75,6 +79,7 @@ function SingleFixture({
   goals: { home: homeGoals, away: awayGoals },
   isMobile
 }: SingleFixtureProps) {
+  const dispatch = useAppDispatch();
   function getMatchStatus(status: IFixtureStatus) {
     if (status.short === "NS") return matchTime;
     if (status.short === "HT") return "HT";
@@ -83,8 +88,13 @@ function SingleFixture({
   }
   const matchStatus = getMatchStatus(status);
   const isLive = status.elapsed && status.short !== "NS" && status.short !== "FT";
+
+  const handleSingleFixtureClick = () => {
+    dispatch(setSingleFixtureId({ fixtureId: fixtureId }));
+    dispatch(toggleSingleFixtureModal());
+  };
   return (
-    <StyledSingleFixture>
+    <StyledSingleFixture onClick={handleSingleFixtureClick}>
       <StyledStatus $isMobile={isMobile} className={isLive ? "status-live" : ""}>
         {matchStatus}
       </StyledStatus>
@@ -105,4 +115,4 @@ function SingleFixture({
   );
 }
 
-export default withScreenSize(SingleFixture);
+export default withScreenSize(SingleFixture) as React.FC<SingleFixtureProps>;

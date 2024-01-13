@@ -7,6 +7,9 @@ interface IToggleState {
   burgerMenu: {
     isCountriesAndLeaguesOpen: boolean;
   };
+  singleFixture: {
+    isSingleFixtureModalOpen: boolean;
+  };
 }
 
 const initialState: IToggleState = {
@@ -15,6 +18,9 @@ const initialState: IToggleState = {
   },
   burgerMenu: {
     isCountriesAndLeaguesOpen: false
+  },
+  singleFixture: {
+    isSingleFixtureModalOpen: false
   }
 };
 
@@ -30,9 +36,20 @@ export const toggleSlice = createSlice({
     },
     closeCountriesAndLeaguesOpen: (state) => {
       state.burgerMenu.isCountriesAndLeaguesOpen = false;
+    },
+    toggleSingleFixtureModal: (state) => {
+      state.singleFixture.isSingleFixtureModalOpen = !state.singleFixture.isSingleFixtureModalOpen;
+    },
+    closeSingleFixtureModal: (state) => {
+      state.singleFixture.isSingleFixtureModalOpen = false;
     }
   }
 });
 
-export const { toggleCalendar, toggleCountriesAndLeaguesOpen, closeCountriesAndLeaguesOpen } =
-  toggleSlice.actions;
+export const {
+  toggleCalendar,
+  toggleCountriesAndLeaguesOpen,
+  closeCountriesAndLeaguesOpen,
+  toggleSingleFixtureModal,
+  closeSingleFixtureModal
+} = toggleSlice.actions;
