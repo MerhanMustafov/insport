@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import withScreenSize from "@/global/hoc/withScreenSize";
+import { FIXTURE, SOCCER } from "@/router/pathConsts";
 import { IFixtureStatus } from "@/types/fixtureStatus.type";
 
 const StyledSingleFixture = styled.div`
@@ -76,6 +78,7 @@ function SingleFixture({
   goals: { home: homeGoals, away: awayGoals },
   isMobile
 }: SingleFixtureProps) {
+  const navigate = useNavigate();
   function getMatchStatus(status: IFixtureStatus) {
     if (status.short === "NS") return matchTime;
     if (status.short === "HT") return "HT";
@@ -83,13 +86,11 @@ function SingleFixture({
     if (status.elapsed) return `${status.elapsed}'`;
   }
 
-  console.log();
-
   const matchStatus = getMatchStatus(status);
   const isLive = status.elapsed && status.short !== "NS" && status.short !== "FT";
 
   const handleSingleFixtureClick = () => {
-    console.log("fixtureId", fixtureId);
+    navigate(`${FIXTURE}/${fixtureId}`);
   };
   return (
     <StyledSingleFixture onClick={handleSingleFixtureClick}>
