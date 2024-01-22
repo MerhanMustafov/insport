@@ -4,12 +4,10 @@ import withScreenSize from "@/global/hoc/withScreenSize";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import {
   closeCountriesAndLeaguesOpen,
-  closeSingleFixtureModal,
   toggleCountriesAndLeaguesOpen
 } from "@/global/redux/slices/toggle.slice";
 import AppNavigation from "@/components/shared/AppNavigation";
 import ClickAwayBackGroundContainer from "@/components/shared/ClickAwayBackGroundContainer";
-import SingleFixtureModal from "@/components/shared/modals/SingleFixtureModal";
 import CountriesAndLeagues from "@/sections/CountriesAndLeagues";
 
 interface AppLayoutProps {
@@ -71,15 +69,11 @@ const StyledContent = styled.div`
 `;
 
 function AppLayout({ children, isMobile }: AppLayoutProps) {
-  const { burgerMenu, singleFixture } = useAppSelector((state) => state.toggle);
+  const { burgerMenu } = useAppSelector((state) => state.toggle);
   const { isCountriesAndLeaguesOpen } = burgerMenu;
-  const { isSingleFixtureModalOpen } = singleFixture;
   const dispatch = useAppDispatch();
   const handleBurgerMenuClick = () => {
     dispatch(toggleCountriesAndLeaguesOpen());
-  };
-  const handleSingleFixtureModalClickAway = () => {
-    dispatch(closeSingleFixtureModal());
   };
 
   useEffect(() => {
@@ -91,12 +85,6 @@ function AppLayout({ children, isMobile }: AppLayoutProps) {
   return (
     <StyledLayout>
       {/* MODALS */}
-      {isSingleFixtureModalOpen && (
-        <>
-          <ClickAwayBackGroundContainer onClick={handleSingleFixtureModalClickAway} />
-          <SingleFixtureModal />
-        </>
-      )}
       {isCountriesAndLeaguesOpen && (
         <>
           <ClickAwayBackGroundContainer onClick={handleBurgerMenuClick} />

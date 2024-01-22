@@ -5,7 +5,6 @@ import { fixturesApiSlice } from "@/global/redux/rtkq/fixtures";
 import { leaguesApiSlice } from "@/global/redux/rtkq/leagues";
 import { calendarSlice } from "@/global/redux/slices/calendar.slice";
 import { toggleSlice } from "@/global/redux/slices/toggle.slice";
-import { trackCurrentDataSlice } from "@/global/redux/slices/trackCurrentData.slice";
 
 export const store = configureStore({
   reducer: {
@@ -15,8 +14,7 @@ export const store = configureStore({
     [fixturesApiSlice.reducerPath]: fixturesApiSlice.reducer,
     // RTK
     [calendarSlice.name]: calendarSlice.reducer,
-    [toggleSlice.name]: toggleSlice.reducer,
-    [trackCurrentDataSlice.name]: trackCurrentDataSlice.reducer
+    [toggleSlice.name]: toggleSlice.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
