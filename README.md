@@ -3,9 +3,22 @@
 ## How to run locally
 1. clone the repo and checkout to `release/v1` branch
 2. run `npm install`
-3. run `npm run dev`
-4. local link [http://localhost:5173/](http://localhost:5173/)
-5. the page on this link will be empty untill you run this app locally as well [insport-rest-api](https://github.com/MerhanMustafov/insport-rest-api)
+3. create `.env` file at the root of the project and put this inside
+```typescript
+# this file is used to set environment variables for the application
+# for local development, create a .env file in the root of the project
+# and set the following variables
+VITE_INSPORT_FOOTBALL_BASE_URL=http://localhost:3050/api
+
+
+# env vars for production
+# use this variable for production
+VITE_INSPORT_FOOTBALL_BASE_URL=https://insport-rest-api.onrender.com/api
+
+```
+4. run `npm run dev`
+5. local link [http://localhost:5173/](http://localhost:5173/)
+6. the page on this link will be empty untill you run this app locally as well [insport-rest-api](https://github.com/MerhanMustafov/insport-rest-api)
 
 
 ## INFO
@@ -63,3 +76,4 @@
 }
 
 ```
+
