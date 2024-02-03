@@ -18,7 +18,7 @@ VITE_INSPORT_FOOTBALL_BASE_URL=https://insport-rest-api.onrender.com/api
 ```
 4. run `npm run dev`
 5. local link [http://localhost:5173/](http://localhost:5173/)
-6. the page on this link will be empty untill you run this app locally as well [insport-rest-api](https://github.com/MerhanMustafov/insport-rest-api)
+6. the page on this link will be empty untill you run this app locally in this branch `release/v1` as well [insport-rest-api](https://github.com/MerhanMustafov/insport-rest-api)
 
 
 ## INFO
