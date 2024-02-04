@@ -1,9 +1,24 @@
 import React from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import withScreenSize from "@/global/hoc/withScreenSize";
 import { FIXTURE, SOCCER } from "@/router/pathConsts";
 import { IFixtureStatus } from "@/types/fixtureStatus.type";
+
+const StyledSingleFixtureWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  &.singleFixture__showMOre {
+    border: 1px solid #000000;
+  }
+`;
 
 const StyledSingleFixture = styled.div`
   display: grid;
@@ -11,9 +26,20 @@ const StyledSingleFixture = styled.div`
   grid-template-rows: auto;
   column-gap: 1rem;
   align-items: center;
-  padding: 0.5rem 1rem;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+`;
+
+const StyledDivider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+`;
+
+const StyledShowWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 5px 0;
 `;
 
 const StyledStatus = styled.span<{ $isMobile?: boolean }>`
@@ -79,6 +105,7 @@ function SingleFixture({
   isMobile
 }: SingleFixtureProps) {
   const navigate = useNavigate();
+  const [showMore, setShowMore] = React.useState(false);
   function getMatchStatus(status: IFixtureStatus) {
     if (status.short === "NS") return matchTime;
     if (status.short === "HT") return "HT";
@@ -89,28 +116,47 @@ function SingleFixture({
   const matchStatus = getMatchStatus(status);
   const isLive = status.elapsed && status.short !== "NS" && status.short !== "FT";
 
-  const handleSingleFixtureClick = () => {
-    navigate(`${FIXTURE}/${fixtureId}`);
-  };
+  // const handleSingleFixtureClick = () => {
+  //   navigate(`${FIXTURE}/${fixtureId}`);
+  // };
   return (
-    <StyledSingleFixture onClick={handleSingleFixtureClick}>
-      <StyledStatus $isMobile={isMobile} className={isLive ? "status-live" : ""}>
-        {matchStatus}
-      </StyledStatus>
-      <StyledTeamsWrapper>
-        <StyledTeamWrapper>
-          <StyldResult $isMobile={isMobile}>{homeGoals}</StyldResult>
-          {/* <Image image={homeLogo} width="24px" height="24px" altText="logo" /> */}
-          <StyledTeamName $isMobile={isMobile}>{homeName}</StyledTeamName>
-        </StyledTeamWrapper>
+    <StyledSingleFixtureWrapper className={showMore ? "singleFixture__showMOre" : ""}>
+      <StyledSingleFixture>
+        <StyledStatus $isMobile={isMobile} className={isLive ? "status-live" : ""}>
+          {matchStatus}
+        </StyledStatus>
+        <StyledTeamsWrapper>
+          <StyledTeamWrapper>
+            <StyldResult $isMobile={isMobile}>{homeGoals}</StyldResult>
+            {/* <Image image={homeLogo} width="24px" height="24px" altText="logo" /> */}
+            <StyledTeamName $isMobile={isMobile}>{homeName}</StyledTeamName>
+          </StyledTeamWrapper>
 
-        <StyledTeamWrapper>
-          <StyldResult $isMobile={isMobile}>{awayGoals}</StyldResult>
-          {/* <Image image={awayLogo} width="23px" height="20px" altText="logo" /> */}
-          <StyledTeamName $isMobile={isMobile}>{awayName}</StyledTeamName>
-        </StyledTeamWrapper>
-      </StyledTeamsWrapper>
-    </StyledSingleFixture>
+          <StyledTeamWrapper>
+            <StyldResult $isMobile={isMobile}>{awayGoals}</StyldResult>
+            {/* <Image image={awayLogo} width="23px" height="20px" altText="logo" /> */}
+            <StyledTeamName $isMobile={isMobile}>{awayName}</StyledTeamName>
+          </StyledTeamWrapper>
+        </StyledTeamsWrapper>
+      </StyledSingleFixture>
+      {!showMore && (
+        <StyledShowWrapper onClick={() => setShowMore(true)}>
+          <IoIosArrowDown />
+          <div>show more</div>
+        </StyledShowWrapper>
+      )}
+
+      {showMore && (
+        <>
+          {showMore && (
+            <StyledShowWrapper onClick={() => setShowMore(false)}>
+              <IoIosArrowUp />
+              <div>show less</div>
+            </StyledShowWrapper>
+          )}
+        </>
+      )}
+    </StyledSingleFixtureWrapper>
   );
 }
 

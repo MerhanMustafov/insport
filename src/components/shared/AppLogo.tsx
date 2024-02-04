@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { TargetAndTransition, motion } from "framer-motion";
+// import { TargetAndTransition, motion } from "framer-motion";
 import styled from "styled-components";
 import withScreenSize from "@/global/hoc/withScreenSize";
 import { LANDING } from "@/router/pathConsts";
@@ -43,13 +43,13 @@ function AppLogo({ isMobile }: { isMobile?: boolean }) {
     navigate(LANDING);
   };
 
-  const logoAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 0.2 } };
+  // const logoAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 0.2 } };
 
   return (
     <StyledLogoWrapper
       $isMobile={isMobile}
-      as={motion.div}
-      animate={logoAnimationConfig}
+      // as={motion.div}
+      // animate={logoAnimationConfig}
       onClick={onLogoClick}
     >
       <StyledIN>In</StyledIN>

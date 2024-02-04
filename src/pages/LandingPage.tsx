@@ -1,4 +1,4 @@
-import { TargetAndTransition, motion } from "framer-motion";
+// import { TargetAndTransition, motion } from "framer-motion";
 import styled from "styled-components";
 import withScreenSize from "@/global/hoc/withScreenSize";
 import CountriesAndLeagues from "@/sections/CountriesAndLeagues";
@@ -21,27 +21,27 @@ const StyledMain = styled.div`
 `;
 
 function LandingPage({ isMobile }: { isMobile?: boolean }) {
-  const sideAnimationConfig: TargetAndTransition = {
-    opacity: [0, 1],
-    overflow: ["hidden", "visible"],
-    transition: { delay: 0.3, ease: "easeIn" }
-  };
-  const mainAnimationConfig: TargetAndTransition = {
-    opacity: [0, 1],
-    overflow: ["hidden", "visible"],
-    transition: { delay: 0.4, ease: "easeIn" }
-  };
+  // const sideAnimationConfig: TargetAndTransition = {
+  //   opacity: [0, 1],
+  //   overflow: ["hidden", "visible"],
+  //   transition: { delay: 0.3, ease: "easeIn" }
+  // };
+  // const mainAnimationConfig: TargetAndTransition = {
+  //   opacity: [0, 1],
+  //   overflow: ["hidden", "visible"],
+  //   transition: { delay: 0.4, ease: "easeIn" }
+  // };
 
   return (
     <StyledLandingPage>
       <StyledLandingPageContent $isMobile={isMobile}>
         {!isMobile && (
-          <StyledSide as={motion.div} animate={sideAnimationConfig}>
+          <StyledSide>
             <CountriesAndLeagues />
           </StyledSide>
         )}
 
-        <StyledMain as={motion.div} animate={mainAnimationConfig}>
+        <StyledMain>
           <DateSpecificMatchView />
         </StyledMain>
       </StyledLandingPageContent>

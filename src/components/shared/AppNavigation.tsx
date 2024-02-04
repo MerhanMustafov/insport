@@ -1,6 +1,6 @@
 import { RiMenuUnfoldLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { TargetAndTransition, motion } from "framer-motion";
+// import { TargetAndTransition, motion } from "framer-motion";
 import styled from "styled-components";
 import withScreenSize from "@/global/hoc/withScreenSize";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
@@ -34,13 +34,13 @@ const StyledLinkWrapper = styled.li`
   padding: 5px 10px;
 `;
 
-const StyledLink = styled(motion(Link))<{ $isMobile?: boolean }>`
+const StyledLink = styled(Link)<{ $isMobile?: boolean }>`
   color: inherit;
   margin: 0 10px;
   font-size: ${(props) => (props.$isMobile ? 1.4 : 2)}rem;
 `;
 
-const StyledBurderMenuWrapper = styled(motion.div)<{ $isMobile?: boolean }>`
+const StyledBurderMenuWrapper = styled("div")<{ $isMobile?: boolean }>`
   grid-area: APP_NAV_MENU;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@ const StyledBurderMenuWrapper = styled(motion.div)<{ $isMobile?: boolean }>`
   cursor: pointer;
 `;
 
-const linkesAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 0.1 } };
+// const linkesAnimationConfig: TargetAndTransition = { opacity: [0, 1], transition: { delay: 0.1 } };
 
 function AppNavigation({ isMobile }: { isMobile?: boolean }) {
   const { isCountriesAndLeaguesOpen } = useAppSelector((state) => state.toggle.burgerMenu);
@@ -66,7 +66,7 @@ function AppNavigation({ isMobile }: { isMobile?: boolean }) {
       {showBurgerMenu && (
         <StyledBurderMenuWrapper
           $isMobile={isMobile}
-          animate={linkesAnimationConfig}
+          // animate={linkesAnimationConfig}
           onClick={handleBurgerMenuClick}
         >
           <RiMenuUnfoldLine />
@@ -76,7 +76,7 @@ function AppNavigation({ isMobile }: { isMobile?: boolean }) {
       <StyledUL>
         <StyledLinkWrapper>
           {!isMobile && (
-            <StyledLink $isMobile={isMobile} animate={linkesAnimationConfig} to={SOCCER}>
+            <StyledLink $isMobile={isMobile} to={SOCCER}>
               Soccer
             </StyledLink>
           )}

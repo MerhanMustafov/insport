@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "@/global/redux/reduxHooks";
 import { useGetFixturesByDateQuery } from "@/global/redux/rtkq/fixtures";
@@ -73,9 +73,9 @@ export default function DateSpecificMatchView() {
             return (
               <StyledLeagueFixturesWrapper
                 key={leagueInfo.id}
-                as={motion.nav}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1, transition: { delay: 0.1 } }}
+                // as={motion.nav}
+                // initial={{ opacity: 0 }}
+                // whileInView={{ opacity: 1, transition: { delay: 0.1 } }}
               >
                 <LeagueInfoFixtureHead
                   leagueId={leagueInfo.id}
